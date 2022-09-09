@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/wallpaper">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <ImageButton
+                    android:id="@+id/anasayfaDuyuru"
+                    android:layout_width="37dp"
+                    android:layout_height="39dp"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginTop="15dp"
+                    android:background="@android:color/transparent"
+                    android:contentDescription="@string/app_name"
+                    android:scaleType="centerInside"
+                    app:srcCompat="@drawable/back" />
+
+                <TextView
+                    android:id="@+id/baslik"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="5dp"
+                    android:text="DUYURULAR"
+                    android:textAlignment="center"
+                    android:textColor="?android:attr/textColorTertiaryInverse"
+                    android:textSize="48sp"
+                    android:typeface="monospace" />
+
+                <ScrollView
+                    android:layout_width="360dp"
+                    android:layout_height="483dp"
+                    android:layout_gravity="center">
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/recyclerview"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="15dp"
+                        tools:itemCount="10"
+                        tools:listitem="@layout/duyuru_view_design">
+
+                    </androidx.recyclerview.widget.RecyclerView>
+
+                </ScrollView>
+
+                <LinearLayout
+                    android:id="@+id/textDuyuruBtn"
+                    android:visibility="invisible"
+                    android:layout_width="360dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="50dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/tarih"
+                        android:layout_width="5dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="10dp"
+                        android:layout_weight="1"
+                        android:gravity="right"
+                        android:text="Duyuru Başlığı :"
+                        android:textColor="?android:attr/textColorTertiaryInverse"
+                        android:textColorHint="?android:attr/textColorTertiaryInverse"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/duyuruDisplay"
+                        android:layout_width="75dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="-"
+                        android:textColor="?android:attr/textColorTertiaryInverse"
+                        android:textColorHint="?android:attr/textColorTertiaryInverse"
+                        android:textSize="16sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="360dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="35dp"
+                    android:orientation="horizontal">
+
+                    <Button
+                        android:id="@+id/btnYeniDuyuru"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="15dp"
+                        android:background="@drawable/custom4"
+                        android:gravity="center"
+                        android:visibility="invisible"
+                        android:text="Yeni Duyuru Oluştur"
+                        android:textColor="?android:attr/textColorTertiaryInverse"
+                        android:textColorHint="?android:attr/textColorTertiaryInverse" />
+
+                    <Button
+                        android:id="@+id/btnDuyuruSil"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginTop="15dp"
+                        android:background="@drawable/custom4"
+                        android:visibility="invisible"
+                        android:text="Duyuru Sil"
+                        android:textColor="?android:attr/textColorTertiaryInverse"
+                        android:textColorHint="?android:attr/textColorTertiaryInverse" />
+                </LinearLayout>
+
+            </LinearLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

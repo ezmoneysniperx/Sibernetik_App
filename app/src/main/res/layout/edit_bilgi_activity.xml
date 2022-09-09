@@ -1,0 +1,288 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/wallpaper1">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_width="413dp"
+                android:layout_height="840dp"
+                android:background="@drawable/wallpaper"
+                android:orientation="vertical"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <ImageButton
+                    android:id="@+id/anasayfaEditBilgiBtn"
+                    android:layout_width="37dp"
+                    android:layout_height="39dp"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginTop="15dp"
+                    android:background="@android:color/transparent"
+                    android:contentDescription="@string/app_name"
+                    android:onClick="izinButton"
+                    android:scaleType="centerInside"
+                    app:srcCompat="@drawable/back" />
+
+                <ImageView
+                    android:id="@+id/imageView2"
+                    android:layout_width="match_parent"
+                    android:layout_height="88dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="25dp"
+                    app:srcCompat="@drawable/loginprofile" />
+
+                <LinearLayout
+                    android:layout_width="300dp"
+                    android:layout_height="596dp"
+                    android:layout_gravity="center"
+                    android:layout_marginBottom="15dp"
+                    android:orientation="vertical">
+
+                    <EditText
+                        android:id="@+id/adSoyadEditBTxt"
+                        android:layout_width="300dp"
+                        android:layout_height="38dp"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="7dp"
+                        android:background="@drawable/custom2"
+                        android:clickable="false"
+                        android:cursorVisible="false"
+                        android:ems="15"
+                        android:focusable="false"
+                        android:focusableInTouchMode="false"
+                        android:hint="@string/adsoyad_register"
+                        android:inputType="textPersonName"
+                        android:textColor="?android:attr/textColorTertiaryInverse"
+                        android:textColorHint="?android:attr/textColorTertiaryInverse"
+                        android:textSize="17dp" />
+
+                    <EditText
+                        android:id="@+id/ePostaEditBTxt"
+                        android:layout_width="300dp"
+                        android:layout_height="38dp"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="7dp"
+                        android:background="@drawable/custom2"
+                        android:clickable="false"
+                        android:cursorVisible="false"
+                        android:ems="15"
+                        android:focusable="false"
+                        android:focusableInTouchMode="false"
+                        android:hint="@string/email_login"
+                        android:inputType="textPersonName"
+                        android:textColor="?android:attr/textColorTertiaryInverse"
+                        android:textColorHint="?android:attr/textColorTertiaryInverse"
+                        android:textSize="17dp" />
+
+                    <EditText
+                        android:id="@+id/telNoEditBTxt"
+                        android:layout_width="300dp"
+                        android:layout_height="38dp"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="7dp"
+                        android:background="@drawable/custom2"
+                        android:ems="15"
+                        android:hint="@string/tel_register"
+                        android:inputType="text"
+                        android:textColor="?android:attr/textColorTertiaryInverse"
+                        android:textColorHint="?android:attr/textColorTertiaryInverse"
+                        android:textSize="17dp" />
+
+                    <EditText
+                        android:id="@+id/tcknEditBTxt"
+                        android:layout_width="300dp"
+                        android:layout_height="38dp"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="7dp"
+                        android:layout_marginBottom="7dp"
+                        android:background="@drawable/custom2"
+                        android:clickable="false"
+                        android:cursorVisible="false"
+                        android:ems="15"
+                        android:focusable="false"
+                        android:focusableInTouchMode="false"
+                        android:hint="@string/dep_register"
+                        android:inputType="textEmailAddress"
+                        android:textColor="?android:attr/textColorTertiaryInverse"
+                        android:textColorHint="?android:attr/textColorTertiaryInverse"
+                        android:textSize="17dp" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="38dp"
+                        android:orientation="horizontal">
+
+                        <EditText
+                            android:id="@+id/tarihEditBTxt"
+                            android:layout_width="251dp"
+                            android:layout_height="38dp"
+                            android:layout_alignParentLeft="true"
+                            android:layout_alignParentEnd="true"
+                            android:layout_alignParentRight="true"
+                            android:layout_gravity="left"
+                            android:layout_marginTop="7dp"
+                            android:layout_marginRight="7dp"
+                            android:background="@drawable/custom2"
+                            android:clickable="false"
+                            android:editable="false"
+                            android:ems="15"
+                            android:hint="@string/password_login"
+                            android:text="İşe Başlangıç Tarihi"
+                            android:textColor="?android:attr/textColorTertiaryInverse"
+                            android:textColorHint="?android:attr/textColorTertiaryInverse"
+                            android:textSize="16sp" />
+
+                        <Button
+                            android:id="@+id/iseTarihEditBtn"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_centerHorizontal="true"
+                            android:layout_gravity="center"
+                            android:background="@drawable/custom4"
+                            android:ems="12"
+                            android:text="Seç"
+                            android:textColor="?android:attr/textColorTertiaryInverse"
+                            android:textColorHint="?android:attr/textColorTertiaryInverse"
+                            android:textSize="10sp"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+
+                    <EditText
+                        android:id="@+id/bolumEditBTxt"
+                        android:layout_width="300dp"
+                        android:layout_height="38dp"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="7dp"
+                        android:background="@drawable/custom2"
+                        android:ems="15"
+                        android:hint="@string/bolum_onayla"
+                        android:inputType="text"
+                        android:textColor="?android:attr/textColorTertiaryInverse"
+                        android:textColorHint="?android:attr/textColorTertiaryInverse"
+                        android:textSize="17dp" />
+
+                    <EditText
+                        android:id="@+id/yoneticiEditBTxt"
+                        android:layout_width="300dp"
+                        android:layout_height="38dp"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="7dp"
+                        android:background="@drawable/custom2"
+                        android:ems="15"
+                        android:hint="@string/yonetici_onayla"
+                        android:inputType="text"
+                        android:textColor="?android:attr/textColorTertiaryInverse"
+                        android:textColorHint="?android:attr/textColorTertiaryInverse"
+                        android:textSize="17dp" />
+
+                    <EditText
+                        android:id="@+id/gorevEditBTxt"
+                        android:layout_width="300dp"
+                        android:layout_height="38dp"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="7dp"
+                        android:layout_marginBottom="10dp"
+                        android:background="@drawable/custom2"
+                        android:ems="15"
+                        android:hint="@string/gorev_onayla"
+                        android:inputType="text"
+                        android:textColor="?android:attr/textColorTertiaryInverse"
+                        android:textColorHint="?android:attr/textColorTertiaryInverse"
+                        android:textSize="17dp" />
+
+                    <Button
+                        android:id="@+id/btnEditBilgi"
+                        android:layout_width="300dp"
+                        android:layout_height="46dp"
+                        android:layout_centerHorizontal="true"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="10dp"
+                        android:background="@drawable/custom4"
+                        android:ems="19"
+                        android:text="@string/button_editbilgi"
+                        android:textColor="?android:attr/textColorTertiaryInverse"
+                        android:textColorHint="?android:attr/textColorTertiaryInverse" />
+
+                    <Button
+                        android:id="@+id/btnEditSifre"
+                        android:layout_width="300dp"
+                        android:layout_height="wrap_content"
+                        android:layout_centerHorizontal="true"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="10dp"
+                        android:background="@drawable/custom4"
+                        android:ems="19"
+                        android:text="@string/button_changepwd"
+                        android:textColor="?android:attr/textColorTertiaryInverse"
+                        android:textColorHint="?android:attr/textColorTertiaryInverse" />
+
+                    <Button
+                        android:id="@+id/btnEditImza"
+                        android:layout_width="300dp"
+                        android:layout_height="46dp"
+                        android:layout_centerHorizontal="true"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="10dp"
+                        android:background="@drawable/custom4"
+                        android:ems="19"
+                        android:text="İMZA EKLE/DÜZENLE"
+                        android:textColor="?android:attr/textColorTertiaryInverse"
+                        android:textColorHint="?android:attr/textColorTertiaryInverse"
+                        android:textSize="16sp" />
+
+                    <Button
+                        android:id="@+id/hesapSilBtn"
+                        android:layout_width="match_parent"
+                        android:layout_height="46dp"
+                        android:layout_centerHorizontal="true"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="10dp"
+                        android:background="@drawable/custom4"
+                        android:ems="19"
+                        android:text="HESABI SİL"
+                        android:textColor="?android:attr/textColorTertiaryInverse"
+                        android:textColorHint="?android:attr/textColorTertiaryInverse"
+                        android:textSize="16sp"
+                        app:layout_constraintStart_toEndOf="@+id/editBilgiBtn" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

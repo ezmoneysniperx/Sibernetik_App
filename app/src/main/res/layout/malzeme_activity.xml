@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/wallpaper">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:shape="rectangle">
+
+            <ImageButton
+                android:id="@+id/anasayfaMalzemeUserBtn"
+                android:layout_width="37dp"
+                android:layout_height="39dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginRight="165dp"
+                android:background="@android:color/transparent"
+                android:contentDescription="@string/app_name"
+                android:foregroundGravity="left"
+                android:scaleType="centerInside"
+                app:srcCompat="@drawable/back" />
+
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="318dp"
+                android:layout_height="66dp"
+                android:layout_marginTop="5dp"
+                android:text="Malzeme Formu"
+                android:textAlignment="center"
+                android:textAllCaps="false"
+                android:textColor="?android:attr/textColorTertiaryInverse"
+                android:textColorHint="?android:attr/textColorTertiaryInverse"
+                android:textSize="34sp"
+                android:textStyle="normal|bold" />
+
+            <EditText
+                android:id="@+id/nameTxt"
+                android:layout_width="300dp"
+                android:layout_height="42dp"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginTop="7dp"
+                android:background="@drawable/custom2"
+                android:ems="15"
+                android:hint="Ad Soyad"
+                android:inputType="textPersonName"
+                android:textColor="?android:attr/textColorTertiaryInverse"
+                android:textColorHint="?android:attr/textColorTertiaryInverse"
+                android:textSize="17dp" />
+
+            <EditText
+                android:id="@+id/malzemeAdi"
+                android:layout_width="300dp"
+                android:layout_height="42dp"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginTop="7dp"
+                android:background="@drawable/custom2"
+                android:ems="15"
+                android:hint="Malezeme Adı"
+                android:inputType="text"
+                android:textColor="?android:attr/textColorTertiaryInverse"
+                android:textColorHint="?android:attr/textColorTertiaryInverse"
+                android:textSize="17dp" />
+
+            <EditText
+                android:id="@+id/proje"
+                android:layout_width="300dp"
+                android:layout_height="42dp"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginTop="7dp"
+                android:background="@drawable/custom2"
+                android:ems="15"
+                android:hint="Proje"
+                android:inputType="text"
+                android:textColor="?android:attr/textColorTertiaryInverse"
+                android:textColorHint="?android:attr/textColorTertiaryInverse"
+                android:textSize="17dp" />
+
+            <EditText
+                android:id="@+id/fiyat"
+                android:layout_width="300dp"
+                android:layout_height="42dp"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginTop="7dp"
+                android:background="@drawable/custom2"
+                android:ems="15"
+                android:hint="Fiyat"
+                android:inputType="text"
+                android:textColor="?android:attr/textColorTertiaryInverse"
+                android:textColorHint="?android:attr/textColorTertiaryInverse"
+                android:textSize="17dp" />
+
+            <Button
+                android:id="@+id/btnSubmit"
+                android:layout_width="300dp"
+                android:layout_height="44dp"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/custom5"
+                android:ems="19"
+                android:text="Gönder"
+                android:textColor="?android:attr/textColorTertiaryInverse"
+                android:textColorHint="?android:attr/textColorTertiaryInverse" />
+
+            <ScrollView
+                android:layout_width="349dp"
+                android:layout_height="301dp"
+                android:layout_gravity="center">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recyclerview"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    tools:itemCount="10"
+                    tools:listitem="@layout/malzeme_view_design" />
+
+            </ScrollView>
+
+        </LinearLayout>
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

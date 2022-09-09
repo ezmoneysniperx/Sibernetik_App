@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "317795800585",
+    "firebase_url": "https://sibernetik-3c2ef-default-rtdb.europe-west1.firebasedatabase.app",
+    "project_id": "sibernetik-3c2ef",
+    "storage_bucket": "sibernetik-3c2ef.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:317795800585:android:f3aa5db17b618abf1a8ad8",
+        "android_client_info": {
+          "package_name": "com.example.sibernetik"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "317795800585-imcl7e1g7kd9qo3fih0e1kbds4hrntu3.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.sibernetik",
+            "certificate_hash": "f3dc7a6df7a007ea012dd138abfe246eb750c7e0"
+          }
+        },
+        {
+          "client_id": "317795800585-ns8jn39rg7vdfl8l6qmuqlj6tj4rnl6h.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC5WoTWUG2XgSWa7n_N51sw9T2vhRTyUk8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "317795800585-ns8jn39rg7vdfl8l6qmuqlj6tj4rnl6h.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

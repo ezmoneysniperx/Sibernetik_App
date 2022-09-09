@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/wallpaper">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/top_card"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="70dp"
+            android:layout_marginEnd="30dp"
+            android:elevation="20dp"
+            app:cardCornerRadius="10dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/scrollView2">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="140dp"
+                android:background="@color/white"
+                android:backgroundTint="@color/white"
+                android:color="@color/white">
+
+                <TextView
+                    android:id="@+id/top_header"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="20dp"
+                    android:text="Hoşgeldiniz"
+                    android:textColor="?android:attr/textColorTertiaryInverse"
+                    android:textColorHint="?android:attr/textColorTertiaryInverse"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toTopOf="@+id/subtitle"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/subtitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Nasılsınız?"
+                    android:textColor="?android:attr/textColorTertiaryInverse"
+                    android:textColorHint="?android:attr/textColorTertiaryInverse"
+                    android:textSize="16sp"
+                    app:layout_constraintBottom_toTopOf="@+id/editBilgiBtn"
+                    app:layout_constraintStart_toStartOf="@id/top_header"
+                    app:layout_constraintTop_toBottomOf="@id/top_header" />
+
+                <Button
+                    android:id="@+id/editBilgiBtn"
+                    android:layout_width="115dp"
+                    android:layout_height="45dp"
+                    android:layout_marginStart="180dp"
+                    android:layout_marginRight="40dp"
+                    android:layout_marginBottom="15dp"
+                    android:backgroundTint="#FFCC99"
+                    android:color="#FFFFCC"
+                    android:text="Bilgilerim"
+                    android:textColor="?android:attr/textColorTertiaryInverse"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/subtitle"
+                    app:layout_constraintVertical_bias="1.0" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <ScrollView
+            android:id="@+id/scrollView2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.0">
+
+                <GridLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="475dp"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="225dp"
+                    android:alignmentMode="alignMargins"
+                    android:background="?attr/selectableItemBackground"
+                    android:columnCount="2"
+                    android:columnOrderPreserved="false">
+
+                    <ImageButton
+                        android:id="@+id/izinBtn"
+                        android:layout_width="114dp"
+                        android:layout_height="114dp"
+                        android:layout_margin="8dp"
+                        android:layout_marginRight="50dp"
+                        android:background="@android:color/transparent"
+                        android:contentDescription="@string/app_name"
+                        android:onClick="izinButton"
+                        android:scaleType="centerInside"
+                        android:src="@drawable/izin" />
+
+                    <ImageButton
+                        android:id="@+id/malzemeBtn"
+                        android:layout_width="114dp"
+                        android:layout_height="114dp"
+                        android:layout_margin="8dp"
+                        android:background="@android:color/transparent"
+                        android:contentDescription="@string/app_name"
+                        android:onClick="malzemeButton"
+                        android:scaleType="centerInside"
+                        android:src="@drawable/malzemeislemleri2" />
+
+                    <ImageButton
+                        android:id="@+id/yemekMenuBtn"
+                        android:layout_width="114dp"
+                        android:layout_height="114dp"
+                        android:layout_margin="8dp"
+                        android:layout_marginBottom="10dp"
+                        android:background="@android:color/transparent"
+                        android:contentDescription="@string/app_name"
+                        android:onClick="historicSites"
+                        android:scaleType="centerInside"
+                        android:src="@drawable/yemek" />
+
+                    <ImageButton
+                        android:id="@+id/duyuruBtn"
+                        android:layout_width="114dp"
+                        android:layout_height="114dp"
+                        android:layout_margin="8dp"
+                        android:background="@android:color/transparent"
+                        android:contentDescription="@string/app_name"
+                        android:onClick="historicSites"
+                        android:scaleType="centerInside"
+                        android:src="@drawable/duyuru2" />
+
+                    <ImageButton
+                        android:id="@+id/hesapYonetimBtn"
+                        android:layout_width="114dp"
+                        android:layout_height="114dp"
+                        android:layout_margin="8dp"
+                        android:layout_marginBottom="10dp"
+                        android:background="@android:color/transparent"
+                        android:contentDescription="@string/app_name"
+                        android:scaleType="centerInside"
+                        android:src="@drawable/yonetim"
+                        android:visibility="invisible" />
+
+                    <ImageButton
+                        android:id="@+id/izinHakkiBtn"
+                        android:layout_width="114dp"
+                        android:layout_height="114dp"
+                        android:layout_margin="8dp"
+                        android:layout_marginBottom="10dp"
+                        android:background="@android:color/transparent"
+                        android:contentDescription="@string/app_name"
+                        android:scaleType="centerInside"
+                        android:src="@drawable/izinhakkiyonetimi"
+                        android:visibility="invisible" />
+
+                </GridLayout>
+
+            </LinearLayout>
+        </ScrollView>
+
+        <ImageButton
+            android:id="@+id/logoutBtn"
+            android:layout_width="37dp"
+            android:layout_height="37dp"
+            android:layout_gravity="right"
+            android:layout_marginStart="290dp"
+            android:layout_marginTop="20dp"
+            android:background="@android:color/transparent"
+            android:contentDescription="@string/app_name"
+            android:scaleType="centerInside"
+            android:src="@drawable/power"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/scrollView2" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

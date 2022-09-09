@@ -1,0 +1,72 @@
+<resources>
+    <string name="app_name">Sibernetik</string>
+
+    <string name="email_login"><font size="15">E-Posta Adresi</font></string>
+    <string name="password_login"><font size="15">Şifre</font></string>
+    <string name="button_login"><font size="18">GİRİŞ YAP</font></string>
+
+    <string name="adsoyad_register"><font size="15">Adı Soyadı</font></string>
+    <string name="tel_register"><font size="15">Telefon No</font></string>
+    <string name="dep_register"><font size="15">TC Kimlik Numarası</font></string>
+    <string name="button_register"><font size="18">YENİ HESAP OLUŞTUR</font></string>
+
+    <string name="button_onayla"><font size="18">HESAP ONAYLA</font></string>
+    <string name="bolum_onayla"><font size="15">Bölüm</font></string>
+    <string name="yonetici_onayla"><font size="15">Yönetici</font></string>
+    <string name="gorev_onayla"><font size="15">Görev</font></string>
+
+    <string name="button_forgotpwd"><font size="18">YENİ ŞİFRE OLUŞTUR</font></string>
+    <string name="button_editbilgi"><font size="18">BİLGİLERİ DEĞİŞTİR</font></string>
+    <string name="button_changepwd"><font size="18">ŞİFRE DEĞİŞTİR</font></string>
+    <string name="button_imza"><font size="18">İMZA EKLE / DÜZENLE</font></string>
+
+    <string name="sifre_reset"><font size="15">Yeni Şifre</font></string>
+    <string name="sifre_tekrar_reset"><font size="15">Yeni Şifre (TEKRAR)</font></string>
+    <string name="button_resetpwd"><font size="18">YENİ ŞİFRE ONAYLA</font></string>
+    <string name="eski_sifre"><font size="15">Eski Şifre</font></string>
+
+    <string name="action_settings"></string>
+    <string name="first_fragment_label"></string>
+    <string name="second_fragment_label"></string>
+
+    <string name="yemek_date"><font size="15">Günün Tarihi</font></string>
+    <string name="yemek1"><font size="15">Yemek Menü 1</font></string>
+    <string name="yemek2"><font size="15">Yemek Menü 2</font></string>
+    <string name="yemek3"><font size="15">Yemek Menü 3</font></string>
+    <string name="yemek4"><font size="15">Yemek Menü 4</font></string>
+    <string name="button_yemek"><font size="18">GÜNÜN MENÜ BİLGİLERİ GİR</font></string>
+
+    <string-array name="hesap_durum">
+        <item>ONAY BEKLIYOR</item>
+        <item>ONAYLANDI</item>
+    </string-array>
+
+    <string-array name="izin_durum">
+        <item>ONAY BEKLIYOR</item>
+        <item>ONAYLANDI</item>
+        <item>REDDETTI</item>
+    </string-array>
+
+    <string-array name="hesap_gorev">
+        <item>INSAN KAYNAKLAR</item>
+        <item>YONETICI</item>
+        <item>CALIŞAN</item>
+        <item>STAJYER</item>
+    </string-array>
+
+    <string-array name="izin_tipi">
+        <item>Ücretli</item>
+        <item>Ücretsiz</item>
+    </string-array>
+
+    <string-array name="mazeret">
+        <item>Hasta</item>
+        <item>Yıılık İzin</item>
+        <item>Görevli</item>
+        <item>Raporlu</item>
+        <item>Özel</item>
+        <item>SSK Vizite</item>
+    </string-array>
+
+
+</resources>

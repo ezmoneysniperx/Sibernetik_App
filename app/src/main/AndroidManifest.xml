@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.sibernetik">
+
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:largeHeap="true"
+        android:usesCleartextTraffic="true"
+        android:theme="@style/Theme.SIbernetik">
+        <meta-data
+            android:name="firebase_performance_logcat_enabled"
+            android:value="true" />
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_icon"
+            android:resource="@drawable/duyuru1" />
+        <activity
+            android:name=".ImzaActivity"
+            android:exported="false" />
+
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="${applicationId}.provider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/provider_paths" />
+        </provider>
+
+        <service
+            android:name=".MyFirebaseMessagingService"
+            android:directBootAware="true"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
+
+        <activity
+            android:name=".SplashScreen"
+            android:exported="true"
+            android:label="@string/app_name"
+            android:theme="@style/Theme.SIbernetik.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".LoginActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ForgotPasswordActivity"
+            android:exported="false" />
+        <activity
+            android:name=".RegisterActivity"
+            android:exported="false" />
+        <activity
+            android:name=".IzinUserActivity"
+            android:exported="false" />
+        <activity
+            android:name=".IzinAdminActivity"
+            android:exported="false" />
+        <activity
+            android:name=".MalzemeUserActivity"
+            android:exported="false" />
+        <activity
+            android:name=".MalzemeAdminActivity"
+            android:exported="false" />
+        <activity
+            android:name=".MainActivity"
+            android:exported="false" />
+        <activity
+            android:name=".DuyuruActivity"
+            android:exported="false" />
+        <activity
+            android:name=".DuyuruAdminActivity"
+            android:exported="false" />
+        <activity
+            android:name=".YemekAdminActivity"
+            android:exported="false" />
+        <activity
+            android:name=".YemekActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ResetPasswordActivity"
+            android:exported="false" />
+        <activity
+            android:name=".AccountManagementActivity"
+            android:exported="false" />
+        <activity
+            android:name=".IzinManagementActivity"
+            android:exported="false" />
+        <activity
+            android:name=".AccountOnaylaActivity"
+            android:exported="false" />
+        <activity
+            android:name=".IzinUserTime"
+            android:exported="false" />
+        <activity
+            android:name=".IzinAdminTime"
+            android:exported="false" />
+        <activity
+            android:name=".EditBilgiActivity"
+            android:exported="false" />
+        <activity
+            android:name=".EditSifreActivity"
+            android:exported="false" />
+        <activity
+            android:name=".IzinMenuActivity"
+            android:exported="false" />
+    </application>
+
+</manifest>
