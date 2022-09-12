@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".GeciciGorevlendirmeUserActivity"
+    android:background="@drawable/wallpaper">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <LinearLayout
+            android:id="@+id/linearLayout6"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <ImageButton
+                android:id="@+id/anasayfaGGUserBtn"
+                android:layout_width="37dp"
+                android:layout_height="39dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginRight="165dp"
+                android:background="@android:color/transparent"
+                android:contentDescription="@string/app_name"
+                android:foregroundGravity="left"
+                android:scaleType="centerInside"
+                app:srcCompat="@drawable/back" />
+
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="match_parent"
+                android:layout_height="66dp"
+                android:layout_marginTop="10dp"
+                android:text="Geçici Görevlendirme Formu"
+                android:textAlignment="center"
+                android:textAllCaps="false"
+                android:textColor="?android:attr/textColorTertiaryInverse"
+                android:textColorHint="?android:attr/textColorTertiaryInverse"
+                android:textSize="28sp"
+                android:textStyle="normal|bold" />
+
+            <EditText
+                android:id="@+id/nameGGTxt"
+                android:layout_width="330dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:background="@drawable/custom2"
+                android:ems="15"
+                android:hint="Adı Soyadı"
+                android:inputType="textPersonName"
+                android:textColor="?android:attr/textColorTertiaryInverse"
+                android:textColorHint="?android:attr/textColorTertiaryInverse"
+                android:textSize="17dp" />
+
+            <EditText
+                android:id="@+id/ggYeriTxt"
+                android:layout_width="330dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginTop="7dp"
+                android:background="@drawable/custom2"
+                android:ems="15"
+                android:hint="Geçici Görev Yeri"
+                android:inputType="text"
+                android:textColor="?android:attr/textColorTertiaryInverse"
+                android:textColorHint="?android:attr/textColorTertiaryInverse"
+                android:textSize="17dp" />
+
+            <EditText
+                android:id="@+id/ggTarifiTxt"
+                android:layout_width="330dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginTop="7dp"
+                android:background="@drawable/custom2"
+                android:ems="15"
+                android:hint="Geçici Görev Tarifi"
+                android:inputType="text"
+                android:textColor="?android:attr/textColorTertiaryInverse"
+                android:textColorHint="?android:attr/textColorTertiaryInverse"
+                android:textSize="17dp" />
+
+            <LinearLayout
+                android:layout_width="330dp"
+                android:layout_height="match_parent"
+                android:layout_marginTop="7dp"
+                android:orientation="horizontal">
+
+                <EditText
+                    android:id="@+id/ggBasTarihTxt"
+                    android:layout_width="283dp"
+                    android:layout_height="40dp"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_gravity="left"
+                    android:layout_marginRight="7dp"
+                    android:background="@drawable/custom2"
+                    android:ems="15"
+                    android:hint="Geçici Göreve Başladığı Tarihi"
+                    android:textColor="?android:attr/textColorTertiaryInverse"
+                    android:textColorHint="?android:attr/textColorTertiaryInverse"
+                    android:textSize="17sp" />
+
+                <Button
+                    android:id="@+id/ggBasTarihBtn"
+                    android:layout_width="41dp"
+                    android:layout_height="40dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_gravity="center"
+                    android:background="@drawable/custom4"
+                    android:ems="12"
+                    android:text="Seç"
+                    android:textColor="?android:attr/textColorTertiaryInverse"
+                    android:textColorHint="?android:attr/textColorTertiaryInverse"
+                    android:textSize="10sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="330dp"
+                android:layout_height="match_parent"
+                android:layout_marginTop="7dp"
+                android:orientation="horizontal">
+
+                <EditText
+                    android:id="@+id/ggBitTarihTxt"
+                    android:layout_width="283dp"
+                    android:layout_height="40dp"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_gravity="left"
+                    android:layout_marginRight="7dp"
+                    android:background="@drawable/custom2"
+                    android:ems="15"
+                    android:hint="Geçici Göreve Döneceği Tarihi"
+                    android:textColor="?android:attr/textColorTertiaryInverse"
+                    android:textColorHint="?android:attr/textColorTertiaryInverse"
+                    android:textSize="17sp" />
+
+                <Button
+                    android:id="@+id/ggBitTarihBtn"
+                    android:layout_width="41dp"
+                    android:layout_height="40dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_gravity="center"
+                    android:background="@drawable/custom4"
+                    android:ems="12"
+                    android:text="Seç"
+                    android:textColor="?android:attr/textColorTertiaryInverse"
+                    android:textColorHint="?android:attr/textColorTertiaryInverse"
+                    android:textSize="10sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="330dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/btnSubmitGg"
+                    android:layout_width="330dp"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:background="@drawable/custom5"
+                    android:ems="19"
+                    android:text="Gönder"
+                    android:textColor="?android:attr/textColorTertiaryInverse"
+                    android:textColorHint="?android:attr/textColorTertiaryInverse" />
+
+                <Button
+                    android:id="@+id/btnTemizleGg"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginRight="13dp"
+                    android:layout_marginLeft="13dp"
+                    android:background="@drawable/custom5"
+                    android:ems="19"
+                    android:text="Temizle"
+                    android:textColor="?android:attr/textColorTertiaryInverse"
+                    android:textColorHint="?android:attr/textColorTertiaryInverse" />
+
+                <Button
+                    android:id="@+id/btnDeleteGg"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:background="@drawable/custom4"
+                    android:ems="19"
+                    android:text="TALEBİNİ SİL"
+                    android:textColor="?android:attr/textColorTertiaryInverse"
+                    android:textColorHint="?android:attr/textColorTertiaryInverse" />
+
+            </LinearLayout>
+
+            <ScrollView
+                android:layout_width="375dp"
+                android:layout_height="258dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="5dp">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recyclerview"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    tools:itemCount="10"
+                    tools:listitem="@layout/card_view_design" />
+            </ScrollView>
+        </LinearLayout>
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
