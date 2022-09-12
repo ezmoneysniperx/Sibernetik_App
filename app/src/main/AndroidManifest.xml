@@ -8,17 +8,19 @@
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
+        android:largeHeap="true"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:largeHeap="true"
-        android:usesCleartextTraffic="true"
-        android:theme="@style/Theme.SIbernetik">
+        android:theme="@style/Theme.SIbernetik"
+        android:usesCleartextTraffic="true">
+
         <meta-data
             android:name="firebase_performance_logcat_enabled"
             android:value="true" />
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_icon"
             android:resource="@drawable/duyuru1" />
+
         <activity
             android:name=".ImzaActivity"
             android:exported="false" />
@@ -46,6 +48,7 @@
             android:name=".SplashScreen"
             android:exported="true"
             android:label="@string/app_name"
+            android:noHistory="true"
             android:theme="@style/Theme.SIbernetik.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -55,7 +58,8 @@
         </activity>
         <activity
             android:name=".LoginActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:noHistory="true"/>
         <activity
             android:name=".ForgotPasswordActivity"
             android:exported="false" />
@@ -90,9 +94,6 @@
             android:name=".YemekActivity"
             android:exported="false" />
         <activity
-            android:name=".ResetPasswordActivity"
-            android:exported="false" />
-        <activity
             android:name=".AccountManagementActivity"
             android:exported="false" />
         <activity
@@ -115,6 +116,12 @@
             android:exported="false" />
         <activity
             android:name=".IzinMenuActivity"
+            android:exported="false" />
+        <activity
+            android:name=".GeciciGorevlendirmeUserActivity"
+            android:exported="false" />
+        <activity
+            android:name=".GeciciGorevlendirmeAdminActivity"
             android:exported="false" />
     </application>
 

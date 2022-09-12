@@ -6,6 +6,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.content.Context
 import android.content.SharedPreferences
+import android.media.Image
 import android.os.Build
 import android.util.Log
 import android.widget.Button
@@ -67,6 +68,7 @@ class MainActivity : AppCompatActivity()  {
         val hesapYonetimButton = findViewById<ImageButton>(R.id.hesapYonetimBtn)
         val izinHakkiButton = findViewById<ImageButton>(R.id.izinHakkiBtn)
         val bilgilerimButton = findViewById<Button>(R.id.editBilgiBtn)
+        val geciciGorevButton = findViewById<ImageButton>(R.id.geciciBtn)
 
         val popupMenuMalzeme = PopupMenu(this@MainActivity, malzemeButton)
         popupMenuMalzeme.menuInflater.inflate(R.menu.popup_menu, popupMenuMalzeme.menu)
@@ -94,6 +96,20 @@ class MainActivity : AppCompatActivity()  {
                 val intent = Intent(this, IzinMenuActivity::class.java)
                 intent.putExtra("Yetki","User")
                 startActivity(intent)
+            }
+            false
+        }
+
+        val popupMenuGeciciGorev = PopupMenu(this@MainActivity, geciciGorevButton)
+        popupMenuGeciciGorev.menuInflater.inflate(R.menu.popup_menu, popupMenuGeciciGorev.menu)
+        popupMenuGeciciGorev.setOnMenuItemClickListener { menuItem ->
+            val id = menuItem.itemId
+            if (id == R.id.adminEkran){
+                val admin = Intent(this, GeciciGorevlendirmeAdminActivity::class.java)
+                startActivity(admin)
+            }else if (id == R.id.userEkran){
+                val user = Intent(this, GeciciGorevlendirmeUserActivity::class.java)
+                startActivity(user)
             }
             false
         }
@@ -147,6 +163,25 @@ class MainActivity : AppCompatActivity()  {
                         }else{
                             val intent = Intent(this, IzinMenuActivity::class.java)
                             intent.putExtra("Yetki","User")
+                            startActivity(intent)
+                        }
+                    }else{
+                        Toast.makeText(this@MainActivity, "Bu Özelliği Kullanmak İçin İmza Oluşturmanız Gerekiyor! Bilgilerim Sayfasında Ulaşabilirsiniz!", Toast.LENGTH_SHORT).show()
+                    }
+                }
+            }
+        }
+
+        geciciGorevButton.setOnClickListener {
+            myRef.child(uid).get().addOnSuccessListener {
+                if (it.exists()) {
+                    val imzaDurum = it.child("imzaExist").value.toString()
+                    Log.w("test","$imzaDurum")
+                    if(imzaDurum == "1"){
+                        if(gorev == "INSAN KAYNAKLAR" || gorev == "YONETICI"){
+                            popupMenuGeciciGorev.show()
+                        }else{
+                            val intent = Intent(this, GeciciGorevlendirmeUserActivity::class.java)
                             startActivity(intent)
                         }
                     }else{

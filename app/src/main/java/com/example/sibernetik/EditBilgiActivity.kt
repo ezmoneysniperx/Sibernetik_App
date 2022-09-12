@@ -83,8 +83,9 @@ class EditBilgiActivity : AppCompatActivity() {
             val bolum = bolumEditBTxt.text.toString()
             val yonetici = yoneticiEditBTxt.text.toString()
             val gorev = gorevEditBTxt.text.toString()
+            val bolumdekigorev = bolumGorevEditBTxt.text.toString()
 
-            editInfo(adsoyad, eposta, tel, tckn, tarih, bolum, yonetici, gorev)
+            editInfo(adsoyad, eposta, tel, tckn, tarih, bolum, yonetici, gorev, bolumdekigorev)
         }
 
         btnEditSifre.setOnClickListener {
@@ -156,9 +157,9 @@ class EditBilgiActivity : AppCompatActivity() {
         }
     }
 
-    fun editInfo(adsoyad : String, eposta : String, tel : String, tckn : String, tarih : String, bolum : String, yonetici : String, gorev : String){
+    fun editInfo(adsoyad : String, eposta : String, tel : String, tckn : String, tarih : String, bolum : String, yonetici : String, gorev : String, bolumdekigorev : String){
         if(adsoyad.isEmpty() || eposta.isEmpty() || tel.isEmpty() || tckn.isEmpty()
-            || tarih.isEmpty() || bolum.isEmpty() || yonetici.isEmpty() || gorev.isEmpty()){
+            || tarih.isEmpty() || bolum.isEmpty() || yonetici.isEmpty() || gorev.isEmpty() || bolumdekigorev.isEmpty()){
 
             val builder = AlertDialog.Builder(this)
             builder.setMessage("Bilgileri Boş Bırakılmaz!")
@@ -188,6 +189,7 @@ class EditBilgiActivity : AppCompatActivity() {
                 myRef.child(uid).child("bolum").setValue(bolum)
                 myRef.child(uid).child("yonetici").setValue(yonetici)
                 myRef.child(uid).child("gorev").setValue(gorev)
+                myRef.child(uid).child("bolumdekiGorev").setValue(bolumdekigorev)
                 Toast.makeText(this, "Güncelleme İşlemi Başarılı!", Toast.LENGTH_SHORT).show()
                 val intent = Intent(this, MainActivity::class.java)
                 startActivity(intent)

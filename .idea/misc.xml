@@ -77,6 +77,9 @@
         <entry key="..\:/Users/gjuan/AndroidStudioProjects/Sibernetik/app/src/main/res/layout/account_management.xml" value="0.16500453309156846" />
         <entry key="..\:/Users/gjuan/AndroidStudioProjects/Sibernetik/app/src/main/res/layout/account_onayla_activity.xml" value="0.264" />
         <entry key="..\:/Users/gjuan/AndroidStudioProjects/Sibernetik/app/src/main/res/layout/activity_edit_sifre.xml" value="0.15489130434782608" />
+        <entry key="..\:/Users/gjuan/AndroidStudioProjects/Sibernetik/app/src/main/res/layout/activity_gecici_gorevlendirme.xml" value="0.24365942028985507" />
+        <entry key="..\:/Users/gjuan/AndroidStudioProjects/Sibernetik/app/src/main/res/layout/activity_gecici_gorevlendirme_admin.xml" value="0.24010416666666667" />
+        <entry key="..\:/Users/gjuan/AndroidStudioProjects/Sibernetik/app/src/main/res/layout/activity_gecici_gorevlendirme_user.xml" value="0.264" />
         <entry key="..\:/Users/gjuan/AndroidStudioProjects/Sibernetik/app/src/main/res/layout/activity_imza.xml" value="0.2" />
         <entry key="..\:/Users/gjuan/AndroidStudioProjects/Sibernetik/app/src/main/res/layout/activity_izin_menu.xml" value="0.1" />
         <entry key="..\:/Users/gjuan/AndroidStudioProjects/Sibernetik/app/src/main/res/layout/activity_main.xml" value="0.16" />
@@ -91,6 +94,7 @@
         <entry key="..\:/Users/gjuan/AndroidStudioProjects/Sibernetik/app/src/main/res/layout/izin_management.xml" value="0.15489130434782608" />
         <entry key="..\:/Users/gjuan/AndroidStudioProjects/Sibernetik/app/src/main/res/layout/izin_user_activity.xml" value="0.20863616930312098" />
         <entry key="..\:/Users/gjuan/AndroidStudioProjects/Sibernetik/app/src/main/res/layout/izin_user_time.xml" value="0.264" />
+        <entry key="..\:/Users/gjuan/AndroidStudioProjects/Sibernetik/app/src/main/res/layout/layout_pdf_gg.xml" value="0.14895833333333333" />
         <entry key="..\:/Users/gjuan/AndroidStudioProjects/Sibernetik/app/src/main/res/layout/layout_pdf_page.xml" value="0.1848381601362862" />
         <entry key="..\:/Users/gjuan/AndroidStudioProjects/Sibernetik/app/src/main/res/layout/login_activity.xml" value="0.16500453309156846" />
         <entry key="..\:/Users/gjuan/AndroidStudioProjects/Sibernetik/app/src/main/res/layout/malzeme_activity.xml" value="0.12360688956433637" />

@@ -22,6 +22,7 @@ import com.google.firebase.database.ktx.getValue
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.messaging.ktx.messaging
 import kotlinx.android.synthetic.main.login_activity.*
+import kotlin.system.exitProcess
 
 class LoginActivity : AppCompatActivity(){
 
@@ -62,6 +63,13 @@ class LoginActivity : AppCompatActivity(){
                 login(eposta,sifre)
             }
         }
+    }
+
+    override fun onBackPressed() {
+        //super.onBackPressed()
+        finishAffinity()
+        finish()
+        exitProcess(0)
     }
 
     fun goToRegister(view: View) {

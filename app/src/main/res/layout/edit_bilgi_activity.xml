@@ -46,7 +46,7 @@
 
                 <LinearLayout
                     android:layout_width="300dp"
-                    android:layout_height="596dp"
+                    android:layout_height="650dp"
                     android:layout_gravity="center"
                     android:layout_marginBottom="15dp"
                     android:orientation="vertical">
@@ -184,6 +184,23 @@
                         android:background="@drawable/custom2"
                         android:ems="15"
                         android:hint="@string/bolum_onayla"
+                        android:inputType="text"
+                        android:textColor="?android:attr/textColorTertiaryInverse"
+                        android:textColorHint="?android:attr/textColorTertiaryInverse"
+                        android:textSize="17dp" />
+
+                    <EditText
+                        android:id="@+id/bolumGorevEditBTxt"
+                        android:layout_width="300dp"
+                        android:layout_height="38dp"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="7dp"
+                        android:background="@drawable/custom2"
+                        android:ems="15"
+                        android:hint="@string/bolum_gorev_onayla"
                         android:inputType="text"
                         android:textColor="?android:attr/textColorTertiaryInverse"
                         android:textColorHint="?android:attr/textColorTertiaryInverse"

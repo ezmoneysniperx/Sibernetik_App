@@ -80,6 +80,7 @@ class AccountOnaylaActivity : AppCompatActivity() {
             val bolum = bolumOnayTxt.text.toString()
             val yonetici = yoneticiOnayTxt.text.toString()
             val gorev = spinnerSelItem.toString()
+            val bolumdekiGorev = gorevBolumOnayTxt.text.toString()
 
             var detector = 0
 
@@ -94,7 +95,7 @@ class AccountOnaylaActivity : AppCompatActivity() {
                     if(snapshot!=null && snapshot.getChildren()!=null &&
                         snapshot.getChildren().iterator().hasNext() && detector == 0) {
                         detector = 1
-                        accAccount(adsoyad, eposta, telefon, tckn, iseBasTar, bolum, yonetici, gorev)
+                        accAccount(adsoyad, eposta, telefon, tckn, iseBasTar, bolum, yonetici, gorev, bolumdekiGorev)
                     }else if (detector != 1){
                         progressDialog.dismiss()
                         Toast.makeText(this@AccountOnaylaActivity,"Yazdığınız Yöneticiye Ait Uygulamada Hesap Bulunamadı!",Toast.LENGTH_SHORT).show()
@@ -137,7 +138,7 @@ class AccountOnaylaActivity : AppCompatActivity() {
         })
     }
 
-    fun accAccount(adsoyad: String, ePosta: String, telefon: String, tckn: String, iseBasTar : String, bolum : String, yonetici : String, gorev : String){
+    fun accAccount(adsoyad: String, ePosta: String, telefon: String, tckn: String, iseBasTar : String, bolum : String, yonetici : String, gorev : String, bolumdekiGorev : String){
         myRef.addValueEventListener(object:ValueEventListener{
                 override fun onDataChange(snapshot: DataSnapshot) {
                     for (postSnapshot in snapshot.children){
@@ -174,7 +175,7 @@ class AccountOnaylaActivity : AppCompatActivity() {
                                             .addOnCompleteListener { task -> }
                                         sifre = HashUtils.sha256(sifre)
                                         Log.w("data", "sebelum saveData")
-                                        saveData(adsoyad, ePosta, telefon, tckn, iseBasTar, sifre,"ONAYLANDI", gorev, bolum, yonetici, uid)
+                                        saveData(adsoyad, ePosta, telefon, tckn, iseBasTar, sifre,"ONAYLANDI", gorev, bolum, yonetici, uid, bolumdekiGorev)
                                         Log.w("data", "sebelum delete")
                                         myRef.child(tckn).removeValue()
                                         Log.w("data", "abis delete")
@@ -209,8 +210,8 @@ class AccountOnaylaActivity : AppCompatActivity() {
             })
     }
 
-    fun saveData(adSoyad : String, ePosta : String, telefon : String, tckn : String, tarih : String, sifre : String, durum : String, gorev : String, bolum : String, yonetici : String, uid : String) {
-        val newUser = UsersModel(adSoyad, ePosta, telefon, tckn, durum, gorev,0, tarih, sifre, 0, bolum, yonetici,0)
+    fun saveData(adSoyad : String, ePosta : String, telefon : String, tckn : String, tarih : String, sifre : String, durum : String, gorev : String, bolum : String, yonetici : String, uid : String, bolumdekiGorev : String) {
+        val newUser = UsersModel(adSoyad, ePosta, telefon, tckn, durum, gorev,0, tarih, sifre, 0, bolum, bolumdekiGorev, yonetici,0)
         myRef.child(uid).setValue(newUser)
     }
 }

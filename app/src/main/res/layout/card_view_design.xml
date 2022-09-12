@@ -2,7 +2,7 @@
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="180dp"
+    android:layout_height="155dp"
     android:layout_margin="10dp"
     android:background="@color/white"
     android:backgroundTint="@color/white"
@@ -116,7 +116,7 @@
                 android:id="@+id/textView6"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Yönetici 1 Onayı :"
+                android:text="İnsan Kaynaklar Onayı :"
                 android:textColor="?android:attr/textColorTertiaryInverse"
                 android:textSize="11sp" />
 
@@ -134,7 +134,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:text="Yönetici 2 Onayı :"
+                android:text="Yönetici Onayı :"
                 android:textColor="?android:attr/textColorTertiaryInverse"
                 android:textSize="11sp" />
 

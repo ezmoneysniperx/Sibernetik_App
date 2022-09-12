@@ -12,6 +12,7 @@ data class UsersModel (
     var sifre : String? =null,
     var isUpdated : Int? =null,
     var bolum : String? = null,
+    var bolumdekiGorev : String? = null,
     var yonetici : String? = null,
     var imzaExist : Int? = null
 )

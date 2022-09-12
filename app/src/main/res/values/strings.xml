@@ -12,8 +12,9 @@
 
     <string name="button_onayla"><font size="18">HESAP ONAYLA</font></string>
     <string name="bolum_onayla"><font size="15">Bölüm</font></string>
+    <string name="bolum_gorev_onayla"><font size="15">Bölümdeki Görevi</font></string>
     <string name="yonetici_onayla"><font size="15">Yönetici</font></string>
-    <string name="gorev_onayla"><font size="15">Görev</font></string>
+    <string name="gorev_onayla"><font size="15">Şirketteki Görevi</font></string>
 
     <string name="button_forgotpwd"><font size="18">YENİ ŞİFRE OLUŞTUR</font></string>
     <string name="button_editbilgi"><font size="18">BİLGİLERİ DEĞİŞTİR</font></string>

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/wallpaper1">
+    android:background="@drawable/wallpaper">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -40,7 +40,7 @@
 
             <LinearLayout
                 android:layout_width="300dp"
-                android:layout_height="440dp"
+                android:layout_height="500dp"
                 android:layout_gravity="center"
                 android:layout_marginBottom="15dp"
                 android:orientation="vertical">
@@ -154,6 +154,13 @@
                         android:textStyle="bold" />
                 </LinearLayout>
 
+                <Spinner
+                    android:id="@+id/spinner"
+                    android:layout_width="305dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="7dp"
+                    android:entries="@array/hesap_gorev" />
+
                 <EditText
                     android:id="@+id/bolumOnayTxt"
                     android:layout_width="300dp"
@@ -166,6 +173,23 @@
                     android:background="@drawable/custom2"
                     android:ems="15"
                     android:hint="@string/bolum_onayla"
+                    android:inputType="text"
+                    android:textColor="?android:attr/textColorTertiaryInverse"
+                    android:textColorHint="?android:attr/textColorTertiaryInverse"
+                    android:textSize="17dp" />
+
+                <EditText
+                    android:id="@+id/gorevBolumOnayTxt"
+                    android:layout_width="300dp"
+                    android:layout_height="38dp"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="7dp"
+                    android:background="@drawable/custom2"
+                    android:ems="15"
+                    android:hint="@string/bolum_gorev_onayla"
                     android:inputType="text"
                     android:textColor="?android:attr/textColorTertiaryInverse"
                     android:textColorHint="?android:attr/textColorTertiaryInverse"
@@ -188,14 +212,6 @@
                     android:textColorHint="?android:attr/textColorTertiaryInverse"
                     android:textSize="17dp" />
 
-                <Spinner
-                    android:id="@+id/spinner"
-                    android:layout_width="305dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="7dp"
-                    android:layout_marginBottom="10dp"
-                    android:entries="@array/hesap_gorev" />
-
                 <Button
                     android:id="@+id/btnOnay"
                     android:layout_width="300dp"
@@ -210,14 +226,6 @@
                     android:textColorHint="?android:attr/textColorTertiaryInverse" />
 
             </LinearLayout>
-
-            <ImageView
-                android:id="@+id/imageView"
-                android:layout_width="353dp"
-                android:layout_height="113dp"
-                android:layout_gravity="center"
-                android:background="?attr/selectableItemBackground"
-                android:src="@drawable/sibernetik_logo" />
 
         </LinearLayout>
     </ScrollView>
