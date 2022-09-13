@@ -126,7 +126,6 @@
                         android:layout_margin="6dp"
                         android:background="@android:color/transparent"
                         android:contentDescription="@string/app_name"
-                        android:onClick="mesaiButton"
                         android:scaleType="centerInside"
                         android:src="@drawable/mesai" />
 
@@ -203,7 +202,7 @@
                         android:contentDescription="@string/app_name"
                         android:scaleType="centerInside"
                         android:src="@drawable/yonetim"
-                        android:visibility="visible" />
+                        android:visibility="invisible" />
 
                     <ImageButton
                         android:id="@+id/izinHakkiBtn"
@@ -215,7 +214,7 @@
                         android:contentDescription="@string/app_name"
                         android:scaleType="centerInside"
                         android:src="@drawable/izinhakkiyonetimi"
-                        android:visibility="visible" />
+                        android:visibility="invisible" />
 
                 </GridLayout>
 

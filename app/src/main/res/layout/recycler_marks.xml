@@ -20,7 +20,7 @@
 
         <TextView
             android:id="@+id/txt_subject_recy"
-            android:layout_width="144dp"
+            android:layout_width="170dp"
             android:layout_height="0dp"
             android:textColor="@color/black"
             app:layout_constraintBottom_toBottomOf="parent"

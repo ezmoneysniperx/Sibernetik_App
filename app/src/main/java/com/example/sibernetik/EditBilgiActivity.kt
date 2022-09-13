@@ -145,6 +145,7 @@ class EditBilgiActivity : AppCompatActivity() {
                 bolumEditBTxt.setText(it.child("bolum").value.toString())
                 yoneticiEditBTxt.setText(it.child("yonetici").value.toString())
                 gorevEditBTxt.setText(it.child("gorev").value.toString())
+                bolumGorevEditBTxt.setText(it.child("bolumdekiGorev").value.toString())
             }else{
                 val builder = AlertDialog.Builder(this)
                 builder.setMessage("HATA OLUŞTU! (VERİ BULUNAMADI)")

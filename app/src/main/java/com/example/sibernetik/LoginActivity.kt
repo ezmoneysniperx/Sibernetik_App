@@ -14,6 +14,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.auth.ktx.userProfileChangeRequest
+import com.google.firebase.crashlytics.ktx.crashlytics
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
@@ -94,6 +95,8 @@ class LoginActivity : AppCompatActivity(){
                     val user = auth.currentUser
                     val uid = user!!.uid
                     adsoyad1 = user!!.displayName.toString()
+                    Firebase.crashlytics.setUserId("$uid")
+                    Firebase.crashlytics.log("message")
                     if(gorev == "INSAN KAYNAKLAR"){
                         Firebase.messaging.subscribeToTopic("IK")
                             .addOnCompleteListener { task ->

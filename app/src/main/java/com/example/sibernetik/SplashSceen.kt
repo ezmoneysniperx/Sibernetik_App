@@ -17,6 +17,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
+import com.google.firebase.crashlytics.ktx.crashlytics
 import com.google.firebase.ktx.Firebase
 import com.microsoft.appcenter.AppCenter
 import com.microsoft.appcenter.analytics.Analytics
@@ -45,9 +46,13 @@ class SplashScreen : AppCompatActivity() {
 
         val user = Firebase.auth.currentUser
 
-        Handler().postDelayed({
+            Handler().postDelayed({
             if (checkForInternet(this)) {
                 if(user != null){
+                    val user = Firebase.auth.currentUser
+                    val uid = user!!.uid
+                    Firebase.crashlytics.setUserId("$uid")
+                    Firebase.crashlytics.log("message")
                     val intent = Intent(this, MainActivity::class.java)
                     startActivity(intent)
                     finish()

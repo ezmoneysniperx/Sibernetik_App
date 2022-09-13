@@ -11,7 +11,8 @@
         android:layout_height="match_parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
             android:id="@+id/linearLayout6"
@@ -20,11 +21,24 @@
             android:gravity="center"
             android:orientation="vertical">
 
+            <ImageButton
+                android:id="@+id/anasayfaMesaiBtn"
+                android:layout_width="37dp"
+                android:layout_height="39dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginRight="160dp"
+                android:background="@android:color/transparent"
+                android:contentDescription="@string/app_name"
+                android:foregroundGravity="left"
+                android:onClick="izinButton"
+                android:scaleType="centerInside"
+                app:srcCompat="@drawable/back" />
+
             <TextView
                 android:id="@+id/textView2"
                 android:layout_width="match_parent"
                 android:layout_height="66dp"
-                android:layout_marginTop="30dp"
+                android:layout_marginTop="5dp"
                 android:text="Mesai Kayıt Formu"
                 android:textAlignment="center"
                 android:textAllCaps="false"
@@ -97,7 +111,7 @@
                     android:layout_marginRight="7dp"
                     android:background="@drawable/custom2"
                     android:ems="15"
-                    android:text="Mesai Yapılan Tarihi"
+                    android:hint="Mesai Yapılan Tarihi"
                     android:textColor="?android:attr/textColorTertiaryInverse"
                     android:textColorHint="?android:attr/textColorTertiaryInverse"
                     android:textSize="17sp" />
@@ -127,7 +141,7 @@
                 android:layout_marginTop="7dp"
                 android:background="@drawable/custom2"
                 android:ems="15"
-                android:hint="Toplam Mesai Saati (SS:DD)"
+                android:hint="Toplam Mesai Saati"
                 android:inputType="text"
                 android:textColor="?android:attr/textColorTertiaryInverse"
                 android:textColorHint="?android:attr/textColorTertiaryInverse"
@@ -165,23 +179,51 @@
                 android:textColorHint="?android:attr/textColorTertiaryInverse"
                 android:textSize="17dp" />
 
-            <Button
-                android:id="@+id/btnSubmitMesai"
-                android:layout_width="330dp"
-                android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="10dp"
-                android:background="@drawable/custom5"
-                android:ems="19"
-                android:text="Gönder"
-                android:textColor="?android:attr/textColorTertiaryInverse"
-                android:textColorHint="?android:attr/textColorTertiaryInverse" />
-
             <LinearLayout
                 android:layout_width="330dp"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"/>
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:layout_marginTop="7dp"
+                android:layout_marginBottom="5dp"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/btnSubmitMesai"
+                    android:layout_width="330dp"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_gravity="center"
+                    android:background="@drawable/custom5"
+                    android:ems="19"
+                    android:text="Gönder"
+                    android:textColor="?android:attr/textColorTertiaryInverse"
+                    android:textColorHint="?android:attr/textColorTertiaryInverse" />
+
+                <Button
+                    android:id="@+id/btnTemizleMesai"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginLeft="13dp"
+                    android:layout_marginRight="13dp"
+                    android:background="@drawable/custom5"
+                    android:ems="19"
+                    android:text="Temizle"
+                    android:textColor="?android:attr/textColorTertiaryInverse"
+                    android:textColorHint="?android:attr/textColorTertiaryInverse" />
+
+                <Button
+                    android:id="@+id/btnDeleteMesai"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:background="@drawable/custom4"
+                    android:ems="19"
+                    android:text="İZİNİ SİL"
+                    android:textColor="?android:attr/textColorTertiaryInverse"
+                    android:textColorHint="?android:attr/textColorTertiaryInverse" />
+
+            </LinearLayout>
 
             <ScrollView
                 android:layout_width="375dp"

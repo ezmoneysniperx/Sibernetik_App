@@ -51,15 +51,23 @@ class MainActivity : AppCompatActivity()  {
         auth = Firebase.auth
 
         val user = Firebase.auth.currentUser
-        name = user!!.displayName.toString()
-        uid = user.uid
+        if(user != null){
+            name = user!!.displayName.toString()
+            uid = user.uid
+            getGorev()
+            top_header.setText("Hoşgeldiniz $name!")
+        }else {
+            Toast.makeText(this@MainActivity, "Giriş Yapmadınız!", Toast.LENGTH_SHORT).show()
+            val intent = Intent(this, LoginActivity::class.java)
+            startActivity(intent)
+            finish()
+        }
 
-        getGorev()
 
         notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
         sharedPreferences = getSharedPreferences(PREFS_KEY, Context.MODE_PRIVATE)
 
-        top_header.setText("Hoşgeldiniz $name!")
+
 
         val logoutButton = findViewById<ImageButton>(R.id.logoutBtn)
         val izinButton = findViewById<ImageButton>(R.id.izinBtn)
@@ -94,6 +102,22 @@ class MainActivity : AppCompatActivity()  {
                 startActivity(intent)
             } else if (id == R.id.userEkran) {
                 val intent = Intent(this, IzinMenuActivity::class.java)
+                intent.putExtra("Yetki","User")
+                startActivity(intent)
+            }
+            false
+        }
+
+        val popupMenuMesai = PopupMenu(this@MainActivity, mesaiBtn)
+        popupMenuMesai.menuInflater.inflate(R.menu.popup_menu, popupMenuMesai.menu)
+        popupMenuMesai.setOnMenuItemClickListener { menuItem ->
+            val id = menuItem.itemId
+            if (id == R.id.adminEkran) {
+                val intent = Intent(this, MesaiAdminActivity::class.java)
+                intent.putExtra("Yetki","Admin")
+                startActivity(intent)
+            } else if (id == R.id.userEkran) {
+                val intent = Intent(this, MesaiUserActivity::class.java)
                 intent.putExtra("Yetki","User")
                 startActivity(intent)
             }
@@ -196,6 +220,15 @@ class MainActivity : AppCompatActivity()  {
                 popupMenuMalzeme.show()
             }else{
                 val user = Intent(this, MalzemeUserActivity::class.java)
+                startActivity(user)
+            }
+        }
+
+        mesaiBtn.setOnClickListener{
+            if(gorev == "INSAN KAYNAKLAR" || gorev == "YONETICI"){
+                popupMenuMesai.show()
+            }else{
+                val user = Intent(this, MesaiUserActivity::class.java)
                 startActivity(user)
             }
         }
