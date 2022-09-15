@@ -6,7 +6,7 @@
 
   <h3 align="center">Sibernetik App</h3>
 
-  <p align="center">
+<p align="center">
     An application project made for the personel of Sibernetik company.
     <br/>
     <br/>
@@ -16,8 +16,9 @@
   </p>
 </p>
 
+<p align="center">
 ![Downloads](https://img.shields.io/github/downloads/ezmoneysniperx/Sibernetik_App/total) ![Contributors](https://img.shields.io/github/contributors/ezmoneysniperx/Sibernetik_App?color=dark-green) ![Stargazers](https://img.shields.io/github/stars/ezmoneysniperx/Sibernetik_App?style=social) ![Issues](https://img.shields.io/github/issues/ezmoneysniperx/Sibernetik_App) 
-
+</p>
 ## About The Project
 
 ![PREVIEW APP](https://user-images.githubusercontent.com/76488381/190408801-4d8bb3ad-b0a2-4673-a491-56f0ca06e1b9.png)
