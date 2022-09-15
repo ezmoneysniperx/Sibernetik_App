@@ -20,7 +20,7 @@
 
 ## About The Project
 
-![Screen Shot](images/PREVIEW APP.png)
+![Screen Shot](Sibernetik_App/PREVIEW APP.png)
 
 Sibernetik App is an Android application project developed using Kotlin while the Backend service provider of this project is Firebase. This application is designed to make several administration process in the company easier for the personels and the administrator, while also being an user friendly application and easy to use.
 
