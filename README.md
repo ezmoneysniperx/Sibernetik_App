@@ -1,7 +1,7 @@
 <br/>
 <p align="center">
   <a href="https://github.com/ezmoneysniperx/Sibernetik_App">
-    <img src="Sibernetik_App/app/src/main/res/drawable/logo.png" alt="Logo" width="80" height="80">
+    <img src="https://media-exp1.licdn.com/dms/image/C560BAQF3nXJAgpZhiA/company-logo_200_200/0/1601893438560?e=2147483647&v=beta&t=F17h2ZI1z8R6za_QXW4BXmDJioClU4p2_ojPPl9Gk70" alt="Logo" width="80" height="80">
   </a>
 
   <h3 align="center">Sibernetik App</h3>
@@ -20,7 +20,8 @@
 
 ## About The Project
 
-![ScreenShot](Sibernetik_App/PREVIEW APP.png)
+![PREVIEW APP](https://user-images.githubusercontent.com/76488381/190408801-4d8bb3ad-b0a2-4673-a491-56f0ca06e1b9.png)
+
 
 Sibernetik App is an Android application project developed using Kotlin while the Backend service provider of this project is Firebase. This application is designed to make several administration process in the company easier for the personels and the administrator, while also being an user friendly application and easy to use.
 
