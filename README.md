@@ -16,9 +16,9 @@
   </p>
 </p>
 
-<div align="center>
+
 ![Downloads](https://img.shields.io/github/downloads/ezmoneysniperx/Sibernetik_App/total) ![Contributors](https://img.shields.io/github/contributors/ezmoneysniperx/Sibernetik_App?color=dark-green) ![Stargazers](https://img.shields.io/github/stars/ezmoneysniperx/Sibernetik_App?style=social) ![Issues](https://img.shields.io/github/issues/ezmoneysniperx/Sibernetik_App) 
-</div>
+
 
 ## About The Project
 
