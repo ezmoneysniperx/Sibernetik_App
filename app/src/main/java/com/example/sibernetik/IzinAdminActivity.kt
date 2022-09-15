@@ -528,6 +528,7 @@ class IzinAdminActivity : AppCompatActivity(), CustomAdapter.OnItemClickListener
         var izinSayisi = 0
         durum = "ONAYLANDI"
         mesaj = izinMesaj.text.toString()
+        if (mesaj.isEmpty()) { mesaj = "-" }
 
 
         myRefUser.addValueEventListener(object : ValueEventListener {
@@ -708,7 +709,7 @@ class IzinAdminActivity : AppCompatActivity(), CustomAdapter.OnItemClickListener
                 myRef.child(id).child("yonetici1").setValue(durum)
                 myRef.child(id).child("mesaj").setValue(mesaj)
                 //notifikasi//
-                var icon = logo
+                val icon = R.drawable.logo
                 val iconString = icon.toString()
                 val notification = Notification()
                 notification.title = "İzin Talebiniz Reddedildi"

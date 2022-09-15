@@ -22,7 +22,7 @@ import java.util.*
 
 class RegisterActivity : AppCompatActivity(){
 
-    val database = Firebase.database("DBLINK")
+    val database = Firebase.database("https://sibernetik-3c2ef-default-rtdb.europe-west1.firebasedatabase.app")
     val myRef = database.getReference("Users")
     private lateinit var auth: FirebaseAuth
     lateinit var progressDialog: ProgressDialog
@@ -73,6 +73,8 @@ class RegisterActivity : AppCompatActivity(){
             val trh = tarihTxt.text.toString()
             val pwd = passwordTxt.text.toString()
 
+            val trhVerif = trh.matches(Regex("[0-9]{2}-[0-9]{2}-[0-9]{4}"))
+
             if(name.isEmpty()){
                 showMessage("Lütfen Adınızı ve Soyadınızı Giriniz!","Tamam")
             }else if(email.isEmpty()){
@@ -85,8 +87,10 @@ class RegisterActivity : AppCompatActivity(){
                 showMessage("Lütfen Şifrenizi Giriniz!", "Tamam")
             }else if (trh.isEmpty()){
                 showMessage("Lütfen İşe Başlangıç Tarihi Seçiniz!", "Tamam")
-            }else if (pwd.length < 6){
+            }else if (pwd.length < 6) {
                 showMessage("Şifrenizi En Az 6 Karakterli Olması Gerekiyor!", "Tamam")
+            }else if (!trhVerif){
+                showMessage("Yanlış Tarih Formatı! Lütfen GG-AA-YYYY tarih formatını kullanın!", "Tamam")
             }else {
                 progressDialog = ProgressDialog(this@RegisterActivity)
                 progressDialog.setMessage("Hesabınız Oluşturuluyor")
@@ -146,7 +150,7 @@ class RegisterActivity : AppCompatActivity(){
     }
     fun saveData(adSoyad : String, ePosta : String, telefon : String, tckn : String, tarih : String, sifre : String, gorev : String) {
         val durum = "ONAY BEKLIYOR"
-        val newUser = UsersModel(adSoyad, ePosta, telefon, tckn, durum, gorev,0, tarih, sifre)
+        val newUser = UsersModel(adSoyad, ePosta, telefon, tckn, durum, gorev,0, tarih, sifre,)
         myRef.child(tckn).setValue(newUser)
     }
 

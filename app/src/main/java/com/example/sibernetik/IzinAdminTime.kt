@@ -43,11 +43,13 @@ class IzinAdminTime : AppCompatActivity(), CustomAdapter.OnItemClickListener  {
 
     var uid = ""
 
-    val database = Firebase.database("DBLINK")
+    val database = Firebase.database("https://sibernetik-3c2ef-default-rtdb.europe-west1.firebasedatabase.app")
     val myRef = database.getReference("Izin").child("Izin Saatlik")
     val myRefUser = database.getReference("Users")
     private lateinit var auth: FirebaseAuth
     var serverKey = "serverkey"
+
+    //var serverKey = "serverkey"
     var email = ""
     var emailIzinPerson = ""
     var gorev = ""
@@ -286,23 +288,23 @@ class IzinAdminTime : AppCompatActivity(), CustomAdapter.OnItemClickListener  {
                             }
                         }else{
                             if(value!!.yonetici2 == "REDDETTI"){
-                                val tarih = value!!.izintarihi.toString()
-                                val bassaatii = value!!.bassaati.toString()
-                                val bitSaati = value!!.bitsaati.toString()
+                                val tarih = value.izintarihi.toString()
+                                val bassaatii = value.bassaati.toString()
+                                val bitSaati = value.bitsaati.toString()
                                 val saat = "$bassaatii - $bitSaati"
-                                val izinTip = value!!.izinTipi.toString()
-                                val izinMaz = value!!.izinMazeret.toString()
+                                val izinTip = value.izinTipi.toString()
+                                val izinMaz = value.izinMazeret.toString()
 
                                 data.add(ItemsViewModel(
                                     R.drawable.reddeti,
-                                    value!!.adsoyad.toString(),
-                                    value!!.sebeb.toString(),
+                                    value.adsoyad.toString(),
+                                    value.sebeb.toString(),
                                     tarih,
                                     saat,
-                                    value!!.yonetici1.toString(),
-                                    value!!.yonetici2.toString(),
-                                    value!!.mesaj.toString(),
-                                    value!!.izinId.toString(),
+                                    value.yonetici1.toString(),
+                                    value.yonetici2.toString(),
+                                    value.mesaj.toString(),
+                                    value.izinId.toString(),
                                     "",
                                     izinTip,
                                     izinMaz
@@ -312,23 +314,23 @@ class IzinAdminTime : AppCompatActivity(), CustomAdapter.OnItemClickListener  {
                     }else if (gorev == "INSAN KAYNAKLAR"){
                         if (durum == "ONAY BEKLIYOR"){
                             if(value!!.yonetici1 == "ONAY BEKLIYOR" && value!!.yonetici2 == "ONAYLANDI"){
-                                val tarih = value!!.izintarihi.toString()
-                                val bassaatii = value!!.bassaati.toString()
-                                val bitSaati = value!!.bitsaati.toString()
+                                val tarih = value.izintarihi.toString()
+                                val bassaatii = value.bassaati.toString()
+                                val bitSaati = value.bitsaati.toString()
                                 val saat = "$bassaatii - $bitSaati"
-                                val izinTip = value!!.izinTipi.toString()
-                                val izinMaz = value!!.izinMazeret.toString()
+                                val izinTip = value.izinTipi.toString()
+                                val izinMaz = value.izinMazeret.toString()
 
                                 data.add(ItemsViewModel(
                                     R.drawable.bekleme,
-                                    value!!.adsoyad.toString(),
-                                    value!!.sebeb.toString(),
+                                    value.adsoyad.toString(),
+                                    value.sebeb.toString(),
                                     tarih,
                                     saat,
-                                    value!!.yonetici1.toString(),
-                                    value!!.yonetici2.toString(),
-                                    value!!.mesaj.toString(),
-                                    value!!.izinId.toString(),
+                                    value.yonetici1.toString(),
+                                    value.yonetici2.toString(),
+                                    value.mesaj.toString(),
+                                    value.izinId.toString(),
                                     "",
                                     izinTip,
                                     izinMaz
@@ -336,21 +338,21 @@ class IzinAdminTime : AppCompatActivity(), CustomAdapter.OnItemClickListener  {
                             }
                         }else if (durum == "ONAYLANDI"){
                             if(value!!.yonetici1 == "ONAYLANDI" && value!!.yonetici2 == "ONAYLANDI"){
-                                val tarih = value!!.izintarihi.toString()
-                                val bassaatii = value!!.bassaati.toString()
-                                val bitSaati = value!!.bitsaati.toString()
+                                val tarih = value.izintarihi.toString()
+                                val bassaatii = value.bassaati.toString()
+                                val bitSaati = value.bitsaati.toString()
                                 val saat = "$bassaatii - $bitSaati"
-                                val izinTip = value!!.izinTipi.toString()
-                                val izinMaz = value!!.izinMazeret.toString()
+                                val izinTip = value.izinTipi.toString()
+                                val izinMaz = value.izinMazeret.toString()
 
                                 data.add(ItemsViewModel(
                                     R.drawable.onaylandi,
-                                    value!!.adsoyad.toString(),
-                                    value!!.sebeb.toString(),
+                                    value.adsoyad.toString(),
+                                    value.sebeb.toString(),
                                     tarih,
                                     saat,
-                                    value!!.yonetici1.toString(),
-                                    value!!.yonetici2.toString(),
+                                    value.yonetici1.toString(),
+                                    value.yonetici2.toString(),
                                     value!!.mesaj.toString(),
                                     value!!.izinId.toString(),
                                     "",

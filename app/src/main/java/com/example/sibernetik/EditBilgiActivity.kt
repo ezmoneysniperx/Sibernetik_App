@@ -16,6 +16,7 @@ import com.google.firebase.ktx.Firebase
 import kotlinx.android.synthetic.main.edit_bilgi_activity.*
 import java.text.SimpleDateFormat
 import java.util.*
+import kotlin.collections.ArrayList
 
 class EditBilgiActivity : AppCompatActivity() {
 
@@ -47,46 +48,6 @@ class EditBilgiActivity : AppCompatActivity() {
         }
 
         showInfo(uid)
-
-        val simpleDateFormat = SimpleDateFormat("dd-MM-yyyy")
-        var formatted: String = simpleDateFormat.format(Date())
-        val c = Calendar.getInstance()
-        val year = c.get(Calendar.YEAR)
-        val month = c.get(Calendar.MONTH)
-        val day = c.get(Calendar.DATE)
-
-        iseTarihEditBtn.setOnClickListener {
-            val dpd = DatePickerDialog(this, DatePickerDialog.OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
-                var newMonth = month + 1
-                var formattedMonth = "" + newMonth
-                var formattedDate = "" + dayOfMonth
-                if(newMonth < 10){
-
-                    formattedMonth = "0" + newMonth;
-                }
-                if(dayOfMonth < 10){
-
-                    formattedDate  = "0" + dayOfMonth ;
-                }
-                formatted = "$formattedDate-$formattedMonth-$year"
-                tarihEditBTxt.setText(formatted).toString()
-            }, year, month, day)
-            dpd.show()
-        }
-
-        btnEditBilgi.setOnClickListener {
-            val adsoyad = adSoyadEditBTxt.text.toString()
-            val eposta = ePostaEditBTxt.text.toString()
-            val tel = telNoEditBTxt.text.toString()
-            val tckn = tcknEditBTxt.text.toString()
-            val tarih = tarihEditBTxt.text.toString()
-            val bolum = bolumEditBTxt.text.toString()
-            val yonetici = yoneticiEditBTxt.text.toString()
-            val gorev = gorevEditBTxt.text.toString()
-            val bolumdekigorev = bolumGorevEditBTxt.text.toString()
-
-            editInfo(adsoyad, eposta, tel, tckn, tarih, bolum, yonetici, gorev, bolumdekigorev)
-        }
 
         btnEditSifre.setOnClickListener {
             val intent = Intent(this, EditSifreActivity::class.java)
@@ -155,52 +116,6 @@ class EditBilgiActivity : AppCompatActivity() {
                 alertDialog.setCancelable(false)
                 alertDialog.show()
             }
-        }
-    }
-
-    fun editInfo(adsoyad : String, eposta : String, tel : String, tckn : String, tarih : String, bolum : String, yonetici : String, gorev : String, bolumdekigorev : String){
-        if(adsoyad.isEmpty() || eposta.isEmpty() || tel.isEmpty() || tckn.isEmpty()
-            || tarih.isEmpty() || bolum.isEmpty() || yonetici.isEmpty() || gorev.isEmpty() || bolumdekigorev.isEmpty()){
-
-            val builder = AlertDialog.Builder(this)
-            builder.setMessage("Bilgileri Boş Bırakılmaz!")
-            builder.setNeutralButton("Tamam"){dialogInterface , which ->
-            }
-            val alertDialog: AlertDialog = builder.create()
-            alertDialog.setCancelable(false)
-            alertDialog.show()
-
-        }else if(gorev != "INSAN KAYNAKLAR" && gorev != "YONETICI" && gorev != "CALIŞAN" && gorev != "STAJYER" ) {
-            val builder = AlertDialog.Builder(this)
-            builder.setMessage("Görev Alanında INSAN KAYNAKLAR / YONETICI / CALIŞAN / STAJYER ile Doldurmalıdır!")
-            builder.setNeutralButton("Tamam"){dialogInterface , which ->
-            }
-            val alertDialog: AlertDialog = builder.create()
-            alertDialog.setCancelable(false)
-            alertDialog.show()
-        }else {
-            val builder = AlertDialog.Builder(this)
-            builder.setMessage("Değiştirilen Bilgiler Güncellenecektir!")
-            builder.setPositiveButton("Tamam"){dialogInterface , which ->
-                myRef.child(uid).child("adSoyad").setValue(adsoyad)
-                myRef.child(uid).child("eposta").setValue(eposta)
-                myRef.child(uid).child("telefon").setValue(tel)
-                myRef.child(uid).child("tckn").setValue(tckn)
-                myRef.child(uid).child("tarih").setValue(tarih)
-                myRef.child(uid).child("bolum").setValue(bolum)
-                myRef.child(uid).child("yonetici").setValue(yonetici)
-                myRef.child(uid).child("gorev").setValue(gorev)
-                myRef.child(uid).child("bolumdekiGorev").setValue(bolumdekigorev)
-                Toast.makeText(this, "Güncelleme İşlemi Başarılı!", Toast.LENGTH_SHORT).show()
-                val intent = Intent(this, MainActivity::class.java)
-                startActivity(intent)
-                finish()
-            }
-            builder.setNegativeButton("Iptal"){dialogInterace , which ->
-            }
-            val alertDialog: AlertDialog = builder.create()
-            alertDialog.setCancelable(false)
-            alertDialog.show()
         }
     }
 }

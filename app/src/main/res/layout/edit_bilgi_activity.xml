@@ -104,6 +104,10 @@
                         android:layout_marginTop="7dp"
                         android:background="@drawable/custom2"
                         android:ems="15"
+                        android:focusable="false"
+                        android:focusableInTouchMode="false"
+                        android:clickable="false"
+                        android:cursorVisible="false"
                         android:hint="@string/tel_register"
                         android:inputType="text"
                         android:textColor="?android:attr/textColorTertiaryInverse"
@@ -139,7 +143,7 @@
 
                         <EditText
                             android:id="@+id/tarihEditBTxt"
-                            android:layout_width="251dp"
+                            android:layout_width="300dp"
                             android:layout_height="38dp"
                             android:layout_alignParentLeft="true"
                             android:layout_alignParentEnd="true"
@@ -148,8 +152,10 @@
                             android:layout_marginTop="7dp"
                             android:layout_marginRight="7dp"
                             android:background="@drawable/custom2"
+                            android:focusable="false"
+                            android:focusableInTouchMode="false"
                             android:clickable="false"
-                            android:editable="false"
+                            android:cursorVisible="false"
                             android:ems="15"
                             android:hint="@string/password_login"
                             android:text="İşe Başlangıç Tarihi"
@@ -157,19 +163,6 @@
                             android:textColorHint="?android:attr/textColorTertiaryInverse"
                             android:textSize="16sp" />
 
-                        <Button
-                            android:id="@+id/iseTarihEditBtn"
-                            android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
-                            android:layout_centerHorizontal="true"
-                            android:layout_gravity="center"
-                            android:background="@drawable/custom4"
-                            android:ems="12"
-                            android:text="Seç"
-                            android:textColor="?android:attr/textColorTertiaryInverse"
-                            android:textColorHint="?android:attr/textColorTertiaryInverse"
-                            android:textSize="10sp"
-                            android:textStyle="bold" />
                     </LinearLayout>
 
                     <EditText
@@ -184,6 +177,10 @@
                         android:background="@drawable/custom2"
                         android:ems="15"
                         android:hint="@string/bolum_onayla"
+                        android:focusable="false"
+                        android:focusableInTouchMode="false"
+                        android:clickable="false"
+                        android:cursorVisible="false"
                         android:inputType="text"
                         android:textColor="?android:attr/textColorTertiaryInverse"
                         android:textColorHint="?android:attr/textColorTertiaryInverse"
@@ -200,6 +197,10 @@
                         android:layout_marginTop="7dp"
                         android:background="@drawable/custom2"
                         android:ems="15"
+                        android:focusable="false"
+                        android:focusableInTouchMode="false"
+                        android:clickable="false"
+                        android:cursorVisible="false"
                         android:hint="@string/bolum_gorev_onayla"
                         android:inputType="text"
                         android:textColor="?android:attr/textColorTertiaryInverse"
@@ -217,6 +218,10 @@
                         android:layout_marginTop="7dp"
                         android:background="@drawable/custom2"
                         android:ems="15"
+                        android:focusable="false"
+                        android:focusableInTouchMode="false"
+                        android:clickable="false"
+                        android:cursorVisible="false"
                         android:hint="@string/yonetici_onayla"
                         android:inputType="text"
                         android:textColor="?android:attr/textColorTertiaryInverse"
@@ -235,24 +240,15 @@
                         android:layout_marginBottom="10dp"
                         android:background="@drawable/custom2"
                         android:ems="15"
+                        android:focusable="false"
+                        android:focusableInTouchMode="false"
+                        android:clickable="false"
+                        android:cursorVisible="false"
                         android:hint="@string/gorev_onayla"
                         android:inputType="text"
                         android:textColor="?android:attr/textColorTertiaryInverse"
                         android:textColorHint="?android:attr/textColorTertiaryInverse"
                         android:textSize="17dp" />
-
-                    <Button
-                        android:id="@+id/btnEditBilgi"
-                        android:layout_width="300dp"
-                        android:layout_height="46dp"
-                        android:layout_centerHorizontal="true"
-                        android:layout_gravity="center"
-                        android:layout_marginTop="10dp"
-                        android:background="@drawable/custom4"
-                        android:ems="19"
-                        android:text="@string/button_editbilgi"
-                        android:textColor="?android:attr/textColorTertiaryInverse"
-                        android:textColorHint="?android:attr/textColorTertiaryInverse" />
 
                     <Button
                         android:id="@+id/btnEditSifre"

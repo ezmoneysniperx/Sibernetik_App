@@ -95,7 +95,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     tools:itemCount="10"
-                    tools:listitem="@layout/card_view_design" />
+                    tools:listitem="@layout/mesai_view_design" />
 
             </ScrollView>
 
@@ -171,7 +171,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="right"
-                    android:text="Toplam Mesai Saati : "
+                    android:text="Mesai Saati : "
                     android:textColor="?android:attr/textColorTertiaryInverse"
                     android:textColorHint="?android:attr/textColorTertiaryInverse"
                     android:textSize="16sp" />
@@ -259,7 +259,7 @@
                     android:layout_height="40dp"
                     android:layout_weight="1"
                     android:background="@drawable/custom4"
-                    android:text="İZİNİ SİL"
+                    android:text="MESAİNİ  SİL"
                     android:textColor="?android:attr/textColorTertiaryInverse"
                     android:textColorHint="?android:attr/textColorTertiaryInverse" />
 

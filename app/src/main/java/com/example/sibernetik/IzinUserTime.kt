@@ -37,7 +37,7 @@ class IzinUserTime : AppCompatActivity(), CustomAdapter.OnItemClickListener  {
     lateinit var sharedPreferences: SharedPreferences
     var serverKey = "SERVERKEY"
 
-    val database = Firebase.database("DBLINK")
+    val database = Firebase.database("https://sibernetik-3c2ef-default-rtdb.europe-west1.firebasedatabase.app")
     val myRef = database.getReference("Izin").child("Izin Saatlik")
     val myRefUser = database.getReference("Users")
     private lateinit var auth: FirebaseAuth
@@ -221,11 +221,19 @@ class IzinUserTime : AppCompatActivity(), CustomAdapter.OnItemClickListener  {
             val izintipishow = spinnerSelItem
             val izinmazeretshow = spinnerSelItem2
 
-            if(edit == 0){
-                sendIzin(adsoyad, sebeb, izintarihi, bassaati, bitsaati, izintipishow, izinmazeretshow)
-            }else if (edit == 1){
-                editIzin(adsoyad, sebeb, izintarihi, bassaati, bitsaati, izintipishow, izinmazeretshow)
+            val izintarihiVerif = izintarihi.matches(Regex("[0-9]{2}-[0-9]{2}-[0-9]{4}"))
+
+            if(izintarihiVerif){
+                if(edit == 0){
+                    sendIzin(adsoyad, sebeb, izintarihi, bassaati, bitsaati, izintipishow, izinmazeretshow)
+                }else if (edit == 1){
+                    editIzin(adsoyad, sebeb, izintarihi, bassaati, bitsaati, izintipishow, izinmazeretshow)
+                }
+            }else{
+                showMessage("Yanlış Tarih Formatı! Lütfen GG-AA-YYYY tarih formatını kullanın!", "Tamam")
             }
+
+
         }
 
         btnTemizleSaatlik.setOnClickListener {
@@ -364,11 +372,6 @@ class IzinUserTime : AppCompatActivity(), CustomAdapter.OnItemClickListener  {
 
     fun saveData(adsoyad : String, sebeb : String, izintarihi : String, bassaati : String, bitsaati : String, yonetici1 : String, yonetici2 : String, mesaj : String, izinTipi : String, izinMazeret : String){
         val izinId = myRef.push().getKey()
-        //val format = SimpleDateFormat("HH:mm")
-        /*val days = TimeUnit.HOURS.convert(
-            format.parse(bitsaati).getTime() -
-                    format.parse(bassaati).getTime(),
-            TimeUnit.MILLISECONDS)*/
         val newIzin = IzinModelSaatlik(izinId, adsoyad, sebeb, izintarihi, bassaati, bitsaati, yonetici1, yonetici2, mesaj, "0", izinTipi, izinMazeret) //days.toInt())
         myRef.child(izinId.toString()).setValue(newIzin)
     }

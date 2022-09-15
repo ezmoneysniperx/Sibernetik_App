@@ -30,10 +30,10 @@ import kotlin.collections.ArrayList
 
 class GeciciGorevlendirmeUserActivity : AppCompatActivity(), CustomAdapter.OnItemClickListener {
 
-    var serverKey = "serverkey"
     val database = Firebase.database("https://sibernetik-3c2ef-default-rtdb.europe-west1.firebasedatabase.app")
     val myRef = database.getReference("Gecici Gorevlendirme")
     val myRefUser = database.getReference("Users")
+    var serverKey = "serverkey"
 
     val data = ArrayList<ItemsViewModel>()
     val adapter = CustomAdapter(data,this)
@@ -151,10 +151,17 @@ class GeciciGorevlendirmeUserActivity : AppCompatActivity(), CustomAdapter.OnIte
             val bastarih = ggBasTarihTxt.text.toString()
             val bittarih = ggBitTarihTxt.text.toString()
 
-            if(edit == 0){
-                sendGG(adsoyad, yeri, tarifi, bastarih, bittarih)
-            }else if (edit == 1){
-                editGG(adsoyad, yeri, tarifi, bastarih, bittarih)
+            val bastarihVerif = bastarih.matches(Regex("[0-9]{2}-[0-9]{2}-[0-9]{4}"))
+            val bittarihVerif = bittarih.matches(Regex("[0-9]{2}-[0-9]{2}-[0-9]{4}"))
+
+            if(bastarihVerif && bittarihVerif){
+                if(edit == 0){
+                    sendGG(adsoyad, yeri, tarifi, bastarih, bittarih)
+                }else if (edit == 1){
+                    editGG(adsoyad, yeri, tarifi, bastarih, bittarih)
+                }
+            }else{
+                showMessage("Yanlış Tarih Formatı! Lütfen GG-AA-YYYY tarih formatını kullanın!", "Tamam")
             }
         }
 

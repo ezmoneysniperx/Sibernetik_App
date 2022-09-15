@@ -36,12 +36,12 @@ import java.util.concurrent.TimeUnit
 
 class GeciciGorevlendirmeAdminActivity : AppCompatActivity(), CustomAdapter.OnItemClickListener {
 
-    var serverKey = "SERVERKEY"
     val database = Firebase.database("https://sibernetik-3c2ef-default-rtdb.europe-west1.firebasedatabase.app")
     val myRef = database.getReference("Gecici Gorevlendirme")
     val myRefUser = database.getReference("Users")
     private lateinit var auth: FirebaseAuth
     val storage = Firebase.storage
+    var serverKey = "serverkey"
 
     val data = ArrayList<ItemsViewModel>()
     val adapter = CustomAdapter(data, this)
@@ -485,7 +485,8 @@ class GeciciGorevlendirmeAdminActivity : AppCompatActivity(), CustomAdapter.OnIt
 
     fun talepAccepted (id : String){
         val durum = "ONAYLANDI"
-        val mesaj = ggMesaj.text.toString()
+        var mesaj = ggMesaj.text.toString()
+        if (mesaj.isEmpty()) { mesaj = "-" }
 
         if(id.isEmpty()){
             val builder = AlertDialog.Builder(this)
@@ -590,7 +591,7 @@ class GeciciGorevlendirmeAdminActivity : AppCompatActivity(), CustomAdapter.OnIt
             alertDialog.setCancelable(false)
             alertDialog.show()
         }else{
-            if (clickedOnayIK == "REDDETTI" && clickedOnayYonetici == "REDDETTI") {
+            if (clickedOnayIK == "REDDETTI" || clickedOnayYonetici == "REDDETTI") {
                 Toast.makeText(this, "Izin daha önce reddedildi!", Toast.LENGTH_SHORT).show()
             }else if(gorev == "YONETICI"){
                 myRefUser.addValueEventListener(object : ValueEventListener {
@@ -611,6 +612,7 @@ class GeciciGorevlendirmeAdminActivity : AppCompatActivity(), CustomAdapter.OnIt
                                     val firebasePush = FirebasePush.build(serverKey)
                                         .setNotification(notification)
                                         .setOnFinishPush {  }
+                                    Log.d("test","$clickedKisiUid")
                                     firebasePush.sendToTopic("$clickedKisiUid")
                                     //notifikasi//
                                     Toast.makeText(this@GeciciGorevlendirmeAdminActivity, "Reddetme islemi basarili!", Toast.LENGTH_SHORT).show()

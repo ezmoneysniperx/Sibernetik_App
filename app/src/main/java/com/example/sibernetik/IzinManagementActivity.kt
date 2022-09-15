@@ -16,6 +16,8 @@ import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.ktx.database
 import com.google.firebase.database.ktx.getValue
 import com.google.firebase.ktx.Firebase
+import fcm.androidtoandroid.FirebasePush
+import fcm.androidtoandroid.model.Notification
 import kotlinx.android.synthetic.main.izin_admin_time.*
 import kotlinx.android.synthetic.main.izin_management.*
 import kotlinx.android.synthetic.main.izin_management.recyclerview
@@ -30,6 +32,7 @@ class IzinManagementActivity : AppCompatActivity(), DuyuruAdapter.OnItemClickLis
 
     val database = Firebase.database("https://sibernetik-3c2ef-default-rtdb.europe-west1.firebasedatabase.app")
     val myRef = database.getReference("Users")
+    var serverKey = "serverkey"
     //private lateinit var auth: FirebaseAuth
 
     var adsoyadIzinY = ""
@@ -195,13 +198,27 @@ class IzinManagementActivity : AppCompatActivity(), DuyuruAdapter.OnItemClickLis
     }
 
     fun updateIzin(adsoyad : String, izinSayisi : Int){
+        var count = 1
         myRef.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 for (postSnapshot in snapshot.children){
                     val value = postSnapshot.getValue<UsersModel>()
-                    if (value!!.adSoyad.toString() == adsoyad){
+                    if (value!!.adSoyad.toString() == adsoyad && count == 1){
+                        count = 0
                         val uid = postSnapshot.key.toString()
                         myRef.child(uid).child("izin").setValue(izinSayisi)
+                        //notifikasi//
+                        var icon = R.drawable.logo
+                        val iconString = icon.toString()
+                        val notification = Notification()
+                        notification.title = "İzin Hakkı Güncelleme"
+                        notification.body = "Kalan izin hakkınız $izinSayisi olarak güncellendi."
+                        notification.icon = iconString
+                        val firebasePush = FirebasePush.build(serverKey)
+                            .setNotification(notification)
+                            .setOnFinishPush {  }
+                        firebasePush.sendToTopic("$uid")
+                        //notifikasi//
                         Toast.makeText(this@IzinManagementActivity,"İşlem Başarılı!",Toast.LENGTH_SHORT).show()
                         finish()
                         overridePendingTransition(0, 0);

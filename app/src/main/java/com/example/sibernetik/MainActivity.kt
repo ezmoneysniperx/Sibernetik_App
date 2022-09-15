@@ -7,6 +7,8 @@ import android.os.Bundle
 import android.content.Context
 import android.content.SharedPreferences
 import android.media.Image
+import android.net.ConnectivityManager
+import android.net.NetworkCapabilities
 import android.os.Build
 import android.util.Log
 import android.widget.Button
@@ -29,15 +31,14 @@ import com.google.firebase.database.ktx.getValue
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.messaging.ktx.messaging
 import kotlinx.android.synthetic.main.activity_izin_menu.*
+import kotlin.system.exitProcess
 
 class MainActivity : AppCompatActivity()  {
-    var PREFS_KEY = "prefs"
-    var EMAIL_KEY = "email"
+
     var name = ""
     var gorev = ""
     var email = ""
     var uid = ""
-    lateinit var sharedPreferences: SharedPreferences
 
     private lateinit var auth: FirebaseAuth
     val database = Firebase.database("https://sibernetik-3c2ef-default-rtdb.europe-west1.firebasedatabase.app")
@@ -48,8 +49,20 @@ class MainActivity : AppCompatActivity()  {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        auth = Firebase.auth
 
+        if(!checkForInternet(this)){
+            val builder = AlertDialog.Builder(this)
+            builder.setMessage("Sibernetik App Kullanabilmek İçin Cihazınız İnternete Bağlı Olmalıdır!")
+            builder.setNeutralButton("Tamam"){dialogInterface , which ->
+                this.finish()
+                exitProcess(0)
+            }
+            val alertDialog: AlertDialog = builder.create()
+            alertDialog.setCancelable(false)
+            alertDialog.show()
+        }
+
+        auth = Firebase.auth
         val user = Firebase.auth.currentUser
         if(user != null){
             name = user!!.displayName.toString()
@@ -63,11 +76,7 @@ class MainActivity : AppCompatActivity()  {
             finish()
         }
 
-
         notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
-        sharedPreferences = getSharedPreferences(PREFS_KEY, Context.MODE_PRIVATE)
-
-
 
         val logoutButton = findViewById<ImageButton>(R.id.logoutBtn)
         val izinButton = findViewById<ImageButton>(R.id.izinBtn)
@@ -139,9 +148,6 @@ class MainActivity : AppCompatActivity()  {
         }
 
         logoutButton.setOnClickListener{
-            val editor: SharedPreferences.Editor = sharedPreferences.edit()
-            editor.clear()
-            editor.apply()
             Firebase.messaging.unsubscribeFromTopic("$uid")
                 .addOnCompleteListener { task ->
                     var msg = "Unsubscribed"
@@ -225,21 +231,26 @@ class MainActivity : AppCompatActivity()  {
         }
 
         mesaiBtn.setOnClickListener{
-            if(gorev == "INSAN KAYNAKLAR" || gorev == "YONETICI"){
-                popupMenuMesai.show()
-            }else{
-                val user = Intent(this, MesaiUserActivity::class.java)
-                startActivity(user)
+            myRef.child(uid).get().addOnSuccessListener {
+                if (it.exists()) {
+                    val imzaDurum = it.child("imzaExist").value.toString()
+                    Log.w("test","$imzaDurum")
+                    if(imzaDurum == "1"){
+                        if(gorev == "INSAN KAYNAKLAR" || gorev == "YONETICI"){
+                            popupMenuMesai.show()
+                        }else{
+                            val user = Intent(this, MesaiUserActivity::class.java)
+                            startActivity(user)
+                        }
+                    }else{
+                        Toast.makeText(this@MainActivity, "Bu Özelliği Kullanmak İçin İmza Oluşturmanız Gerekiyor! Bilgilerim Sayfasında Ulaşabilirsiniz!", Toast.LENGTH_SHORT).show()
+                    }
+                }
             }
         }
 
         duyuruButton.setOnClickListener {
             val intent = Intent(this, DuyuruActivity::class.java)
-            startActivity(intent)
-        }
-
-        yemekMenuBtn.setOnClickListener{
-            val intent = Intent(this,YemekActivity::class.java)
             startActivity(intent)
         }
 
@@ -296,5 +307,44 @@ class MainActivity : AppCompatActivity()  {
                 null
             }
         })
+    }
+
+    private fun checkForInternet(context: Context): Boolean {
+
+        // register activity with the connectivity manager service
+        val connectivityManager = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+
+        // if the android version is equal to M
+        // or greater we need to use the
+        // NetworkCapabilities to check what type of
+        // network has the internet connection
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+
+            // Returns a Network object corresponding to
+            // the currently active default data network.
+            val network = connectivityManager.activeNetwork ?: return false
+
+            // Representation of the capabilities of an active network.
+            val activeNetwork = connectivityManager.getNetworkCapabilities(network) ?: return false
+
+            return when {
+                // Indicates this network uses a Wi-Fi transport,
+                // or WiFi has network connectivity
+                activeNetwork.hasTransport(NetworkCapabilities.TRANSPORT_WIFI) -> true
+
+                // Indicates this network uses a Cellular transport. or
+                // Cellular has network connectivity
+                activeNetwork.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR) -> true
+
+                // else return false
+                else -> false
+            }
+        } else {
+            // if the android version is below M
+            @Suppress("DEPRECATION") val networkInfo =
+                connectivityManager.activeNetworkInfo ?: return false
+            @Suppress("DEPRECATION")
+            return networkInfo.isConnected
+        }
     }
 }

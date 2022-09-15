@@ -2,6 +2,7 @@ package com.example.sibernetik
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
@@ -92,6 +93,7 @@ class AccountManagementActivity : AppCompatActivity(), MalzemeAdapter.OnItemClic
                 alertDialog.show()
             }else{
                 intent.putExtra("adSoyad",adsoyad)
+                intent.putExtra("mode","ONAY")
                 startActivity(intent)
                 finish()
             }
@@ -132,6 +134,21 @@ class AccountManagementActivity : AppCompatActivity(), MalzemeAdapter.OnItemClic
             btnHesapOnay.visibility = View.VISIBLE
             btnHesapReddet.visibility = View.VISIBLE
             btnTemizleHesap.visibility = View.VISIBLE
+        }else{
+            val builder = AlertDialog.Builder(this)
+            builder.setMessage("Bilgileri düzenleyeceğiniz kişinin adı $adsoyad, Devam etmek istiyor musunuz?")
+            builder.setPositiveButton("Evet"){dialogInterface , which ->
+                val intent = Intent(this,AccountOnaylaActivity::class.java)
+                intent.putExtra("adSoyad",adsoyad)
+                intent.putExtra("mode","EDIT")
+                startActivity(intent)
+                finish()
+            }
+            builder.setNegativeButton("Iptal"){dialogInterface , which ->
+            }
+            val alertDialog: AlertDialog = builder.create()
+            alertDialog.setCancelable(false)
+            alertDialog.show()
         }
     }
 
@@ -172,7 +189,8 @@ class AccountManagementActivity : AppCompatActivity(), MalzemeAdapter.OnItemClic
     }
 
     fun accountsFilter(filter : String){
-        myRef.addValueEventListener(object : ValueEventListener {
+        val dbRef = myRef.orderByChild("adSoyad")
+        dbRef.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 data.clear()
                 adapter.notifyDataSetChanged()

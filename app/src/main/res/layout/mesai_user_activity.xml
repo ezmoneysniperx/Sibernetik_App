@@ -62,38 +62,6 @@
                 android:textColorHint="?android:attr/textColorTertiaryInverse"
                 android:textSize="17dp" />
 
-            <EditText
-                android:id="@+id/kurumIciTxt"
-                android:layout_width="330dp"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentRight="true"
-                android:layout_marginTop="7dp"
-                android:background="@drawable/custom2"
-                android:ems="15"
-                android:hint="Kurum İçi Mesai"
-                android:inputType="text"
-                android:textColor="?android:attr/textColorTertiaryInverse"
-                android:textColorHint="?android:attr/textColorTertiaryInverse"
-                android:textSize="17dp" />
-
-            <EditText
-                android:id="@+id/kurumDisiTxt"
-                android:layout_width="330dp"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentRight="true"
-                android:layout_marginTop="7dp"
-                android:background="@drawable/custom2"
-                android:ems="15"
-                android:hint="Kurum Dişi Mesai"
-                android:inputType="text"
-                android:textColor="?android:attr/textColorTertiaryInverse"
-                android:textColorHint="?android:attr/textColorTertiaryInverse"
-                android:textSize="17dp" />
-
             <LinearLayout
                 android:layout_width="330dp"
                 android:layout_height="match_parent"
@@ -131,24 +99,84 @@
                     android:textStyle="bold" />
             </LinearLayout>
 
-            <EditText
-                android:id="@+id/saatMesaiTxt"
+            <LinearLayout
                 android:layout_width="330dp"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentRight="true"
+                android:layout_height="match_parent"
                 android:layout_marginTop="7dp"
-                android:background="@drawable/custom2"
-                android:ems="15"
-                android:hint="Toplam Mesai Saati"
-                android:inputType="text"
-                android:textColor="?android:attr/textColorTertiaryInverse"
-                android:textColorHint="?android:attr/textColorTertiaryInverse"
-                android:textSize="17dp" />
+                android:orientation="horizontal">
+
+                <EditText
+                    android:id="@+id/saatMesaiTxt"
+                    android:layout_width="283dp"
+                    android:layout_height="40dp"
+                    android:layout_alignParentLeft="false"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_gravity="left"
+                    android:layout_marginRight="7dp"
+                    android:background="@drawable/custom2"
+                    android:ems="15"
+                    android:hint="Mesai Başlama Saati"
+                    android:textColor="?android:attr/textColorTertiaryInverse"
+                    android:textColorHint="?android:attr/textColorTertiaryInverse"
+                    android:textSize="17sp" />
+
+                <Button
+                    android:id="@+id/saatBaslamaMesaiBtn"
+                    android:layout_width="41dp"
+                    android:layout_height="40dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_gravity="center"
+                    android:background="@drawable/custom4"
+                    android:ems="12"
+                    android:onClick="baslamaBtn"
+                    android:text="Seç"
+                    android:textColor="?android:attr/textColorTertiaryInverse"
+                    android:textColorHint="?android:attr/textColorTertiaryInverse"
+                    android:textSize="10sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="330dp"
+                android:layout_height="match_parent"
+                android:layout_marginTop="7dp"
+                android:orientation="horizontal">
+
+                <EditText
+                    android:id="@+id/saatMesaiBitisTxt"
+                    android:layout_width="283dp"
+                    android:layout_height="40dp"
+                    android:layout_alignParentLeft="false"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_gravity="left"
+                    android:layout_marginRight="7dp"
+                    android:background="@drawable/custom2"
+                    android:ems="15"
+                    android:hint="Mesai Bitiş Saati"
+                    android:textColor="?android:attr/textColorTertiaryInverse"
+                    android:textColorHint="?android:attr/textColorTertiaryInverse"
+                    android:textSize="17sp" />
+
+                <Button
+                    android:id="@+id/saatBitisMesaiBtn"
+                    android:layout_width="41dp"
+                    android:layout_height="40dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_gravity="center"
+                    android:background="@drawable/custom4"
+                    android:ems="12"
+                    android:onClick="baslamaBtn"
+                    android:text="Seç"
+                    android:textColor="?android:attr/textColorTertiaryInverse"
+                    android:textColorHint="?android:attr/textColorTertiaryInverse"
+                    android:textSize="10sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
 
             <EditText
-                android:id="@+id/firmaMesaiTxt"
+                android:id="@+id/mesaiSebebiTxt"
                 android:layout_width="330dp"
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
@@ -157,23 +185,7 @@
                 android:layout_marginTop="7dp"
                 android:background="@drawable/custom2"
                 android:ems="15"
-                android:hint="Çalışma Yapılan Firma"
-                android:inputType="text"
-                android:textColor="?android:attr/textColorTertiaryInverse"
-                android:textColorHint="?android:attr/textColorTertiaryInverse"
-                android:textSize="17dp" />
-
-            <EditText
-                android:id="@+id/calismaAdiTxt"
-                android:layout_width="330dp"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentRight="true"
-                android:layout_marginTop="7dp"
-                android:background="@drawable/custom2"
-                android:ems="15"
-                android:hint="Yapılan Çalışma Adı"
+                android:hint="Mesai Sebebi"
                 android:inputType="text"
                 android:textColor="?android:attr/textColorTertiaryInverse"
                 android:textColorHint="?android:attr/textColorTertiaryInverse"
@@ -214,12 +226,12 @@
 
                 <Button
                     android:id="@+id/btnDeleteMesai"
-                    android:layout_width="100dp"
+                    android:layout_width="105dp"
                     android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
                     android:background="@drawable/custom4"
                     android:ems="19"
-                    android:text="İZİNİ SİL"
+                    android:text="MESAİNİ SİL"
                     android:textColor="?android:attr/textColorTertiaryInverse"
                     android:textColorHint="?android:attr/textColorTertiaryInverse" />
 
@@ -236,7 +248,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     tools:itemCount="10"
-                    tools:listitem="@layout/card_view_design" />
+                    tools:listitem="@layout/mesai_view_design" />
             </ScrollView>
         </LinearLayout>
     </ScrollView>

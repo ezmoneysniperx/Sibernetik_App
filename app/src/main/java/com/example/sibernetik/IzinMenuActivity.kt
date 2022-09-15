@@ -35,9 +35,11 @@ class IzinMenuActivity : AppCompatActivity() {
             if (yetki == "Admin") {
                 val intent = Intent(this, IzinAdminTime::class.java)
                 startActivity(intent)
+                finish()
             } else {
                 val user = Intent(this, IzinUserTime::class.java)
                 startActivity(user)
+                finish()
             }
         }
 
@@ -45,9 +47,11 @@ class IzinMenuActivity : AppCompatActivity() {
             if (yetki == "Admin") {
                 val intent = Intent(this, IzinAdminActivity::class.java)
                 startActivity(intent)
+                finish()
             } else {
                 val user = Intent(this, IzinUserActivity::class.java)
                 startActivity(user)
+                finish()
             }
         }
 

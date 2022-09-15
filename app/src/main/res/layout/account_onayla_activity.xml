@@ -59,7 +59,7 @@
                     android:hint="@string/adsoyad_register"
                     android:inputType="textPersonName"
                     android:textColor="?android:attr/textColorTertiaryInverse"
-                    android:textColorHint="?android:attr/textColorTertiaryInverse"
+                    android:textColorHint="@color/black"
                     android:textSize="17dp" />
 
                 <EditText
@@ -76,7 +76,7 @@
                     android:hint="@string/email_login"
                     android:inputType="textPersonName"
                     android:textColor="?android:attr/textColorTertiaryInverse"
-                    android:textColorHint="?android:attr/textColorTertiaryInverse"
+                    android:textColorHint="@color/black"
                     android:textSize="17dp" />
 
                 <EditText
@@ -93,7 +93,7 @@
                     android:hint="@string/tel_register"
                     android:inputType="text"
                     android:textColor="?android:attr/textColorTertiaryInverse"
-                    android:textColorHint="?android:attr/textColorTertiaryInverse"
+                    android:textColorHint="@color/black"
                     android:textSize="17dp" />
 
                 <EditText
@@ -111,7 +111,7 @@
                     android:hint="@string/dep_register"
                     android:inputType="textEmailAddress"
                     android:textColor="?android:attr/textColorTertiaryInverse"
-                    android:textColorHint="?android:attr/textColorTertiaryInverse"
+                    android:textColorHint="@color/black"
                     android:textSize="17dp" />
 
                 <LinearLayout
@@ -133,10 +133,9 @@
                         android:clickable="false"
                         android:editable="false"
                         android:ems="15"
-                        android:hint="@string/password_login"
-                        android:text="İşe Başlangıç Tarihi"
+                        android:hint="İşe Başlangıç Tarihi"
                         android:textColor="?android:attr/textColorTertiaryInverse"
-                        android:textColorHint="?android:attr/textColorTertiaryInverse"
+                        android:textColorHint="@color/black"
                         android:textSize="16sp" />
 
                     <Button
@@ -175,7 +174,7 @@
                     android:hint="@string/bolum_onayla"
                     android:inputType="text"
                     android:textColor="?android:attr/textColorTertiaryInverse"
-                    android:textColorHint="?android:attr/textColorTertiaryInverse"
+                    android:textColorHint="@color/black"
                     android:textSize="17dp" />
 
                 <EditText
@@ -192,25 +191,16 @@
                     android:hint="@string/bolum_gorev_onayla"
                     android:inputType="text"
                     android:textColor="?android:attr/textColorTertiaryInverse"
-                    android:textColorHint="?android:attr/textColorTertiaryInverse"
+                    android:textColorHint="@color/black"
                     android:textSize="17dp" />
 
-                <EditText
-                    android:id="@+id/yoneticiOnayTxt"
-                    android:layout_width="300dp"
-                    android:layout_height="38dp"
-                    android:layout_alignParentLeft="true"
-                    android:layout_alignParentEnd="true"
-                    android:layout_alignParentRight="true"
-                    android:layout_gravity="center"
+                <Spinner
+                    android:id="@+id/spinnerYonetici"
+                    android:layout_width="305dp"
+                    android:layout_height="wrap_content"
                     android:layout_marginTop="7dp"
-                    android:background="@drawable/custom2"
-                    android:ems="15"
-                    android:hint="@string/yonetici_onayla"
-                    android:inputType="text"
-                    android:textColor="?android:attr/textColorTertiaryInverse"
-                    android:textColorHint="?android:attr/textColorTertiaryInverse"
-                    android:textSize="17dp" />
+                    android:hint="YONETICI"
+                    android:entries="@array/hesap_gorev"/>
 
                 <Button
                     android:id="@+id/btnOnay"

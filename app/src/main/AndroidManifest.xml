@@ -89,12 +89,6 @@
             android:name=".DuyuruAdminActivity"
             android:exported="false" />
         <activity
-            android:name=".YemekAdminActivity"
-            android:exported="false" />
-        <activity
-            android:name=".YemekActivity"
-            android:exported="false" />
-        <activity
             android:name=".AccountManagementActivity"
             android:exported="false" />
         <activity

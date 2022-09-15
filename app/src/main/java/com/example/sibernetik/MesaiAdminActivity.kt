@@ -26,26 +26,21 @@ import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.ktx.storage
 import fcm.androidtoandroid.FirebasePush
 import fcm.androidtoandroid.model.Notification
-import kotlinx.android.synthetic.main.activity_gecici_gorevlendirme_admin.*
 import kotlinx.android.synthetic.main.activity_gecici_gorevlendirme_admin.recyclerview
-import kotlinx.android.synthetic.main.activity_gecici_gorevlendirme_user.*
-import kotlinx.android.synthetic.main.izin_admin_activity.*
 import kotlinx.android.synthetic.main.mesai_admin_activity.*
 import java.io.File
-import java.text.SimpleDateFormat
-import java.util.concurrent.TimeUnit
 
-class MesaiAdminActivity : AppCompatActivity(), CustomAdapter.OnItemClickListener {
+class MesaiAdminActivity : AppCompatActivity(), MesaiAdapter.OnItemClickListener {
 
-    var serverKey = "serverkey"
     val database = Firebase.database("https://sibernetik-3c2ef-default-rtdb.europe-west1.firebasedatabase.app")
     val myRef = database.getReference("Mesai")
     val myRefUser = database.getReference("Users")
     private lateinit var auth: FirebaseAuth
     val storage = Firebase.storage
+    var serverKey = "serverkey"
 
-    val data = ArrayList<ItemsViewModel>()
-    val adapter = CustomAdapter(data, this)
+    val data = ArrayList<MesaiViewModel>()
+    val adapter = MesaiAdapter(data, this)
 
     var userUid = ""
     var userEmail = ""
@@ -53,32 +48,30 @@ class MesaiAdminActivity : AppCompatActivity(), CustomAdapter.OnItemClickListene
     var gorev = ""
 
     var clickedAdsoyad = ""
-    var clickedKurumIci = ""
-    var clickedKurumDisi = ""
     var clickedMesaiTarih = ""
-    var clickedMesaiSaat = ""
-    var clickedFirma = ""
-    var clickedYapilan = ""
+    var clickedMesaiSaatBaslama = ""
+    var clickedMesaiSaatBitis = ""
+    var clickedMesaiSebebi = ""
     var clickedId = ""
     var clickedOnayIK = ""
     var clickedOnayYonetici = ""
     var clickedKisiUid = ""
+    var clickedToplamSaati = ""
 
     var spinnerSelItem = ""
 
     override fun onItemClick(position: Int) {
-        val clickedItem:ItemsViewModel = data[position]
+        val clickedItem:MesaiViewModel = data[position]
 
-        clickedAdsoyad = clickedItem.text
-        clickedKurumIci = clickedItem.date
-        clickedKurumDisi = clickedItem.nedeni
-        clickedMesaiTarih = clickedItem.time.subSequence(0,10).toString()
-        clickedMesaiSaat = clickedItem.tip
-        clickedFirma = clickedItem.mazeret
-        clickedYapilan = clickedItem.day
+        clickedAdsoyad = clickedItem.adsoyad
+        clickedMesaiTarih = clickedItem.mesaiTar.subSequence(0,10).toString()
+        clickedMesaiSaatBaslama = clickedItem.timeBas
+        clickedMesaiSaatBitis = clickedItem.timeBit
+        clickedMesaiSebebi = clickedItem.sebeb
         clickedId = clickedItem.id
         clickedOnayIK = clickedItem.yonetici1onay
         clickedOnayYonetici = clickedItem.yonetici2onay
+        clickedToplamSaati = "$clickedMesaiSaatBaslama - $clickedMesaiSaatBitis"
 
         myRefUser.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
@@ -96,7 +89,7 @@ class MesaiAdminActivity : AppCompatActivity(), CustomAdapter.OnItemClickListene
 
         adsoyadMesaiDisplay.setText(clickedAdsoyad)
         tarihMesaiDisplay.setText(clickedMesaiTarih)
-        saatMesaiDisplay.setText(clickedMesaiSaat)
+        saatMesaiDisplay.setText(clickedToplamSaati)
 
         btnMesaiOnay.visibility = View.VISIBLE
         btnMesaiReddet.visibility = View.VISIBLE
@@ -154,12 +147,10 @@ class MesaiAdminActivity : AppCompatActivity(), CustomAdapter.OnItemClickListene
 
         btnMesaiTemizle.setOnClickListener {
             clickedAdsoyad = ""
-            clickedKurumIci = ""
-            clickedKurumDisi = ""
             clickedMesaiTarih = ""
-            clickedMesaiSaat = ""
-            clickedFirma = ""
-            clickedYapilan = ""
+            clickedMesaiSaatBaslama = ""
+            clickedMesaiSaatBitis = ""
+            clickedMesaiSebebi = ""
             clickedId = ""
             clickedOnayIK = ""
             clickedOnayYonetici = ""
@@ -221,149 +212,131 @@ class MesaiAdminActivity : AppCompatActivity(), CustomAdapter.OnItemClickListene
                     if(gorev == "YONETICI"){
                         if (durum == "ONAY BEKLIYOR"){
                             if(value!!.yonetici2 == "ONAY BEKLIYOR"){
-                                val kurIci = value.kurumIci.toString()
-                                val kurDisi = value.kurumDisi.toString()
                                 val trh = value.mesaiTarih.toString()
-                                val saat = value.mesaiSaat.toString()
-                                val yapFirma = value.yapilanFirma.toString()
-                                val yapAdi = value.yapilanAdi.toString()
+                                val saatBas = value.mesaiSaatBaslama.toString()
+                                val saatBit = value.mesaiSaatBitis.toString()
+                                val sebeb = value.sebeb.toString()
 
-                                data.add(ItemsViewModel(
+                                data.add(
+                                    MesaiViewModel(
                                     R.drawable.bekleme,
-                                    value.adsoyad.toString(),
-                                    kurDisi,
-                                    kurIci,
-                                    trh,
-                                    value.yonetici1.toString(),
-                                    value.yonetici2.toString(),
-                                    "",
-                                    postSnapshot.key.toString(),
-                                    yapAdi,
-                                    saat,
-                                    yapFirma
-                                ))
+                                        value.adsoyad.toString(),
+                                        trh,
+                                        saatBas,
+                                        saatBit,
+                                        sebeb,
+                                        value.mesaiId.toString(),
+                                        value.yonetici1.toString(),
+                                        value.yonetici2.toString()
+                                )
+                                )
                             }
                         }else if (durum == "ONAYLANDI"){
                             if(value!!.yonetici1 == "ONAYLANDI" && value!!.yonetici2 == "ONAYLANDI"){
-                                val kurIci = value.kurumIci.toString()
-                                val kurDisi = value.kurumDisi.toString()
                                 val trh = value.mesaiTarih.toString()
-                                val saat = value.mesaiSaat.toString()
-                                val yapFirma = value.yapilanFirma.toString()
-                                val yapAdi = value.yapilanAdi.toString()
+                                val saatBas = value.mesaiSaatBaslama.toString()
+                                val saatBit = value.mesaiSaatBitis.toString()
+                                val sebeb = value.sebeb.toString()
 
-                                data.add(ItemsViewModel(
+                                data.add(
+                                    MesaiViewModel(
                                     R.drawable.onaylandi,
-                                    value.adsoyad.toString(),
-                                    kurDisi,
-                                    kurIci,
-                                    trh,
-                                    value.yonetici1.toString(),
-                                    value.yonetici2.toString(),
-                                    "",
-                                    postSnapshot.key.toString(),
-                                    yapAdi,
-                                    saat,
-                                    yapFirma
-                                ))
+                                        value.adsoyad.toString(),
+                                        trh,
+                                        saatBas,
+                                        saatBit,
+                                        sebeb,
+                                        value.mesaiId.toString(),
+                                        value.yonetici1.toString(),
+                                        value.yonetici2.toString()
+                                )
+                                )
                             }
                         }else{
                             if(value!!.yonetici2 == "REDDETTI"){
-                                val kurIci = value.kurumIci.toString()
-                                val kurDisi = value.kurumDisi.toString()
                                 val trh = value.mesaiTarih.toString()
-                                val saat = value.mesaiSaat.toString()
-                                val yapFirma = value.yapilanFirma.toString()
-                                val yapAdi = value.yapilanAdi.toString()
+                                val saatBas = value.mesaiSaatBaslama.toString()
+                                val saatBit = value.mesaiSaatBitis.toString()
+                                val sebeb = value.sebeb.toString()
 
-                                data.add(ItemsViewModel(
+                                data.add(
+                                    MesaiViewModel(
                                     R.drawable.reddeti,
-                                    value.adsoyad.toString(),
-                                    kurDisi,
-                                    kurIci,
-                                    trh,
-                                    value.yonetici1.toString(),
-                                    value.yonetici2.toString(),
-                                    "",
-                                    postSnapshot.key.toString(),
-                                    yapAdi,
-                                    saat,
-                                    yapFirma
-                                ))
+                                        value.adsoyad.toString(),
+                                        trh,
+                                        saatBas,
+                                        saatBit,
+                                        sebeb,
+                                        value.mesaiId.toString(),
+                                        value.yonetici1.toString(),
+                                        value.yonetici2.toString()
+                                )
+                                )
                             }
                         }
                     }else if (gorev == "INSAN KAYNAKLAR"){
                         if (durum == "ONAY BEKLIYOR"){
                             if(value!!.yonetici1 == "ONAY BEKLIYOR" && value!!.yonetici2 == "ONAYLANDI"){
-                                val kurIci = value.kurumIci.toString()
-                                val kurDisi = value.kurumDisi.toString()
                                 val trh = value.mesaiTarih.toString()
-                                val saat = value.mesaiSaat.toString()
-                                val yapFirma = value.yapilanFirma.toString()
-                                val yapAdi = value.yapilanAdi.toString()
+                                val saatBas = value.mesaiSaatBaslama.toString()
+                                val saatBit = value.mesaiSaatBitis.toString()
+                                val sebeb = value.sebeb.toString()
 
-                                data.add(ItemsViewModel(
+                                data.add(
+                                    MesaiViewModel(
                                     R.drawable.bekleme,
-                                    value.adsoyad.toString(),
-                                    kurDisi,
-                                    kurIci,
-                                    trh,
-                                    value.yonetici1.toString(),
-                                    value.yonetici2.toString(),
-                                    "",
-                                    postSnapshot.key.toString(),
-                                    yapAdi,
-                                    saat,
-                                    yapFirma
-                                ))
+                                        value.adsoyad.toString(),
+                                        trh,
+                                        saatBas,
+                                        saatBit,
+                                        sebeb,
+                                        value.mesaiId.toString(),
+                                        value.yonetici1.toString(),
+                                        value.yonetici2.toString()
+                                )
+                                )
                             }
                         }else if (durum == "ONAYLANDI"){
                             if(value!!.yonetici1 == "ONAYLANDI" && value!!.yonetici2 == "ONAYLANDI"){
-                                val kurIci = value.kurumIci.toString()
-                                val kurDisi = value.kurumDisi.toString()
                                 val trh = value.mesaiTarih.toString()
-                                val saat = value.mesaiSaat.toString()
-                                val yapFirma = value.yapilanFirma.toString()
-                                val yapAdi = value.yapilanAdi.toString()
+                                val saatBas = value.mesaiSaatBaslama.toString()
+                                val saatBit = value.mesaiSaatBitis.toString()
+                                val sebeb = value.sebeb.toString()
 
-                                data.add(ItemsViewModel(
+                                data.add(
+                                    MesaiViewModel(
                                     R.drawable.onaylandi,
-                                    value.adsoyad.toString(),
-                                    kurDisi,
-                                    kurIci,
-                                    trh,
-                                    value.yonetici1.toString(),
-                                    value.yonetici2.toString(),
-                                    "",
-                                    postSnapshot.key.toString(),
-                                    yapAdi,
-                                    saat,
-                                    yapFirma
-                                ))
+                                        value.adsoyad.toString(),
+                                        trh,
+                                        saatBas,
+                                        saatBit,
+                                        sebeb,
+                                        value.mesaiId.toString(),
+                                        value.yonetici1.toString(),
+                                        value.yonetici2.toString()
+                                )
+                                )
                             }
                         }else{
                             if(value!!.yonetici1 == "REDDETTI" || value!!.yonetici2 == "REDDETTI"){
-                                val kurIci = value.kurumIci.toString()
-                                val kurDisi = value.kurumDisi.toString()
                                 val trh = value.mesaiTarih.toString()
-                                val saat = value.mesaiSaat.toString()
-                                val yapFirma = value.yapilanFirma.toString()
-                                val yapAdi = value.yapilanAdi.toString()
+                                val saatBas = value.mesaiSaatBaslama.toString()
+                                val saatBit = value.mesaiSaatBitis.toString()
+                                val sebeb = value.sebeb.toString()
 
-                                data.add(ItemsViewModel(
+                                data.add(
+                                    MesaiViewModel(
                                     R.drawable.reddeti,
-                                    value.adsoyad.toString(),
-                                    kurDisi,
-                                    kurIci,
-                                    trh,
-                                    value.yonetici1.toString(),
-                                    value.yonetici2.toString(),
-                                    "",
-                                    postSnapshot.key.toString(),
-                                    yapAdi,
-                                    saat,
-                                    yapFirma
-                                ))
+                                        value.adsoyad.toString(),
+                                        trh,
+                                        saatBas,
+                                        saatBit,
+                                        sebeb,
+                                        value.mesaiId.toString(),
+                                        value.yonetici1.toString(),
+                                        value.yonetici2.toString()
+                                )
+                                )
                             }
                         }
                     }
@@ -385,117 +358,102 @@ class MesaiAdminActivity : AppCompatActivity(), CustomAdapter.OnItemClickListene
                     var value = postSnapshot.getValue<MesaiModel>()
                     if( value!!.adsoyad == name ){
                         if (value!!.yonetici1 == "REDDETTI" && value!!.yonetici2 == "REDDETTI"){
-                            val kurIci = value.kurumIci.toString()
-                            val kurDisi = value.kurumDisi.toString()
                             val trh = value.mesaiTarih.toString()
-                            val saat = value.mesaiSaat.toString()
-                            val yapFirma = value.yapilanFirma.toString()
-                            val yapAdi = value.yapilanAdi.toString()
+                            val saatBas = value.mesaiSaatBaslama.toString()
+                            val saatBit = value.mesaiSaatBitis.toString()
+                            val sebeb = value.sebeb.toString()
 
-                            data.add(ItemsViewModel(
+                            data.add(
+                                MesaiViewModel(
                                 R.drawable.reddeti,
-                                value.adsoyad.toString(),
-                                kurDisi,
-                                kurIci,
-                                trh,
-                                value.yonetici1.toString(),
-                                value.yonetici2.toString(),
-                                "",
-                                "",
-                                yapAdi,
-                                saat,
-                                yapFirma
-                            ))
+                                    value.adsoyad.toString(),
+                                    trh,
+                                    saatBas,
+                                    saatBit,
+                                    sebeb,
+                                    value.mesaiId.toString(),
+                                    value.yonetici1.toString(),
+                                    value.yonetici2.toString()
+                            )
+                            )
                         }else if (gorev == "YONETICI" && value!!.yonetici1 == "ONAY BEKLIYOR"){
-                            val kurIci = value.kurumIci.toString()
-                            val kurDisi = value.kurumDisi.toString()
                             val trh = value.mesaiTarih.toString()
-                            val saat = value.mesaiSaat.toString()
-                            val yapFirma = value.yapilanFirma.toString()
-                            val yapAdi = value.yapilanAdi.toString()
+                            val saatBas = value.mesaiSaatBaslama.toString()
+                            val saatBit = value.mesaiSaatBitis.toString()
+                            val sebeb = value.sebeb.toString()
 
-                            data.add(ItemsViewModel(
+                            data.add(
+                                MesaiViewModel(
                                 R.drawable.bekleme,
-                                value.adsoyad.toString(),
-                                kurDisi,
-                                kurIci,
-                                trh,
-                                value.yonetici1.toString(),
-                                value.yonetici2.toString(),
-                                "",
-                                "",
-                                yapAdi,
-                                saat,
-                                yapFirma
-                            ))
+                                    value.adsoyad.toString(),
+                                    trh,
+                                    saatBas,
+                                    saatBit,
+                                    sebeb,
+                                    value.mesaiId.toString(),
+                                    value.yonetici1.toString(),
+                                    value.yonetici2.toString()
+                            )
+                            )
                         }else if ( value!!.yonetici1 == "ONAYLANDI" && value!!.yonetici2 == "ONAYLANDI"){
-                            val kurIci = value.kurumIci.toString()
-                            val kurDisi = value.kurumDisi.toString()
                             val trh = value.mesaiTarih.toString()
-                            val saat = value.mesaiSaat.toString()
-                            val yapFirma = value.yapilanFirma.toString()
-                            val yapAdi = value.yapilanAdi.toString()
+                            val saatBas = value.mesaiSaatBaslama.toString()
+                            val saatBit = value.mesaiSaatBitis.toString()
+                            val sebeb = value.sebeb.toString()
 
-                            data.add(ItemsViewModel(
+                            data.add(
+                                MesaiViewModel(
                                 R.drawable.onaylandi,
-                                value.adsoyad.toString(),
-                                kurDisi,
-                                kurIci,
-                                trh,
-                                value.yonetici1.toString(),
-                                value.yonetici2.toString(),
-                                "",
-                                "",
-                                yapAdi,
-                                saat,
-                                yapFirma
-                            ))
+                                    value.adsoyad.toString(),
+                                    trh,
+                                    saatBas,
+                                    saatBit,
+                                    sebeb,
+                                    value.mesaiId.toString(),
+                                    value.yonetici1.toString(),
+                                    value.yonetici2.toString()
+                            )
+                            )
                         }else if( gorev == "INSAN KAYNAKLAR" && value!!.yonetici2 == "ONAYLANDI"){
-                            val kurIci = value.kurumIci.toString()
-                            val kurDisi = value.kurumDisi.toString()
                             val trh = value.mesaiTarih.toString()
-                            val saat = value.mesaiSaat.toString()
-                            val yapFirma = value.yapilanFirma.toString()
-                            val yapAdi = value.yapilanAdi.toString()
+                            val saatBas = value.mesaiSaatBaslama.toString()
+                            val saatBit = value.mesaiSaatBitis.toString()
+                            val sebeb = value.sebeb.toString()
 
-                            data.add(ItemsViewModel(
+                            data.add(
+                                MesaiViewModel(
                                 R.drawable.bekleme,
-                                value.adsoyad.toString(),
-                                kurDisi,
-                                kurIci,
-                                trh,
-                                value.yonetici1.toString(),
-                                value.yonetici2.toString(),
-                                "",
-                                "",
-                                yapAdi,
-                                saat,
-                                yapFirma
-                            ))
+                                    value.adsoyad.toString(),
+                                    trh,
+                                    saatBas,
+                                    saatBit,
+                                    sebeb,
+                                    value.mesaiId.toString(),
+                                    value.yonetici1.toString(),
+                                    value.yonetici2.toString()
+                            )
+                            )
                         }else if ( gorev == "INSAN KAYNAKLAR" && value!!.yonetici2 != "ONAYLANDI"){
                             continue
                         }else {
-                            val kurIci = value.kurumIci.toString()
-                            val kurDisi = value.kurumDisi.toString()
                             val trh = value.mesaiTarih.toString()
-                            val saat = value.mesaiSaat.toString()
-                            val yapFirma = value.yapilanFirma.toString()
-                            val yapAdi = value.yapilanAdi.toString()
+                            val saatBas = value.mesaiSaatBaslama.toString()
+                            val saatBit = value.mesaiSaatBitis.toString()
+                            val sebeb = value.sebeb.toString()
 
-                            data.add(ItemsViewModel(
+                            data.add(
+                                MesaiViewModel(
                                 R.drawable.reddeti,
-                                value.adsoyad.toString(),
-                                kurDisi,
-                                kurIci,
-                                trh,
-                                value.yonetici1.toString(),
-                                value.yonetici2.toString(),
-                                "",
-                                "",
-                                yapAdi,
-                                saat,
-                                yapFirma
-                            ))
+                                    value.adsoyad.toString(),
+                                    trh,
+                                    saatBas,
+                                    saatBit,
+                                    sebeb,
+                                    value.mesaiId.toString(),
+                                    value.yonetici1.toString(),
+                                    value.yonetici2.toString()
+                            )
+                            )
                         }
                     }
                 }
@@ -726,16 +684,13 @@ class MesaiAdminActivity : AppCompatActivity(), CustomAdapter.OnItemClickListene
                 if(it.exists()){
                     val izinDetailsList = listOf(
                         IzinDetails("Mesai ID", it.child("mesaiId").value.toString()),
-                        IzinDetails(" ", " "),
                         IzinDetails("TCKN", tckn),
                         IzinDetails("Bölüm", bolum),
                         IzinDetails("Görevi", bolumdekigorev),
-                        IzinDetails("Kurum İçi Mesai", it.child("kurumIci").value.toString()),
-                        IzinDetails("Kurum Dişi Mesai", it.child("kurumDisi").value.toString()),
                         IzinDetails("Mesai Yapılan Tarihi", it.child("mesaiTarih").value.toString()),
-                        IzinDetails("Toplam Mesai Saati", it.child("mesaiSaat").value.toString()),
-                        IzinDetails("Çalışma Yapılan Firma", it.child("yapilanFirma").value.toString()),
-                        IzinDetails("Yapılan Çalışma Adı", it.child("yapilanAdi").value.toString()),
+                        IzinDetails("Başlangıç Mesai Saati", it.child("mesaiSaatBaslama").value.toString()),
+                        IzinDetails("Bitiş Mesai Saati", it.child("mesaiSaatBitis").value.toString()),
+                        IzinDetails("Mesai Sebebi", it.child("sebeb").value.toString()),
                         IzinDetails(" ", " "),
                         IzinDetails("Yönetici Onayı", it.child("yonetici2").value.toString()),
                         IzinDetails("İnsan Kaynaklar Onayı", it.child("yonetici1").value.toString()),

@@ -1,7 +1,6 @@
 package com.example.sibernetik
 
 import android.app.DatePickerDialog
-import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.content.res.Resources
@@ -24,21 +23,20 @@ import com.google.firebase.ktx.Firebase
 import fcm.androidtoandroid.FirebasePush
 import fcm.androidtoandroid.model.Notification
 import kotlinx.android.synthetic.main.izin_user_activity.*
-import kotlinx.android.synthetic.main.izin_user_time.*
 import java.text.SimpleDateFormat
 import java.util.*
 import java.util.concurrent.TimeUnit
 import kotlin.collections.ArrayList
 
 class IzinUserActivity : AppCompatActivity(), CustomAdapter.OnItemClickListener {
-    var PREFS_KEY = "prefs"
-    var name = ""
-    lateinit var sharedPreferences: SharedPreferences
 
-    val database = Firebase.database("DBLINK")
+    var name = ""
+
+    val database = Firebase.database("https://sibernetik-3c2ef-default-rtdb.europe-west1.firebasedatabase.app")
     val myRef = database.getReference("Izin").child("Izin Gunluk")
     val myRefUser = database.getReference("Users")
     var serverKey = "serverkey"
+
     val data = ArrayList<ItemsViewModel>()
     val adapter = CustomAdapter(data, this)
 
@@ -100,7 +98,6 @@ class IzinUserActivity : AppCompatActivity(), CustomAdapter.OnItemClickListener 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.izin_user_activity)
 
-        sharedPreferences = getSharedPreferences(PREFS_KEY, Context.MODE_PRIVATE)
         val user = Firebase.auth.currentUser
         name = user!!.displayName.toString()
         showComments(name)
@@ -214,11 +211,21 @@ class IzinUserActivity : AppCompatActivity(), CustomAdapter.OnItemClickListener 
             val izintipishow = spinnerSelItem.toString()
             val izinmazeretshow = spinnerSelItem2.toString()
 
-            if(edit == 0){
-                sendIzin(adsoyad, sebeb, bastarih, bittarih, izintipishow, izinmazeretshow)
-            }else if (edit == 1){
-                editIzin(adsoyad, sebeb, bastarih, bittarih, izintipishow, izinmazeretshow)
+            val bastarihVerif = bastarih.matches(Regex("[0-9]{2}-[0-9]{2}-[0-9]{4}"))
+            val bittarihVerif = bittarih.matches(Regex("[0-9]{2}-[0-9]{2}-[0-9]{4}"))
+
+            if (bastarihVerif && bittarihVerif){
+                if(edit == 0){
+                    sendIzin(adsoyad, sebeb, bastarih, bittarih, izintipishow, izinmazeretshow)
+                }else if (edit == 1){
+                    editIzin(adsoyad, sebeb, bastarih, bittarih, izintipishow, izinmazeretshow)
+                }
+            }else{
+                showMessage("Yanlış Tarih Formatı! Lütfen GG-AA-YYYY tarih formatını kullanın!", "Tamam")
             }
+
+
+
         }
 
         btnTemizleGunluk.setOnClickListener {

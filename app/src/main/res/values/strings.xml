@@ -49,6 +49,7 @@
     </string-array>
 
     <string-array name="hesap_gorev">
+        <item>Görev seçin...</item>
         <item>INSAN KAYNAKLAR</item>
         <item>YONETICI</item>
         <item>CALIŞAN</item>
@@ -67,6 +68,10 @@
         <item>Raporlu</item>
         <item>Özel</item>
         <item>SSK Vizite</item>
+    </string-array>
+
+    <string-array name="yonetici">
+        <item>"-"</item>
     </string-array>
 
 
