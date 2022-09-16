@@ -89,7 +89,7 @@ class MalzemeAdminActivity : AppCompatActivity(), MalzemeAdapter.OnItemClickList
                 adapter.notifyDataSetChanged()
                 for (postSnapshot in dataSnapshot.children) {
                     var value = postSnapshot.getValue<MalzemeModel>()
-                    if (value!!.adSoyad == name) {
+                    if (value!!.adSoyad!!.toLowerCase().contains(name.toLowerCase())) {
                         data.add(
                             MalzemeViewModel(
                                 R.drawable.tools2,

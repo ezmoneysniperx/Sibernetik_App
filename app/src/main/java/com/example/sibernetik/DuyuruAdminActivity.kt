@@ -20,6 +20,7 @@ class DuyuruAdminActivity : AppCompatActivity(){
     val myRef = database.getReference("Duyuru")
     var serverKey = "serverkey"
 
+
     override fun onCreate(savedInstanceState : Bundle?){
         super.onCreate(savedInstanceState)
         setContentView(R.layout.duyuru_admin_activity)

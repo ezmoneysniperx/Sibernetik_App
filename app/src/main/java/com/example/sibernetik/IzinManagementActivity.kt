@@ -32,7 +32,7 @@ class IzinManagementActivity : AppCompatActivity(), DuyuruAdapter.OnItemClickLis
 
     val database = Firebase.database("https://sibernetik-3c2ef-default-rtdb.europe-west1.firebasedatabase.app")
     val myRef = database.getReference("Users")
-    var serverKey = "serverkey"
+var serverKey = "serverkey"
     //private lateinit var auth: FirebaseAuth
 
     var adsoyadIzinY = ""
@@ -172,7 +172,8 @@ class IzinManagementActivity : AppCompatActivity(), DuyuruAdapter.OnItemClickLis
     }
 
     fun showIzin() {
-        myRef.addValueEventListener(object : ValueEventListener {
+        val dbRef = myRef.orderByChild("adSoyad")
+        dbRef.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 data.clear()
                 adapter.notifyDataSetChanged()

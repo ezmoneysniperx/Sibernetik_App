@@ -8,13 +8,18 @@
     tools:context=".ImzaActivity">
 
     <ScrollView
+        android:id="@+id/scrollView5"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical" >
+            android:orientation="vertical">
 
             <ImageButton
                 android:id="@+id/anasayfaImzaBtn"
@@ -32,37 +37,19 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginTop="15dp"
+                android:layout_marginBottom="10dp"
                 android:text="İmza Ekle / Düzenle"
                 android:textColor="?android:attr/textColorTertiaryInverse"
                 android:textColorHint="?android:attr/textColorTertiaryInverse"
                 android:textSize="12pt"
                 android:textStyle="bold" />
 
-            <ImageView
-                android:id="@+id/imgViewImza"
-                android:layout_width="300dp"
-                android:layout_height="300dp"
-                android:layout_gravity="center"
-                android:layout_marginHorizontal="20dp"
-                android:layout_marginTop="5dp"
-                android:scaleType="center" />
-
-            <FrameLayout
-                android:id="@+id/frameLayoutImza"
-                android:layout_width="300dp"
-                android:layout_height="263dp"
-                android:layout_gravity="center"
-                android:layout_marginHorizontal="20dp"
-                android:layout_marginVertical="10dp">
-
-            </FrameLayout>
-
             <LinearLayout
                 android:id="@+id/constraintLinearLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="5dp"
+                android:layout_marginTop="725dp"
                 android:layout_marginEnd="5dp"
                 android:orientation="horizontal">
 
@@ -98,6 +85,37 @@
             </LinearLayout>
         </LinearLayout>
     </ScrollView>
+
+    <LinearLayout
+        android:layout_width="406dp"
+        android:layout_height="594dp"
+        android:layout_marginTop="213dp"
+        android:layout_marginBottom="84dp"
+        android:foregroundGravity="center"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="@+id/scrollView5"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/scrollView5">
+
+        <ImageView
+            android:id="@+id/imgViewImza"
+            android:layout_width="300dp"
+            android:layout_height="300dp"
+            android:layout_gravity="center"
+            android:layout_marginHorizontal="20dp"
+            android:scaleType="center" />
+
+        <FrameLayout
+            android:id="@+id/frameLayoutImza"
+            android:layout_width="300dp"
+            android:layout_height="263dp"
+            android:layout_gravity="center"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginVertical="10dp">
+
+        </FrameLayout>
+    </LinearLayout>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

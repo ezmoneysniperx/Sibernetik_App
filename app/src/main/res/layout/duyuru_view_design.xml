@@ -2,15 +2,22 @@
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="180dp"
+    android:layout_height="100dp"
     android:layout_margin="10dp"
     android:background="@color/white"
     android:backgroundTint="@color/white"
     app:cardElevation="6dp">
 
+    <TextView
+        android:id="@+id/idDuyuru"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:visibility="invisible" />
+
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="101dp"
         android:orientation="horizontal"
         android:padding="5dp">
 
@@ -50,7 +57,7 @@
             <TextView
                 android:id="@+id/textDuyuru"
                 android:layout_width="match_parent"
-                android:layout_height="132dp"
+                android:layout_height="45dp"
                 android:text="TextView"
                 android:textColor="?android:attr/textColorTertiaryInverse"
                 android:textColorHint="?android:attr/textColorTertiaryInverse"

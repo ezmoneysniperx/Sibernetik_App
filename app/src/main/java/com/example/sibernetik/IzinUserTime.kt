@@ -25,9 +25,11 @@ import com.google.firebase.database.ktx.getValue
 import com.google.firebase.ktx.Firebase
 import fcm.androidtoandroid.FirebasePush
 import fcm.androidtoandroid.model.Notification
+import kotlinx.android.synthetic.main.izin_user_activity.*
 import kotlinx.android.synthetic.main.izin_user_time.*
 import java.text.SimpleDateFormat
 import java.util.*
+import java.util.concurrent.TimeUnit
 import kotlin.collections.ArrayList
 
 class IzinUserTime : AppCompatActivity(), CustomAdapter.OnItemClickListener  {
@@ -35,7 +37,7 @@ class IzinUserTime : AppCompatActivity(), CustomAdapter.OnItemClickListener  {
     var EMAIL_KEY = "email"
     var name = ""
     lateinit var sharedPreferences: SharedPreferences
-    var serverKey = "SERVERKEY"
+var serverKey = "serverkey"
 
     val database = Firebase.database("https://sibernetik-3c2ef-default-rtdb.europe-west1.firebasedatabase.app")
     val myRef = database.getReference("Izin").child("Izin Saatlik")
@@ -172,6 +174,7 @@ class IzinUserTime : AppCompatActivity(), CustomAdapter.OnItemClickListener  {
         val year = c.get(Calendar.YEAR)
         val month = c.get(Calendar.MONTH)
         val day = c.get(Calendar.DATE)
+        var izinTarihPicker = ""
 
         izinTarihBtn.setOnClickListener {
             val dpd = DatePickerDialog(this, DatePickerDialog.OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
@@ -186,18 +189,32 @@ class IzinUserTime : AppCompatActivity(), CustomAdapter.OnItemClickListener  {
 
                     formattedDate  = "0" + dayOfMonth ;
                 }
-                formatted = "$formattedDate-$formattedMonth-$year"
-                tarihTxtSaatlik.setText(formatted).toString()
+                izinTarihPicker = "$formattedDate-$formattedMonth-$year"
+                val days = TimeUnit.DAYS.convert(
+                    simpleDateFormat.parse(izinTarihPicker).getTime() -
+                            simpleDateFormat.parse(formatted).getTime(),
+                    TimeUnit.MILLISECONDS)
+                if (days < 0){
+                    showMessage("İzin tarihi, bugün tarihi olmalıdır ya da daha ileri olmalıdır!","Tamam")
+                }else{
+                    tarihTxtSaatlik.setText(izinTarihPicker).toString()
+                }
             }, year, month, day)
             dpd.show()
         }
+
+        var basSaati = ""
+        var bitSaati = ""
+        val formatSaat = SimpleDateFormat("HH:mm")
 
         saatBaslamaBtn.setOnClickListener{
             val cal = Calendar.getInstance()
             val timeSetListener = TimePickerDialog.OnTimeSetListener { timePicker, hour, minute ->
                 cal.set(Calendar.HOUR_OF_DAY, hour)
                 cal.set(Calendar.MINUTE, minute)
-                saatBaslamaTxt.setText(SimpleDateFormat("HH:mm").format(cal.time))
+                basSaati = SimpleDateFormat("HH:mm").format(cal.time)
+
+                saatBaslamaTxt.setText(basSaati)
             }
             TimePickerDialog(this, timeSetListener, cal.get(Calendar.HOUR_OF_DAY), cal.get(Calendar.MINUTE), true).show()
         }
@@ -207,7 +224,20 @@ class IzinUserTime : AppCompatActivity(), CustomAdapter.OnItemClickListener  {
             val timeSetListener = TimePickerDialog.OnTimeSetListener { timePicker, hour, minute ->
                 cal.set(Calendar.HOUR_OF_DAY, hour)
                 cal.set(Calendar.MINUTE, minute)
-                saatBitisTxt.setText(SimpleDateFormat("HH:mm").format(cal.time))
+                bitSaati = SimpleDateFormat("HH:mm").format(cal.time)
+                if (basSaati.isEmpty()){
+                    showMessage("Önce Başlama Saatini Seçmeniz Gerekiyor!","Tamam")
+                }else{
+                    val minutes = TimeUnit.MINUTES.convert(
+                        formatSaat.parse(bitSaati).getTime() -
+                                formatSaat.parse(basSaati).getTime(),
+                        TimeUnit.MILLISECONDS)
+                    if (minutes < 30){
+                        showMessage("Bitiş saati, başlangıç saatinden daha ileri olmalıdır!","Tamam")
+                    }else{
+                        saatBitisTxt.setText(bitSaati)
+                    }
+                }
             }
             TimePickerDialog(this, timeSetListener, cal.get(Calendar.HOUR_OF_DAY), cal.get(Calendar.MINUTE), true).show()
         }
@@ -222,15 +252,17 @@ class IzinUserTime : AppCompatActivity(), CustomAdapter.OnItemClickListener  {
             val izinmazeretshow = spinnerSelItem2
 
             val izintarihiVerif = izintarihi.matches(Regex("[0-9]{2}-[0-9]{2}-[0-9]{4}"))
+            val bassaatVerif = bassaati.matches(Regex("[0-9]{2}:[0-9]{2}"))
+            val bitsaatVerif = bitsaati.matches(Regex("[0-9]{2}:[0-9]{2}"))
 
-            if(izintarihiVerif){
+            if(izintarihiVerif && bassaatVerif && bitsaatVerif){
                 if(edit == 0){
                     sendIzin(adsoyad, sebeb, izintarihi, bassaati, bitsaati, izintipishow, izinmazeretshow)
                 }else if (edit == 1){
                     editIzin(adsoyad, sebeb, izintarihi, bassaati, bitsaati, izintipishow, izinmazeretshow)
                 }
             }else{
-                showMessage("Yanlış Tarih Formatı! Lütfen GG-AA-YYYY tarih formatını kullanın!", "Tamam")
+                showMessage("Yanlış Tarih veya Saat Formatı! Lütfen GG-AA-YYYY tarih formatını ve SS:DD saat formatını kullanın!", "Tamam")
             }
 
 

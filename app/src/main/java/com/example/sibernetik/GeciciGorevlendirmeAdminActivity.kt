@@ -209,7 +209,8 @@ class GeciciGorevlendirmeAdminActivity : AppCompatActivity(), CustomAdapter.OnIt
     }
 
     fun filtreleme(durum : String){
-        myRef.addValueEventListener(object : ValueEventListener {
+        val dbRef = myRef.orderByChild("adsoyad")
+        dbRef.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 data.clear()
                 adapter.notifyDataSetChanged()
@@ -284,7 +285,7 @@ class GeciciGorevlendirmeAdminActivity : AppCompatActivity(), CustomAdapter.OnIt
                                 ))
                             }
                         }
-                    }else if (gorev == "INSAN KAYNAKLAR"){
+                    }else if (gorev == "INSAN KAYNAKLARI"){
                         if (durum == "ONAY BEKLIYOR"){
                             if(value!!.yonetici1 == "ONAY BEKLIYOR" && value!!.yonetici2 == "ONAYLANDI"){
                                 val basTrh = value!!.bastarih.toString()
@@ -369,7 +370,7 @@ class GeciciGorevlendirmeAdminActivity : AppCompatActivity(), CustomAdapter.OnIt
                 adapter.notifyDataSetChanged()
                 for( postSnapshot in dataSnapshot.children ){
                     var value = postSnapshot.getValue<GeciciGorevModel>()
-                    if( value!!.adsoyad == name ){
+                    if( value!!.adsoyad!!.toLowerCase().contains(name.toLowerCase()) ){
                         if (value!!.yonetici1 == "REDDETTI" && value!!.yonetici2 == "REDDETTI"){
                             val basTrh = value!!.bastarih.toString()
                             val bitTrh = value!!.bittarih.toString()
@@ -430,7 +431,7 @@ class GeciciGorevlendirmeAdminActivity : AppCompatActivity(), CustomAdapter.OnIt
                                 "-",
                                 "-"
                             ))
-                        }else if( gorev == "INSAN KAYNAKLAR" && value!!.yonetici2 == "ONAYLANDI"){
+                        }else if( gorev == "INSAN KAYNAKLARI" && value!!.yonetici2 == "ONAYLANDI"){
                             val basTrh = value!!.bastarih.toString()
                             val bitTrh = value!!.bittarih.toString()
                             val tarih = "$basTrh - $bitTrh"
@@ -450,7 +451,7 @@ class GeciciGorevlendirmeAdminActivity : AppCompatActivity(), CustomAdapter.OnIt
                                 "-",
                                 "-"
                             ))
-                        }else if ( gorev == "INSAN KAYNAKLAR" && value!!.yonetici2 != "ONAYLANDI"){
+                        }else if ( gorev == "INSAN KAYNAKLARI" && value!!.yonetici2 != "ONAYLANDI"){
                             continue
                         }else {
                             val basTrh = value!!.bastarih.toString()
@@ -714,7 +715,7 @@ class GeciciGorevlendirmeAdminActivity : AppCompatActivity(), CustomAdapter.OnIt
                         IzinDetails("Geçici Görev Tarifi", it.child("tarif").value.toString()),
                         IzinDetails(" ", " "),
                         IzinDetails("Yönetici Onayı", it.child("yonetici2").value.toString()),
-                        IzinDetails("İnsan Kaynaklar Onayı", it.child("yonetici1").value.toString()),
+                        IzinDetails("İnsan Kaynakları Onayı", it.child("yonetici1").value.toString()),
                         IzinDetails("Mesaj", it.child("mesaj").value.toString()),
                     )
                     val pdfDetails = PdfDetails(it.child("adsoyad").value.toString(), izinDetailsList, talepEdenBitmap,yoneticiBitmap,ikBitmap)

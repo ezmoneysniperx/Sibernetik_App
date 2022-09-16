@@ -51,7 +51,7 @@
 
                 <ScrollView
                     android:layout_width="360dp"
-                    android:layout_height="483dp"
+                    android:layout_height="529dp"
                     android:layout_gravity="center">
 
                     <androidx.recyclerview.widget.RecyclerView
@@ -66,69 +66,18 @@
 
                 </ScrollView>
 
-                <LinearLayout
-                    android:id="@+id/textDuyuruBtn"
-                    android:visibility="invisible"
+                <Button
+                    android:id="@+id/btnYeniDuyuru"
                     android:layout_width="360dp"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginTop="50dp"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:id="@+id/tarih"
-                        android:layout_width="5dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginRight="10dp"
-                        android:layout_weight="1"
-                        android:gravity="right"
-                        android:text="Duyuru Başlığı :"
-                        android:textColor="?android:attr/textColorTertiaryInverse"
-                        android:textColorHint="?android:attr/textColorTertiaryInverse"
-                        android:textSize="16sp" />
-
-                    <TextView
-                        android:id="@+id/duyuruDisplay"
-                        android:layout_width="75dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="-"
-                        android:textColor="?android:attr/textColorTertiaryInverse"
-                        android:textColorHint="?android:attr/textColorTertiaryInverse"
-                        android:textSize="16sp" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="360dp"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginLeft="35dp"
-                    android:orientation="horizontal">
-
-                    <Button
-                        android:id="@+id/btnYeniDuyuru"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="15dp"
-                        android:background="@drawable/custom4"
-                        android:gravity="center"
-                        android:visibility="invisible"
-                        android:text="Yeni Duyuru Oluştur"
-                        android:textColor="?android:attr/textColorTertiaryInverse"
-                        android:textColorHint="?android:attr/textColorTertiaryInverse" />
-
-                    <Button
-                        android:id="@+id/btnDuyuruSil"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="20dp"
-                        android:layout_marginTop="15dp"
-                        android:background="@drawable/custom4"
-                        android:visibility="invisible"
-                        android:text="Duyuru Sil"
-                        android:textColor="?android:attr/textColorTertiaryInverse"
-                        android:textColorHint="?android:attr/textColorTertiaryInverse" />
-                </LinearLayout>
+                    android:layout_marginLeft="25dp"
+                    android:layout_marginTop="20dp"
+                    android:background="@drawable/custom4"
+                    android:gravity="center"
+                    android:text="Yeni Duyuru Oluştur"
+                    android:textColor="?android:attr/textColorTertiaryInverse"
+                    android:textColorHint="?android:attr/textColorTertiaryInverse"
+                    android:visibility="visible" />
 
             </LinearLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>

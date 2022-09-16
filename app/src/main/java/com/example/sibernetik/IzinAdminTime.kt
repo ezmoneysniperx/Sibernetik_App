@@ -4,6 +4,7 @@ import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AlertDialog
@@ -47,7 +48,7 @@ class IzinAdminTime : AppCompatActivity(), CustomAdapter.OnItemClickListener  {
     val myRef = database.getReference("Izin").child("Izin Saatlik")
     val myRefUser = database.getReference("Users")
     private lateinit var auth: FirebaseAuth
-    var serverKey = "serverkey"
+var serverKey = "serverkey"
 
     //var serverKey = "serverkey"
     var email = ""
@@ -230,7 +231,8 @@ class IzinAdminTime : AppCompatActivity(), CustomAdapter.OnItemClickListener  {
     }
 
     fun filtreleme(durum : String){
-        myRef.addValueEventListener(object : ValueEventListener {
+        val dbRef = myRef.orderByChild("adsoyad")
+        dbRef.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 data.clear()
                 adapter.notifyDataSetChanged()
@@ -311,7 +313,7 @@ class IzinAdminTime : AppCompatActivity(), CustomAdapter.OnItemClickListener  {
                                 ))
                             }
                         }
-                    }else if (gorev == "INSAN KAYNAKLAR"){
+                    }else if (gorev == "INSAN KAYNAKLARI"){
                         if (durum == "ONAY BEKLIYOR"){
                             if(value!!.yonetici1 == "ONAY BEKLIYOR" && value!!.yonetici2 == "ONAYLANDI"){
                                 val tarih = value.izintarihi.toString()
@@ -402,7 +404,7 @@ class IzinAdminTime : AppCompatActivity(), CustomAdapter.OnItemClickListener  {
                 adapter.notifyDataSetChanged()
                 for( postSnapshot in dataSnapshot.children ){
                     var value = postSnapshot.getValue<IzinModelSaatlik>()
-                    if( value!!.adsoyad == name ){
+                    if( value!!.adsoyad!!.toLowerCase().contains(name.toLowerCase()) ){
                         val tarih = value!!.izintarihi.toString()
                         val bassaatii = value!!.bassaati.toString()
                         val bitSaati = value!!.bitsaati.toString()
@@ -476,7 +478,7 @@ class IzinAdminTime : AppCompatActivity(), CustomAdapter.OnItemClickListener  {
                                 izinTip,
                                 izinMaz
                             ))
-                        }else if( gorev == "INSAN KAYNAKLAR" && value!!.yonetici2 == "ONAYLANDI"){
+                        }else if( gorev == "INSAN KAYNAKLARI" && value!!.yonetici2 == "ONAYLANDI"){
                             val tarih = value!!.izintarihi.toString()
                             val bassaatii = value!!.bassaati.toString()
                             val bitSaati = value!!.bitsaati.toString()
@@ -498,7 +500,7 @@ class IzinAdminTime : AppCompatActivity(), CustomAdapter.OnItemClickListener  {
                                 izinTip,
                                 izinMaz
                             ))
-                        }else if ( gorev == "INSAN KAYNAKLAR" && value!!.yonetici2 != "ONAYLANDI"){
+                        }else if ( gorev == "INSAN KAYNAKLARI" && value!!.yonetici2 != "ONAYLANDI"){
                             continue
                         }else {
                             val tarih = value!!.izintarihi.toString()
@@ -553,10 +555,14 @@ class IzinAdminTime : AppCompatActivity(), CustomAdapter.OnItemClickListener  {
                         for(postSnapshot in snapshot.children){
                             var value = postSnapshot.getValue<UsersModel>()
                             if (value!!.adSoyad == adsoyad){
+                                val yon = value!!.yonetici.toString()
+                                Log.d("test","sebelum $yon")
                                 if (value!!.yonetici == userAdSoyad){
+                                    Log.d("test","sebelum myref")
                                     myRef.child(id).child("yonetici2").setValue(durum)
                                     myRef.child(id).child("mesaj").setValue(mesaj)
                                     myRef.child(id).child("yoneticiId").setValue(userUid)
+                                    Log.d("test","sesudah myref")
                                     //notifikasi//
                                     var icon = R.drawable.logo
                                     val iconString = icon.toString()
@@ -795,7 +801,7 @@ class IzinAdminTime : AppCompatActivity(), CustomAdapter.OnItemClickListener  {
                         IzinDetails("İzin Nedeni (Açıklama)", it.child("sebeb").value.toString()),
                         IzinDetails(" ", " "),
                         IzinDetails("Yönetici Onayı", it.child("yonetici2").value.toString()),
-                        IzinDetails("İnsan Kaynaklar Onayı", it.child("yonetici1").value.toString()),
+                        IzinDetails("İnsan Kaynakları Onayı", it.child("yonetici1").value.toString()),
                         IzinDetails("Mesaj", it.child("mesaj").value.toString()),
                     )
                     val pdfDetails = PdfDetails(it.child("adsoyad").value.toString(), izinDetailsList, talepEdenBitmap, yoneticiBitmap, ikBitmap)

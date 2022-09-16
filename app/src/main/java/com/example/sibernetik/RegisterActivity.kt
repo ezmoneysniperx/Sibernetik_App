@@ -26,7 +26,7 @@ class RegisterActivity : AppCompatActivity(){
     val myRef = database.getReference("Users")
     private lateinit var auth: FirebaseAuth
     lateinit var progressDialog: ProgressDialog
-    var serverKey = "serverkey"
+var serverKey = "serverkey"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

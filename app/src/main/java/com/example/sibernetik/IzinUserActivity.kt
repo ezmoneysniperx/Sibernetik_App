@@ -35,7 +35,7 @@ class IzinUserActivity : AppCompatActivity(), CustomAdapter.OnItemClickListener 
     val database = Firebase.database("https://sibernetik-3c2ef-default-rtdb.europe-west1.firebasedatabase.app")
     val myRef = database.getReference("Izin").child("Izin Gunluk")
     val myRefUser = database.getReference("Users")
-    var serverKey = "serverkey"
+var serverKey = "serverkey"
 
     val data = ArrayList<ItemsViewModel>()
     val adapter = CustomAdapter(data, this)
@@ -159,11 +159,13 @@ class IzinUserActivity : AppCompatActivity(), CustomAdapter.OnItemClickListener 
             }
         }
 
-        var formatted = ""
+        var formattedBasTarih = ""
+        var formattedBitTarih = ""
         val c = Calendar.getInstance()
         val year = c.get(Calendar.YEAR)
         val month = c.get(Calendar.MONTH)
         val day = c.get(Calendar.DATE)
+        val format = SimpleDateFormat("dd-MM-yyyy")
 
         basTarihBtn.setOnClickListener {
             val dpd = DatePickerDialog(this, DatePickerDialog.OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
@@ -178,8 +180,8 @@ class IzinUserActivity : AppCompatActivity(), CustomAdapter.OnItemClickListener 
 
                     formattedDate  = "0" + dayOfMonth ;
                 }
-                formatted = "$formattedDate-$formattedMonth-$year"
-                basTarihTxt.setText(formatted).toString()
+                formattedBasTarih = "$formattedDate-$formattedMonth-$year"
+                basTarihTxt.setText(formattedBasTarih).toString()
             }, year, month, day)
             dpd.show()
         }
@@ -197,19 +199,35 @@ class IzinUserActivity : AppCompatActivity(), CustomAdapter.OnItemClickListener 
 
                     formattedDate  = "0" + dayOfMonth ;
                 }
-                formatted = "$formattedDate-$formattedMonth-$year"
-                bitTarihTxt.setText(formatted).toString()
+                formattedBitTarih = "$formattedDate-$formattedMonth-$year"
+                if(formattedBasTarih.isEmpty()){
+                    showMessage("Önce Başlama Tarihini Seçmeniz Gerekiyor!","Tamam")
+                }else{
+                    val days = TimeUnit.DAYS.convert(
+                        format.parse(formattedBitTarih).getTime() -
+                                format.parse(formattedBasTarih).getTime(),
+                        TimeUnit.MILLISECONDS)
+                    if (days <= 0){
+                        showMessage("Bitiş tarihi, başlangıç tarihinden daha ileri olmalıdır!","Tamam")
+                    }else{
+                        bitTarihTxt.setText(formattedBitTarih).toString()
+                    }
+                }
             }, year, month, day)
             dpd.show()
         }
 
         gonderBtn.setOnClickListener {
             val adsoyad = nameTxt.text.toString()
-            val sebeb = sebebTxt.text.toString()
+            var sebeb = sebebTxt.text.toString()
             val bastarih = basTarihTxt.text.toString()
             val bittarih = bitTarihTxt.text.toString()
             val izintipishow = spinnerSelItem.toString()
             val izinmazeretshow = spinnerSelItem2.toString()
+
+            if(sebeb.isEmpty()){
+                sebeb = "-"
+            }
 
             val bastarihVerif = bastarih.matches(Regex("[0-9]{2}-[0-9]{2}-[0-9]{4}"))
             val bittarihVerif = bittarih.matches(Regex("[0-9]{2}-[0-9]{2}-[0-9]{4}"))
@@ -223,9 +241,6 @@ class IzinUserActivity : AppCompatActivity(), CustomAdapter.OnItemClickListener 
             }else{
                 showMessage("Yanlış Tarih Formatı! Lütfen GG-AA-YYYY tarih formatını kullanın!", "Tamam")
             }
-
-
-
         }
 
         btnTemizleGunluk.setOnClickListener {

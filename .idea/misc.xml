@@ -80,12 +80,13 @@
         <entry key="..\:/Users/gjuan/AndroidStudioProjects/Sibernetik/app/src/main/res/layout/activity_gecici_gorevlendirme.xml" value="0.24365942028985507" />
         <entry key="..\:/Users/gjuan/AndroidStudioProjects/Sibernetik/app/src/main/res/layout/activity_gecici_gorevlendirme_admin.xml" value="0.24010416666666667" />
         <entry key="..\:/Users/gjuan/AndroidStudioProjects/Sibernetik/app/src/main/res/layout/activity_gecici_gorevlendirme_user.xml" value="0.264" />
-        <entry key="..\:/Users/gjuan/AndroidStudioProjects/Sibernetik/app/src/main/res/layout/activity_imza.xml" value="0.2" />
+        <entry key="..\:/Users/gjuan/AndroidStudioProjects/Sibernetik/app/src/main/res/layout/activity_imza.xml" value="0.136" />
         <entry key="..\:/Users/gjuan/AndroidStudioProjects/Sibernetik/app/src/main/res/layout/activity_izin_menu.xml" value="0.1" />
         <entry key="..\:/Users/gjuan/AndroidStudioProjects/Sibernetik/app/src/main/res/layout/activity_main.xml" value="0.16" />
         <entry key="..\:/Users/gjuan/AndroidStudioProjects/Sibernetik/app/src/main/res/layout/card_view_design.xml" value="0.23505434782608695" />
         <entry key="..\:/Users/gjuan/AndroidStudioProjects/Sibernetik/app/src/main/res/layout/duyuru_activity.xml" value="0.15489130434782608" />
         <entry key="..\:/Users/gjuan/AndroidStudioProjects/Sibernetik/app/src/main/res/layout/duyuru_admin_activity.xml" value="0.10047028644719966" />
+        <entry key="..\:/Users/gjuan/AndroidStudioProjects/Sibernetik/app/src/main/res/layout/duyuru_page.xml" value="0.1" />
         <entry key="..\:/Users/gjuan/AndroidStudioProjects/Sibernetik/app/src/main/res/layout/duyuru_view_design.xml" value="0.12360688956433637" />
         <entry key="..\:/Users/gjuan/AndroidStudioProjects/Sibernetik/app/src/main/res/layout/edit_bilgi_activity.xml" value="0.2" />
         <entry key="..\:/Users/gjuan/AndroidStudioProjects/Sibernetik/app/src/main/res/layout/forgot_password_activity.xml" value="0.264" />
@@ -117,5 +118,12 @@
   </component>
   <component name="ProjectType">
     <option name="id" value="Android" />
+  </component>
+  <component name="VisualizationToolProject">
+    <option name="state">
+      <ProjectState>
+        <option name="scale" value="0.136" />
+      </ProjectState>
+    </option>
   </component>
 </project>

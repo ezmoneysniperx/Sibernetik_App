@@ -37,7 +37,7 @@ class MesaiAdminActivity : AppCompatActivity(), MesaiAdapter.OnItemClickListener
     val myRefUser = database.getReference("Users")
     private lateinit var auth: FirebaseAuth
     val storage = Firebase.storage
-    var serverKey = "serverkey"
+var serverKey = "serverkey"
 
     val data = ArrayList<MesaiViewModel>()
     val adapter = MesaiAdapter(data, this)
@@ -202,7 +202,8 @@ class MesaiAdminActivity : AppCompatActivity(), MesaiAdapter.OnItemClickListener
     }
 
     fun filtreleme(durum : String){
-        myRef.addValueEventListener(object : ValueEventListener {
+        val dbRef = myRef.orderByChild("adsoyad")
+        dbRef.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 data.clear()
                 adapter.notifyDataSetChanged()
@@ -274,7 +275,7 @@ class MesaiAdminActivity : AppCompatActivity(), MesaiAdapter.OnItemClickListener
                                 )
                             }
                         }
-                    }else if (gorev == "INSAN KAYNAKLAR"){
+                    }else if (gorev == "INSAN KAYNAKLARI"){
                         if (durum == "ONAY BEKLIYOR"){
                             if(value!!.yonetici1 == "ONAY BEKLIYOR" && value!!.yonetici2 == "ONAYLANDI"){
                                 val trh = value.mesaiTarih.toString()
@@ -356,7 +357,7 @@ class MesaiAdminActivity : AppCompatActivity(), MesaiAdapter.OnItemClickListener
                 adapter.notifyDataSetChanged()
                 for( postSnapshot in dataSnapshot.children ){
                     var value = postSnapshot.getValue<MesaiModel>()
-                    if( value!!.adsoyad == name ){
+                    if( value!!.adsoyad!!.toLowerCase().contains(name.toLowerCase()) ){
                         if (value!!.yonetici1 == "REDDETTI" && value!!.yonetici2 == "REDDETTI"){
                             val trh = value.mesaiTarih.toString()
                             val saatBas = value.mesaiSaatBaslama.toString()
@@ -414,7 +415,7 @@ class MesaiAdminActivity : AppCompatActivity(), MesaiAdapter.OnItemClickListener
                                     value.yonetici2.toString()
                             )
                             )
-                        }else if( gorev == "INSAN KAYNAKLAR" && value!!.yonetici2 == "ONAYLANDI"){
+                        }else if( gorev == "INSAN KAYNAKLARI" && value!!.yonetici2 == "ONAYLANDI"){
                             val trh = value.mesaiTarih.toString()
                             val saatBas = value.mesaiSaatBaslama.toString()
                             val saatBit = value.mesaiSaatBitis.toString()
@@ -433,7 +434,7 @@ class MesaiAdminActivity : AppCompatActivity(), MesaiAdapter.OnItemClickListener
                                     value.yonetici2.toString()
                             )
                             )
-                        }else if ( gorev == "INSAN KAYNAKLAR" && value!!.yonetici2 != "ONAYLANDI"){
+                        }else if ( gorev == "INSAN KAYNAKLARI" && value!!.yonetici2 != "ONAYLANDI"){
                             continue
                         }else {
                             val trh = value.mesaiTarih.toString()
@@ -693,7 +694,7 @@ class MesaiAdminActivity : AppCompatActivity(), MesaiAdapter.OnItemClickListener
                         IzinDetails("Mesai Sebebi", it.child("sebeb").value.toString()),
                         IzinDetails(" ", " "),
                         IzinDetails("Yönetici Onayı", it.child("yonetici2").value.toString()),
-                        IzinDetails("İnsan Kaynaklar Onayı", it.child("yonetici1").value.toString()),
+                        IzinDetails("İnsan Kaynakları Onayı", it.child("yonetici1").value.toString()),
                         IzinDetails("Mesaj", it.child("mesaj").value.toString()),
                     )
                     val pdfDetails = PdfDetails(it.child("adsoyad").value.toString(), izinDetailsList, talepEdenBitmap,yoneticiBitmap,ikBitmap)

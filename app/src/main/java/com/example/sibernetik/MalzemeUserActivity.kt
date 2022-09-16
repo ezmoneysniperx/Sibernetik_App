@@ -47,7 +47,7 @@ class MalzemeUserActivity : AppCompatActivity(), MalzemeAdapter.OnItemClickListe
         sharedPreferences = getSharedPreferences(PREFS_KEY, Context.MODE_PRIVATE)
         val user = Firebase.auth.currentUser
         ad = user!!.displayName.toString()
-        showComments()
+        showComments(ad)
 
         val gonderBtn = findViewById<Button>(R.id.btnSubmit)
         val nameTextBox = findViewById<TextView>(R.id.nameTxt)
@@ -82,7 +82,7 @@ class MalzemeUserActivity : AppCompatActivity(), MalzemeAdapter.OnItemClickListe
         val newUser = MalzemeModel(adSoyad, malzemead, proje, fiyat, id)
         myRef.child(id.toString()).setValue(newUser)
     }
-    fun showComments(){
+    fun showComments(adSoyad: String){
         myRef.addValueEventListener(object : ValueEventListener{
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 data.clear()
@@ -90,6 +90,7 @@ class MalzemeUserActivity : AppCompatActivity(), MalzemeAdapter.OnItemClickListe
                 adapter.notifyDataSetChanged()
                 for (postSnapshot in dataSnapshot.children){
                     val value = postSnapshot.getValue<MalzemeModel>()
+                    if(value!!.adSoyad.toString() == adSoyad)
                     data.add( MalzemeViewModel(R.drawable.tools2,
                         value!!.adSoyad.toString(),
                         value!!.malzemead.toString(),

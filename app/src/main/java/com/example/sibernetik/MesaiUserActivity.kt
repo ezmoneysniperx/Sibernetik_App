@@ -23,9 +23,11 @@ import com.google.firebase.database.ktx.getValue
 import com.google.firebase.ktx.Firebase
 import fcm.androidtoandroid.FirebasePush
 import fcm.androidtoandroid.model.Notification
+import kotlinx.android.synthetic.main.izin_user_time.*
 import kotlinx.android.synthetic.main.mesai_user_activity.*
 import java.text.SimpleDateFormat
 import java.util.*
+import java.util.concurrent.TimeUnit
 import kotlin.collections.ArrayList
 
 class MesaiUserActivity : AppCompatActivity(), MesaiAdapter.OnItemClickListener  {
@@ -36,7 +38,7 @@ class MesaiUserActivity : AppCompatActivity(), MesaiAdapter.OnItemClickListener 
     val database = Firebase.database("https://sibernetik-3c2ef-default-rtdb.europe-west1.firebasedatabase.app")
     val myRef = database.getReference("Mesai")
     val myRefUser = database.getReference("Users")
-    var serverKey = "serverkey"
+var serverKey = "serverkey"
 
     val data = ArrayList<MesaiViewModel>()
     val adapter = MesaiAdapter(data, this)
@@ -114,6 +116,11 @@ class MesaiUserActivity : AppCompatActivity(), MesaiAdapter.OnItemClickListener 
         val month = c.get(Calendar.MONTH)
         val day = c.get(Calendar.DATE)
 
+        val simpleDateFormat = SimpleDateFormat("dd-MM-yyyy")
+        var bugunTarihi: String = simpleDateFormat.format(Date())
+
+        mesaiTarihTxt.setText(bugunTarihi)
+
         mesaiTarihBtn.setOnClickListener {
             val dpd = DatePickerDialog(this, DatePickerDialog.OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
                 var newMonth = monthOfYear + 1
@@ -128,17 +135,31 @@ class MesaiUserActivity : AppCompatActivity(), MesaiAdapter.OnItemClickListener 
                     formattedDate  = "0" + dayOfMonth ;
                 }
                 formatted = "$formattedDate-$formattedMonth-$year"
+                val days = TimeUnit.DAYS.convert(
+                    simpleDateFormat.parse(formatted).getTime() -
+                            simpleDateFormat.parse(bugunTarihi).getTime(),
+                    TimeUnit.MILLISECONDS)
+                if (days < 0){
+                    showMessageMesai("İzin tarihi, bugün tarihi olmalıdır ya da daha ileri olmalıdır!","Tamam")
+                }else{
+                    mesaiTarihTxt.setText(formatted).toString()
+                }
                 mesaiTarihTxt.setText(formatted).toString()
             }, year, month, day)
             dpd.show()
         }
+
+        var basSaati = ""
+        var bitSaati = ""
+        val formatSaat = SimpleDateFormat("HH:mm")
 
         saatBaslamaMesaiBtn.setOnClickListener{
             val cal = Calendar.getInstance()
             val timeSetListener = TimePickerDialog.OnTimeSetListener { timePicker, hour, minute ->
                 cal.set(Calendar.HOUR_OF_DAY, hour)
                 cal.set(Calendar.MINUTE, minute)
-                saatMesaiTxt.setText(SimpleDateFormat("HH:mm").format(cal.time))
+                basSaati = SimpleDateFormat("HH:mm").format(cal.time)
+                saatMesaiTxt.setText(basSaati)
             }
             TimePickerDialog(this, timeSetListener, cal.get(Calendar.HOUR_OF_DAY), cal.get(Calendar.MINUTE), true).show()
         }
@@ -148,7 +169,21 @@ class MesaiUserActivity : AppCompatActivity(), MesaiAdapter.OnItemClickListener 
             val timeSetListener = TimePickerDialog.OnTimeSetListener { timePicker, hour, minute ->
                 cal.set(Calendar.HOUR_OF_DAY, hour)
                 cal.set(Calendar.MINUTE, minute)
-                saatMesaiBitisTxt.setText(SimpleDateFormat("HH:mm").format(cal.time))
+
+                bitSaati = SimpleDateFormat("HH:mm").format(cal.time)
+                if (basSaati.isEmpty()){
+                    showMessageMesai("Önce Başlama Saatini Seçmeniz Gerekiyor!","Tamam")
+                }else{
+                    val minutes = TimeUnit.MINUTES.convert(
+                        formatSaat.parse(bitSaati).getTime() -
+                                formatSaat.parse(basSaati).getTime(),
+                        TimeUnit.MILLISECONDS)
+                    if (minutes < 30){
+                        showMessageMesai("Bitiş saati, başlangıç saatinden daha ileri olmalıdır!","Tamam")
+                    }else{
+                        saatMesaiBitisTxt.setText(bitSaati)
+                    }
+                }
             }
             TimePickerDialog(this, timeSetListener, cal.get(Calendar.HOUR_OF_DAY), cal.get(Calendar.MINUTE), true).show()
         }
@@ -160,11 +195,21 @@ class MesaiUserActivity : AppCompatActivity(), MesaiAdapter.OnItemClickListener 
             val saatBitis = saatMesaiBitisTxt.text.toString()
             val sebeb = mesaiSebebiTxt.text.toString()
 
-            if(edit == 0){
-                sendMesai(adsoyad, mesaiTarih, saatBaslama, saatBitis, sebeb)
-            }else if (edit == 1){
-                editMesai(adsoyad, mesaiTarih, saatBaslama, saatBitis, sebeb)
+            val mesaitarihiVerif = mesaiTarih.matches(Regex("[0-9]{2}-[0-9]{2}-[0-9]{4}"))
+            val bassaatVerif = saatBaslama.matches(Regex("[0-9]{2}:[0-9]{2}"))
+            val bitsaatVerif = saatBitis.matches(Regex("[0-9]{2}:[0-9]{2}"))
+
+            if(mesaitarihiVerif && bassaatVerif && bitsaatVerif){
+                if(edit == 0){
+                    sendMesai(adsoyad, mesaiTarih, saatBaslama, saatBitis, sebeb)
+                }else if (edit == 1){
+                    editMesai(adsoyad, mesaiTarih, saatBaslama, saatBitis, sebeb)
+                }
+            }else{
+                showMessageMesai("Yanlış Tarih veya Saat Formatı! Lütfen GG-AA-YYYY tarih formatını ve SS:DD saat formatını kullanın!", "Tamam")
             }
+
+
         }
 
         btnTemizleMesai.setOnClickListener {

@@ -92,7 +92,7 @@ class AccountManagementActivity : AppCompatActivity(), MalzemeAdapter.OnItemClic
                 alertDialog.setCancelable(false)
                 alertDialog.show()
             }else{
-                intent.putExtra("adSoyad",adsoyad)
+                intent.putExtra("eposta",eposta)
                 intent.putExtra("mode","ONAY")
                 startActivity(intent)
                 finish()
@@ -139,7 +139,7 @@ class AccountManagementActivity : AppCompatActivity(), MalzemeAdapter.OnItemClic
             builder.setMessage("Bilgileri düzenleyeceğiniz kişinin adı $adsoyad, Devam etmek istiyor musunuz?")
             builder.setPositiveButton("Evet"){dialogInterface , which ->
                 val intent = Intent(this,AccountOnaylaActivity::class.java)
-                intent.putExtra("adSoyad",adsoyad)
+                intent.putExtra("eposta",eposta)
                 intent.putExtra("mode","EDIT")
                 startActivity(intent)
                 finish()

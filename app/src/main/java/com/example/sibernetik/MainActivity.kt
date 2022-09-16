@@ -188,7 +188,7 @@ class MainActivity : AppCompatActivity()  {
                     val imzaDurum = it.child("imzaExist").value.toString()
                     Log.w("test","$imzaDurum")
                     if(imzaDurum == "1"){
-                        if(gorev == "INSAN KAYNAKLAR" || gorev == "YONETICI"){
+                        if(gorev == "INSAN KAYNAKLARI" || gorev == "YONETICI"){
                             popupMenuIzin.show()
                         }else{
                             val intent = Intent(this, IzinMenuActivity::class.java)
@@ -208,7 +208,7 @@ class MainActivity : AppCompatActivity()  {
                     val imzaDurum = it.child("imzaExist").value.toString()
                     Log.w("test","$imzaDurum")
                     if(imzaDurum == "1"){
-                        if(gorev == "INSAN KAYNAKLAR" || gorev == "YONETICI"){
+                        if(gorev == "INSAN KAYNAKLARI" || gorev == "YONETICI"){
                             popupMenuGeciciGorev.show()
                         }else{
                             val intent = Intent(this, GeciciGorevlendirmeUserActivity::class.java)
@@ -222,7 +222,7 @@ class MainActivity : AppCompatActivity()  {
         }
 
         malzemeButton.setOnClickListener {
-            if(gorev == "INSAN KAYNAKLAR" || gorev == "YONETICI"){
+            if(gorev == "INSAN KAYNAKLARI" || gorev == "YONETICI"){
                 popupMenuMalzeme.show()
             }else{
                 val user = Intent(this, MalzemeUserActivity::class.java)
@@ -236,7 +236,7 @@ class MainActivity : AppCompatActivity()  {
                     val imzaDurum = it.child("imzaExist").value.toString()
                     Log.w("test","$imzaDurum")
                     if(imzaDurum == "1"){
-                        if(gorev == "INSAN KAYNAKLAR" || gorev == "YONETICI"){
+                        if(gorev == "INSAN KAYNAKLARI" || gorev == "YONETICI"){
                             popupMenuMesai.show()
                         }else{
                             val user = Intent(this, MesaiUserActivity::class.java)
@@ -255,7 +255,7 @@ class MainActivity : AppCompatActivity()  {
         }
 
         hesapYonetimButton.setOnClickListener {
-            if(gorev == "INSAN KAYNAKLAR"){
+            if(gorev == "INSAN KAYNAKLARI"){
                 val intent = Intent(this,AccountManagementActivity::class.java)
                 startActivity(intent)
             }else{
@@ -264,7 +264,7 @@ class MainActivity : AppCompatActivity()  {
         }
 
         izinHakkiButton.setOnClickListener{
-            if(gorev == "INSAN KAYNAKLAR"){
+            if(gorev == "INSAN KAYNAKLARI"){
                 val intent = Intent(this,IzinManagementActivity::class.java)
                 startActivity(intent)
             }else{
@@ -293,7 +293,7 @@ class MainActivity : AppCompatActivity()  {
                     var value = postSnapshot.getValue<UsersModel>()
                     if (value!!.ePosta == email){
                         gorev = value!!.gorev.toString()
-                        if(gorev == "INSAN KAYNAKLAR"){
+                        if(gorev == "INSAN KAYNAKLARI"){
                             hesapYonetimButton.visibility = View.VISIBLE
                             izinHakkiButton.visibility = View.VISIBLE
                         }else{

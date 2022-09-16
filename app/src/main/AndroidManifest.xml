@@ -124,6 +124,9 @@
         <activity
             android:name=".MesaiUserActivity"
             android:exported="false" />
+        <activity
+            android:name=".DuyuruPageActivity"
+            android:exported="false" />
     </application>
 
 </manifest>

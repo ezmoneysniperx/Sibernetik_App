@@ -33,7 +33,7 @@ class GeciciGorevlendirmeUserActivity : AppCompatActivity(), CustomAdapter.OnIte
     val database = Firebase.database("https://sibernetik-3c2ef-default-rtdb.europe-west1.firebasedatabase.app")
     val myRef = database.getReference("Gecici Gorevlendirme")
     val myRefUser = database.getReference("Users")
-    var serverKey = "serverkey"
+var serverKey = "serverkey"
 
     val data = ArrayList<ItemsViewModel>()
     val adapter = CustomAdapter(data,this)
@@ -66,7 +66,7 @@ class GeciciGorevlendirmeUserActivity : AppCompatActivity(), CustomAdapter.OnIte
         clickedOnay = clickedItem.yonetici1onay
 
         if(clickedOnay == "ONAYLANDI"){
-            showMessage("Onaylandı İzin Talebi Düzenlenemez!", "Tamam")
+            showMessage("Onaylandı Talebi Düzenlenemez!", "Tamam")
         }else{
             nameGGTxt.setText(clickedAdsoyad)
             ggYeriTxt.setText(clickedYeri)
@@ -95,11 +95,13 @@ class GeciciGorevlendirmeUserActivity : AppCompatActivity(), CustomAdapter.OnIte
 
         nameGGTxt.setText(name)
 
-        var formatted = ""
+        var formattedBasTarih = ""
+        var formattedBitTarih = ""
         val c = Calendar.getInstance()
         val year = c.get(Calendar.YEAR)
         val month = c.get(Calendar.MONTH)
         val day = c.get(Calendar.DATE)
+        val format = SimpleDateFormat("dd-MM-yyyy")
 
         ggBasTarihBtn.setOnClickListener {
             val dpd = DatePickerDialog(this, DatePickerDialog.OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
@@ -114,8 +116,8 @@ class GeciciGorevlendirmeUserActivity : AppCompatActivity(), CustomAdapter.OnIte
 
                     formattedDate  = "0" + dayOfMonth ;
                 }
-                formatted = "$formattedDate-$formattedMonth-$year"
-                ggBasTarihTxt.setText(formatted).toString()
+                formattedBasTarih = "$formattedDate-$formattedMonth-$year"
+                ggBasTarihTxt.setText(formattedBasTarih).toString()
             }, year, month, day)
             dpd.show()
         }
@@ -132,8 +134,20 @@ class GeciciGorevlendirmeUserActivity : AppCompatActivity(), CustomAdapter.OnIte
 
                     formattedDate  = "0" + dayOfMonth ;
                 }
-                formatted = "$formattedDate-$formattedMonth-$year"
-                ggBitTarihTxt.setText(formatted).toString()
+                formattedBitTarih = "$formattedDate-$formattedMonth-$year"
+                if(formattedBasTarih.isEmpty()) {
+                    showMessage("Önce Başlama Tarihini Seçmeniz Gerekiyor!","Tamam")
+                }else{
+                    val days = TimeUnit.DAYS.convert(
+                        format.parse(formattedBitTarih).getTime() -
+                                format.parse(formattedBasTarih).getTime(),
+                        TimeUnit.MILLISECONDS)
+                    if (days <= 0){
+                        showMessage("Bitiş tarihi, başlangıç tarihinden daha ileri olmalıdır!","Tamam")
+                    }else{
+                        ggBitTarihTxt.setText(formattedBitTarih).toString()
+                    }
+                }
             }, year, month, day)
             dpd.show()
         }
@@ -294,7 +308,7 @@ class GeciciGorevlendirmeUserActivity : AppCompatActivity(), CustomAdapter.OnIte
             firebasePush.sendToTopic("$yoneticiUid")
             Log.d("yoneticiUid",yoneticiUid)
             //notifikasi//
-            Toast.makeText(this, "Izin talebi başarıyla gönderildi!", Toast.LENGTH_LONG).show()
+            Toast.makeText(this, "Görevlendirme talebi başarıyla gönderildi!", Toast.LENGTH_LONG).show()
             finish()
             overridePendingTransition(0, 0);
             startActivity(getIntent());

@@ -234,7 +234,7 @@ class IzinAdminActivity : AppCompatActivity(), CustomAdapter.OnItemClickListener
                 adapter.notifyDataSetChanged()
                 for( postSnapshot in dataSnapshot.children ){
                     var value = postSnapshot.getValue<IzinModel>()
-                    if( value!!.adsoyad == name ){
+                    if( value!!.adsoyad!!.toLowerCase().contains(name.toLowerCase()) ){
                         if (value!!.yonetici1 == "REDDETTI" && value!!.yonetici2 == "REDDETTI"){
                             val basTrh = value!!.bastarih.toString()
                             val bitTrh = value!!.bittarih.toString()
@@ -301,7 +301,7 @@ class IzinAdminActivity : AppCompatActivity(), CustomAdapter.OnItemClickListener
                                 izinTip,
                                 izinMaz
                             ))
-                        }else if( gorev == "INSAN KAYNAKLAR" && value!!.yonetici2 == "ONAYLANDI"){
+                        }else if( gorev == "INSAN KAYNAKLARI" && value!!.yonetici2 == "ONAYLANDI"){
                             val basTrh = value!!.bastarih.toString()
                             val bitTrh = value!!.bittarih.toString()
                             val tarih = "$basTrh - $bitTrh"
@@ -323,7 +323,7 @@ class IzinAdminActivity : AppCompatActivity(), CustomAdapter.OnItemClickListener
                                 izinTip,
                                 izinMaz
                             ))
-                        }else if ( gorev == "INSAN KAYNAKLAR" && value!!.yonetici2 != "ONAYLANDI"){
+                        }else if ( gorev == "INSAN KAYNAKLARI" && value!!.yonetici2 != "ONAYLANDI"){
                             continue
                         }else {
                             val basTrh = value!!.bastarih.toString()
@@ -359,7 +359,8 @@ class IzinAdminActivity : AppCompatActivity(), CustomAdapter.OnItemClickListener
     }
 
     fun filtreleme(durum : String){
-        myRef.addValueEventListener(object : ValueEventListener {
+        val dbRef = myRef.orderByChild("adsoyad")
+        dbRef.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 data.clear()
                 adapter.notifyDataSetChanged()
@@ -440,7 +441,7 @@ class IzinAdminActivity : AppCompatActivity(), CustomAdapter.OnItemClickListener
                                 ))
                             }
                         }
-                    }else if (gorev == "INSAN KAYNAKLAR"){
+                    }else if (gorev == "INSAN KAYNAKLARI"){
                         if (durum == "ONAY BEKLIYOR"){
                             if(value!!.yonetici1 == "ONAY BEKLIYOR" && value!!.yonetici2 == "ONAYLANDI"){
                                 val basTrh = value!!.bastarih.toString()
@@ -797,7 +798,7 @@ class IzinAdminActivity : AppCompatActivity(), CustomAdapter.OnItemClickListener
                         IzinDetails("İzin Nedeni (Açıklama)", it.child("sebeb").value.toString()),
                         IzinDetails(" ", " "),
                         IzinDetails("Yönetici Onayı", it.child("yonetici2").value.toString()),
-                        IzinDetails("İnsan Kaynaklar Onayı", it.child("yonetici1").value.toString()),
+                        IzinDetails("İnsan Kaynakları Onayı", it.child("yonetici1").value.toString()),
                         IzinDetails("Mesaj", it.child("mesaj").value.toString()),
                     )
                     val pdfDetails = PdfDetails(it.child("adsoyad").value.toString(), izinDetailsList, talepEdenBitmap,yoneticiBitmap,ikBitmap)

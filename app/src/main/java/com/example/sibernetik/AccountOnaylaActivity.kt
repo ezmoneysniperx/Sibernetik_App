@@ -29,7 +29,7 @@ class AccountOnaylaActivity : AppCompatActivity() {
     private lateinit var auth: FirebaseAuth
     lateinit var progressDialog: ProgressDialog
     var arrayYonetici = ArrayList<String>()
-    var serverKey = "serverkey"
+var serverKey = "serverkey"
 
     var spinnerSelItem = ""
     var spinnerYoneticiItem = ""
@@ -45,16 +45,16 @@ class AccountOnaylaActivity : AppCompatActivity() {
         getYoneticiList()
 
         val bundle = intent.extras
-        var adsoyad = ""
+        var eposta = ""
         var mode = ""
         if (bundle != null) {
-            adsoyad = bundle.getString("adSoyad").toString()
+            eposta = bundle.getString("eposta").toString()
             mode = bundle.getString("mode").toString()
             if (mode == "EDIT"){
                 btnOnay.setText("DÜZENLE")
-                getDetailsEdit(adsoyad)
+                getDetailsEdit(eposta)
             }else if (mode == "ONAY"){
-                getDetails(adsoyad)
+                getDetails(eposta)
             }
         }
 
@@ -105,7 +105,7 @@ class AccountOnaylaActivity : AppCompatActivity() {
             }
         }
 
-        adSoyadOnayTxt.setText(adsoyad)
+        ePostaOnayTxt.setText(eposta)
 
         btnOnay.setOnClickListener {
             val adsoyadText = adSoyadOnayTxt.text.toString()
@@ -153,13 +153,13 @@ class AccountOnaylaActivity : AppCompatActivity() {
 
     }
 
-    fun getDetails(adsoyad : String) {
+    fun getDetails(eposta : String) {
         myRef.addValueEventListener(object : ValueEventListener{
             override fun onDataChange(snapshot: DataSnapshot) {
                 for (postSnapshot in snapshot.children){
                     var value = postSnapshot.getValue<UsersModel>()
-                    if(value!!.adSoyad.toString() == adsoyad){
-                        ePostaOnayTxt.setText(value!!.ePosta.toString())
+                    if(value!!.ePosta.toString() == eposta){
+                        adSoyadOnayTxt.setText(value!!.adSoyad.toString())
                         telNoOnayTxt.setText(value!!.telefon.toString())
                         tcknOnayTxt.setText(value!!.tckn.toString())
                         tarihOnayTxt.setText(value!!.tarih.toString())
@@ -173,12 +173,12 @@ class AccountOnaylaActivity : AppCompatActivity() {
         })
     }
 
-    fun getDetailsEdit(adsoyad: String){
+    fun getDetailsEdit(eposta: String){
         myRef.addValueEventListener(object : ValueEventListener{
             override fun onDataChange(snapshot: DataSnapshot) {
                 for (postSnapshot in snapshot.children){
                     var value = postSnapshot.getValue<UsersModel>()
-                    if(value!!.adSoyad.toString() == adsoyad){
+                    if(value!!.ePosta.toString() == eposta){
                         var bolum = value!!.bolum.toString()
                         var bolumdekiGorev = value!!.bolumdekiGorev.toString()
                         var gorev = value!!.gorev.toString()
@@ -194,7 +194,7 @@ class AccountOnaylaActivity : AppCompatActivity() {
                             yonetici = ""
                         }
 
-                        ePostaOnayTxt.setText(value!!.ePosta.toString())
+                        adSoyadOnayTxt.setText(value!!.adSoyad.toString())
                         telNoOnayTxt.setText(value!!.telefon.toString())
                         tcknOnayTxt.setText(value!!.tckn.toString())
                         tarihOnayTxt.setText(value!!.tarih.toString())
@@ -296,6 +296,7 @@ class AccountOnaylaActivity : AppCompatActivity() {
         progressDialog.show()
 
         arrayYonetici.add("Yönetici Seçin...")
+        val spinnerYonetici = findViewById<Spinner>(R.id.spinnerYonetici)
 
         myRef.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
@@ -304,7 +305,6 @@ class AccountOnaylaActivity : AppCompatActivity() {
                     if (value!!.gorev == "YONETICI"){
                         arrayYonetici.add(value!!.adSoyad.toString())
                     }
-                    val spinnerYonetici = findViewById<Spinner>(R.id.spinnerYonetici)
                     if (spinnerYonetici != null) {
                         val adapterArray1 = ArrayAdapter(
                             this@AccountOnaylaActivity,

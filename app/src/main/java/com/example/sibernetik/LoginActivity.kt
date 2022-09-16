@@ -91,7 +91,7 @@ class LoginActivity : AppCompatActivity(){
                             .addOnCompleteListener { task -> }
                         Firebase.crashlytics.setUserId("$uid")
                         Firebase.crashlytics.log("message")
-                        if(gorev == "INSAN KAYNAKLAR"){
+                        if(gorev == "INSAN KAYNAKLARI"){
                             Firebase.messaging.subscribeToTopic("IK")
                                 .addOnCompleteListener { task ->
                                     var msg = "Subscribed"

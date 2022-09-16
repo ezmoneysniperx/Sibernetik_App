@@ -83,6 +83,7 @@ class ImzaActivity : AppCompatActivity() {
 
         btnTemizleImza.setOnClickListener {
             imzaView.clear()
+            btnImzaKaydet.visibility = View.INVISIBLE
             imageView.setImageBitmap(null)
         }
 
