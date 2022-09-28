@@ -5,17 +5,15 @@ import android.content.Intent
 
 import android.content.SharedPreferences
 import android.os.Bundle
+import android.view.View
+import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
-import android.widget.Button
-import android.widget.ImageButton
-import android.widget.Toast
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.ktx.database
 import com.google.firebase.database.ktx.getValue
 import com.google.firebase.ktx.Firebase
-import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.auth.ktx.auth
@@ -26,13 +24,13 @@ class MalzemeUserActivity : AppCompatActivity(), MalzemeAdapter.OnItemClickListe
     val database = Firebase.database("https://sibernetik-3c2ef-default-rtdb.europe-west1.firebasedatabase.app")
     val myRef = database.getReference("Malzeme")
 
-    var PREFS_KEY = "prefs"
-    var EMAIL_KEY = "email"
     var ad = ""
     lateinit var sharedPreferences: SharedPreferences
 
     val data = ArrayList<MalzemeViewModel>()
     val adapter = MalzemeAdapter(data,this)
+
+    var spinnerProjeItem = ""
 
     override fun onItemClick(position: Int) {
     }
@@ -44,10 +42,36 @@ class MalzemeUserActivity : AppCompatActivity(), MalzemeAdapter.OnItemClickListe
         val recyclerview = findViewById<RecyclerView>(R.id.recyclerview)
         recyclerview.layoutManager = LinearLayoutManager(this)
 
-        sharedPreferences = getSharedPreferences(PREFS_KEY, Context.MODE_PRIVATE)
         val user = Firebase.auth.currentUser
         ad = user!!.displayName.toString()
         showComments(ad)
+
+        val spinnerProje = findViewById<Spinner>(R.id.projeAdiSpinnerMalz)
+        val arrayProje = resources.getStringArray(R.array.proje_malzeme)
+
+        if (spinnerProje != null) {
+            val adapterArray = ArrayAdapter(
+                this,
+                R.layout.spinner_list, arrayProje
+            )
+            adapterArray.setDropDownViewResource(R.layout.spinner_list)
+            spinnerProje.adapter = adapterArray
+        }
+
+        spinnerProje.onItemSelectedListener = object :
+            AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(
+                parent: AdapterView<*>,
+                view: View, position: Int, id: Long
+            ){
+                spinnerProjeItem = arrayProje[position]
+            }
+
+            override fun onNothingSelected(parent: AdapterView<*>) {
+                null
+            }
+        }
+
 
         val gonderBtn = findViewById<Button>(R.id.btnSubmit)
         val nameTextBox = findViewById<TextView>(R.id.nameTxt)
@@ -58,7 +82,7 @@ class MalzemeUserActivity : AppCompatActivity(), MalzemeAdapter.OnItemClickListe
         gonderBtn.setOnClickListener {
             val adsoyad = nameTxt.text.toString()
             val malzemead = malzemeAdi.text.toString()
-            val proje = proje.text.toString()
+            val proje = spinnerProjeItem
             val fiyat = fiyat.text.toString()
             saveData(adsoyad,malzemead,proje,fiyat)
 

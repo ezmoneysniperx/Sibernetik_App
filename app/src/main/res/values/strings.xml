@@ -74,5 +74,11 @@
         <item>"-"</item>
     </string-array>
 
+    <string-array name="proje_malzeme">
+        <item>AKES</item>
+        <item>ALD</item>
+        <item>MSLV5</item>
+    </string-array>
+
 
 </resources>

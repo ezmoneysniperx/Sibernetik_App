@@ -80,21 +80,12 @@
                 android:textColorHint="?android:attr/textColorTertiaryInverse"
                 android:textSize="17dp" />
 
-            <EditText
-                android:id="@+id/proje"
+            <Spinner
+                android:id="@+id/projeAdiSpinnerMalz"
                 android:layout_width="300dp"
                 android:layout_height="42dp"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentRight="true"
                 android:layout_marginTop="7dp"
-                android:background="@drawable/custom2"
-                android:ems="15"
-                android:hint="Proje"
-                android:inputType="text"
-                android:textColor="?android:attr/textColorTertiaryInverse"
-                android:textColorHint="?android:attr/textColorTertiaryInverse"
-                android:textSize="17dp" />
+                android:entries="@array/proje_malzeme" />
 
             <EditText
                 android:id="@+id/fiyat"
