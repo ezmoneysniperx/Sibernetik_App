@@ -33,6 +33,7 @@ var serverKey = "serverkey"
 
     var spinnerSelItem = ""
     var spinnerYoneticiItem = ""
+    var spinnerAracItem = ""
     var uid = ""
     var editUid = ""
 
@@ -41,6 +42,7 @@ var serverKey = "serverkey"
         setContentView(R.layout.account_onayla_activity)
         auth = Firebase.auth
         val arrayDurum = resources.getStringArray(R.array.hesap_gorev)
+        val arrayArac = resources.getStringArray(R.array.arac_kullanim)
 
         getYoneticiList()
 
@@ -60,6 +62,7 @@ var serverKey = "serverkey"
 
         val spinner = findViewById<Spinner>(R.id.spinner)
         val spinnerYonetici = findViewById<Spinner>(R.id.spinnerYonetici)
+        var spinnerArac = findViewById<Spinner>(R.id.spinnerArac)
 
         if (spinner != null) {
             val adapterArray = ArrayAdapter(
@@ -105,6 +108,32 @@ var serverKey = "serverkey"
             }
         }
 
+        if (spinnerArac != null) {
+            val adapterArray = ArrayAdapter(
+                this,
+                R.layout.spinner_list, arrayArac
+            )
+            adapterArray.setDropDownViewResource(R.layout.spinner_list)
+            spinnerArac.adapter = adapterArray
+        }
+        spinnerArac.onItemSelectedListener = object :
+            AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(
+                parent: AdapterView<*>,
+                view: View, position: Int, id: Long
+            ){
+                if(position > 0){
+                    spinnerAracItem = arrayArac[position]
+                }else{
+                    spinnerAracItem = ""
+                }
+            }
+
+            override fun onNothingSelected(parent: AdapterView<*>) {
+                null
+            }
+        }
+
         ePostaOnayTxt.setText(eposta)
 
         btnOnay.setOnClickListener {
@@ -117,6 +146,7 @@ var serverKey = "serverkey"
             val yonetici = spinnerYoneticiItem
             val gorev = spinnerSelItem
             val bolumdekiGorev = gorevBolumOnayTxt.text.toString()
+            val aracKullanimDurum = spinnerAracItem
 
             val iseBasTarVerif = iseBasTar.matches(Regex("[0-9]{2}-[0-9]{2}-[0-9]{4}"))
 
@@ -126,13 +156,13 @@ var serverKey = "serverkey"
             progressDialog.show()
 
             if(adsoyadText.isEmpty() || eposta.isEmpty() || telefon.isEmpty() || tckn.isEmpty() || iseBasTar.isEmpty()
-                || bolum.isEmpty() || yonetici.isEmpty() || gorev.isEmpty() || bolumdekiGorev.isEmpty()){
+                || bolum.isEmpty() || yonetici.isEmpty() || gorev.isEmpty() || bolumdekiGorev.isEmpty() || aracKullanimDurum.isEmpty()){
                 progressDialog.dismiss()
                 Toast.makeText(this@AccountOnaylaActivity,"Formdaki tüm alanı doldurmanız gerekmektedir!",Toast.LENGTH_SHORT).show()
             }else if (iseBasTarVerif){
                 if(mode == "ONAY"){
                     progressDialog.dismiss()
-                    accAccount(adsoyadText, eposta, telefon, tckn, iseBasTar, bolum, yonetici, gorev, bolumdekiGorev)
+                    accAccount(adsoyadText, eposta, telefon, tckn, iseBasTar, bolum, yonetici, gorev, bolumdekiGorev, aracKullanimDurum)
                 }else if(mode == "EDIT"){
                     progressDialog.dismiss()
                     editAccount(adsoyadText, eposta, telefon, tckn, iseBasTar, bolum, yonetici, gorev, bolumdekiGorev)
@@ -213,13 +243,20 @@ var serverKey = "serverkey"
         })
     }
 
-    fun accAccount(adsoyad: String, ePosta: String, telefon: String, tckn: String, iseBasTar : String, bolum : String, yonetici : String, gorev : String, bolumdekiGorev : String){
+    fun accAccount(adsoyad: String, ePosta: String, telefon: String, tckn: String, iseBasTar : String, bolum : String, yonetici : String, gorev : String, bolumdekiGorev : String, aracKullanimDurum : String){
         myRef.addValueEventListener(object:ValueEventListener{
                 override fun onDataChange(snapshot: DataSnapshot) {
                     for (postSnapshot in snapshot.children){
                         var value = postSnapshot.getValue<UsersModel>()
                         if(value!!.ePosta == ePosta && value!!.durum != "ONAYLANDI"){
                             var sifre = value!!.sifre.toString()
+                            var aracKullanimDurumDB = ""
+
+                            if (aracKullanimDurum == "Araç Kullanabilir"){
+                                aracKullanimDurumDB = "EVET"
+                            }else{
+                                aracKullanimDurumDB = "HAYIR"
+                            }
 
                             val firebaseDefaultApp = Firebase.auth.app
                             val signUpAppName = firebaseDefaultApp.name + "_signUp"
@@ -250,7 +287,7 @@ var serverKey = "serverkey"
                                             .addOnCompleteListener { task -> }
                                         sifre = HashUtils.sha256(sifre)
                                         Log.w("data", "sebelum saveData")
-                                        saveData(adsoyad, ePosta, telefon, tckn, iseBasTar, sifre,"ONAYLANDI", gorev, bolum, yonetici, uid, bolumdekiGorev)
+                                        saveData(adsoyad, ePosta, telefon, tckn, iseBasTar, sifre,"ONAYLANDI", gorev, bolum, yonetici, uid, bolumdekiGorev, aracKullanimDurumDB)
                                         Log.w("data", "sebelum delete")
                                         myRef.child(tckn).removeValue()
                                         Log.w("data", "abis delete")
@@ -284,8 +321,8 @@ var serverKey = "serverkey"
         })
     }
 
-    fun saveData(adSoyad : String, ePosta : String, telefon : String, tckn : String, tarih : String, sifre : String, durum : String, gorev : String, bolum : String, yonetici : String, uid : String, bolumdekiGorev : String) {
-        val newUser = UsersModel(adSoyad, ePosta, telefon, tckn, durum, gorev,0, tarih, sifre, 0, bolum, bolumdekiGorev, yonetici,0)
+    fun saveData(adSoyad : String, ePosta : String, telefon : String, tckn : String, tarih : String, sifre : String, durum : String, gorev : String, bolum : String, yonetici : String, uid : String, bolumdekiGorev : String, aracKullanimDurum : String) {
+        val newUser = UsersModel(adSoyad, ePosta, telefon, tckn, durum, gorev,0, tarih, sifre, 0, bolum, bolumdekiGorev, yonetici,0,aracKullanimDurum)
         myRef.child(uid).setValue(newUser)
     }
 

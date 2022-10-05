@@ -254,6 +254,11 @@ class MainActivity : AppCompatActivity()  {
             startActivity(intent)
         }
 
+        aracBtn.setOnClickListener {
+            val intent = Intent(this,AracKullanimUser::class.java)
+            startActivity(intent)
+        }
+
         hesapYonetimButton.setOnClickListener {
             if(gorev == "INSAN KAYNAKLARI"){
                 val intent = Intent(this,AccountManagementActivity::class.java)

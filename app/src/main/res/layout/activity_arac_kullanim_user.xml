@@ -1,0 +1,332 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".AracKullanimUser"
+    android:background="@drawable/wallpaper">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:id="@+id/linearLayout6"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <ImageButton
+                android:id="@+id/anasayfaAracUserBtn"
+                android:layout_width="37dp"
+                android:layout_height="39dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginRight="165dp"
+                android:background="@android:color/transparent"
+                android:contentDescription="@string/app_name"
+                android:foregroundGravity="left"
+                android:scaleType="centerInside"
+                app:srcCompat="@drawable/back" />
+
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="match_parent"
+                android:layout_height="66dp"
+                android:layout_marginTop="5dp"
+                android:text="Araç Talep Formu"
+                android:textAlignment="center"
+                android:textAllCaps="false"
+                android:textColor="?android:attr/textColorTertiaryInverse"
+                android:textColorHint="?android:attr/textColorTertiaryInverse"
+                android:textSize="34sp"
+                android:textStyle="normal|bold" />
+
+            <Spinner
+                android:id="@+id/plakaSpinnerAracUser"
+                android:layout_width="330dp"
+                android:layout_height="35dp"
+                android:layout_marginTop="7dp"
+                android:entries="@array/arac_plaka" />
+
+            <EditText
+                android:id="@+id/adSoyadTxtAracUser"
+                android:layout_width="330dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:background="@drawable/custom2"
+                android:ems="15"
+                android:hint="Adı Soyadı"
+                android:inputType="textPersonName"
+                android:layout_marginTop="7dp"
+                android:textColor="?android:attr/textColorTertiaryInverse"
+                android:textColorHint="?android:attr/textColorTertiaryInverse"
+                android:textSize="17dp" />
+
+            <EditText
+                android:id="@+id/sebebTxtAracUser"
+                android:layout_width="330dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginTop="7dp"
+                android:background="@drawable/custom2"
+                android:ems="15"
+                android:hint="Talep Sebebi"
+                android:inputType="text"
+                android:textColor="?android:attr/textColorTertiaryInverse"
+                android:textColorHint="?android:attr/textColorTertiaryInverse"
+                android:textSize="17dp" />
+
+            <LinearLayout
+                android:layout_width="330dp"
+                android:layout_height="match_parent"
+                android:layout_marginTop="7dp"
+                android:orientation="horizontal">
+
+                <EditText
+                    android:id="@+id/cikTarihTxtAracUser"
+                    android:layout_width="283dp"
+                    android:layout_height="40dp"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_gravity="left"
+                    android:layout_marginRight="7dp"
+                    android:background="@drawable/custom2"
+                    android:ems="15"
+                    android:hint="Çıkış Tarihi"
+                    android:textColor="?android:attr/textColorTertiaryInverse"
+                    android:textColorHint="?android:attr/textColorTertiaryInverse"
+                    android:textSize="17sp" />
+
+                <Button
+                    android:id="@+id/cikTarihBtnAracUser"
+                    android:layout_width="41dp"
+                    android:layout_height="40dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_gravity="center"
+                    android:background="@drawable/custom4"
+                    android:ems="12"
+                    android:text="Seç"
+                    android:textColor="?android:attr/textColorTertiaryInverse"
+                    android:textColorHint="?android:attr/textColorTertiaryInverse"
+                    android:textSize="10sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="330dp"
+                android:layout_height="match_parent"
+                android:layout_marginTop="7dp"
+                android:orientation="horizontal">
+
+                <EditText
+                    android:id="@+id/cikSaatTxtAracUser"
+                    android:layout_width="283dp"
+                    android:layout_height="40dp"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="7dp"
+                    android:background="@drawable/custom2"
+                    android:ems="15"
+                    android:hint="Çıkış Saati"
+                    android:inputType="date|text"
+                    android:textColor="?android:attr/textColorTertiaryInverse"
+                    android:textColorHint="?android:attr/textColorTertiaryInverse"
+                    android:textSize="17dp" />
+
+                <Button
+                    android:id="@+id/cikSaatBtnAracUser"
+                    android:layout_width="41dp"
+                    android:layout_height="40dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_gravity="center"
+                    android:background="@drawable/custom4"
+                    android:ems="12"
+                    android:text="Seç"
+                    android:textColor="?android:attr/textColorTertiaryInverse"
+                    android:textColorHint="?android:attr/textColorTertiaryInverse"
+                    android:textSize="10sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <EditText
+                android:id="@+id/cikKmTxtAracUser"
+                android:layout_width="330dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginTop="7dp"
+                android:background="@drawable/custom2"
+                android:ems="15"
+                android:hint="Çıkış Km"
+                android:inputType="number"
+                android:textColor="?android:attr/textColorTertiaryInverse"
+                android:textColorHint="?android:attr/textColorTertiaryInverse"
+                android:textSize="17dp" />
+
+            <LinearLayout
+                android:layout_width="330dp"
+                android:layout_height="match_parent"
+                android:layout_marginTop="7dp"
+                android:orientation="horizontal"
+                android:id="@+id/girTarihLayoutAracUser">
+
+                <EditText
+                    android:id="@+id/girTarihTxtAracUser"
+                    android:layout_width="283dp"
+                    android:layout_height="40dp"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_gravity="left"
+                    android:layout_marginRight="7dp"
+                    android:background="@drawable/custom2"
+                    android:ems="15"
+                    android:hint="Giriş Tarihi"
+                    android:textColor="?android:attr/textColorTertiaryInverse"
+                    android:textColorHint="?android:attr/textColorTertiaryInverse"
+                    android:textSize="17sp" />
+
+                <Button
+                    android:id="@+id/girTarihBtnAracUser"
+                    android:layout_width="41dp"
+                    android:layout_height="40dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_gravity="center"
+                    android:background="@drawable/custom4"
+                    android:ems="12"
+                    android:text="Seç"
+                    android:textColor="?android:attr/textColorTertiaryInverse"
+                    android:textColorHint="?android:attr/textColorTertiaryInverse"
+                    android:textSize="10sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="330dp"
+                android:layout_height="match_parent"
+                android:layout_marginTop="7dp"
+                android:orientation="horizontal"
+                android:id="@+id/girSaatLayoutAracUser">
+
+                <EditText
+                    android:id="@+id/girSaatTxtAracUser"
+                    android:layout_width="283dp"
+                    android:layout_height="40dp"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="7dp"
+                    android:background="@drawable/custom2"
+                    android:ems="15"
+                    android:hint="Giriş Saati"
+                    android:inputType="date|text"
+                    android:textColor="?android:attr/textColorTertiaryInverse"
+                    android:textColorHint="?android:attr/textColorTertiaryInverse"
+                    android:textSize="17dp" />
+
+                <Button
+                    android:id="@+id/girSaatBtnAracUser"
+                    android:layout_width="41dp"
+                    android:layout_height="40dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_gravity="center"
+                    android:background="@drawable/custom4"
+                    android:ems="12"
+                    android:text="Seç"
+                    android:textColor="?android:attr/textColorTertiaryInverse"
+                    android:textColorHint="?android:attr/textColorTertiaryInverse"
+                    android:textSize="10sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <EditText
+                android:id="@+id/girKmTxtAracUser"
+                android:layout_width="330dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginTop="7dp"
+                android:background="@drawable/custom2"
+                android:ems="15"
+                android:hint="Giriş Km"
+                android:inputType="number"
+                android:textColor="?android:attr/textColorTertiaryInverse"
+                android:textColorHint="?android:attr/textColorTertiaryInverse"
+                android:textSize="17dp" />
+
+
+            <LinearLayout
+                android:layout_width="330dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="7dp"
+                android:layout_marginBottom="5dp"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/btnSubmitAracUser"
+                    android:layout_width="330dp"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:background="@drawable/custom5"
+                    android:ems="19"
+                    android:text="Onay"
+                    android:textColor="?android:attr/textColorTertiaryInverse"
+                    android:textColorHint="?android:attr/textColorTertiaryInverse" />
+
+                <Button
+                    android:id="@+id/btnTemizleAracUser"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginRight="13dp"
+                    android:layout_marginLeft="13dp"
+                    android:background="@drawable/custom4"
+                    android:ems="19"
+                    android:text="Temizle"
+                    android:textColor="?android:attr/textColorTertiaryInverse"
+                    android:textColorHint="?android:attr/textColorTertiaryInverse" />
+
+                <Button
+                    android:id="@+id/btnDeleteAracUser"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:background="@drawable/custom4"
+                    android:ems="19"
+                    android:text="SİL"
+                    android:textColor="?android:attr/textColorTertiaryInverse"
+                    android:textColorHint="?android:attr/textColorTertiaryInverse" />
+
+            </LinearLayout>
+
+            <ScrollView
+                android:layout_width="375dp"
+                android:layout_height="258dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="5dp">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recyclerview"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    tools:itemCount="10"
+                    tools:listitem="@layout/card_view_design" />
+            </ScrollView>
+        </LinearLayout>
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

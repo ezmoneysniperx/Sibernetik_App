@@ -202,6 +202,14 @@
                     android:hint="YONETICI"
                     android:entries="@array/hesap_gorev"/>
 
+                <Spinner
+                    android:id="@+id/spinnerArac"
+                    android:layout_width="305dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="7dp"
+                    android:hint="YONETICI"
+                    android:entries="@array/arac_kullanim"/>
+
                 <Button
                     android:id="@+id/btnOnay"
                     android:layout_width="300dp"

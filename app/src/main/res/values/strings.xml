@@ -80,5 +80,19 @@
         <item>MSLV5</item>
     </string-array>
 
+    <string-array name="arac_kullanim">
+        <item>Araç Kullanma Durumu Seçin...</item>
+        <item>Araç Kullanabilir</item>
+        <item>Araç Kullanamaz</item>
+    </string-array>
+
+    <string-array name="arac_plaka">
+        <item>16AOC328</item>
+        <item>16ACC733</item>
+        <item>16NLU07</item>
+        <item>16CJN90</item>
+        <item>16AJH456</item>
+    </string-array>
+
 
 </resources>

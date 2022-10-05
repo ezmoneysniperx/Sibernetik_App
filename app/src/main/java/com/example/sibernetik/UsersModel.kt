@@ -14,5 +14,6 @@ data class UsersModel (
     var bolum : String? = null,
     var bolumdekiGorev : String? = null,
     var yonetici : String? = null,
-    var imzaExist : Int? = null
+    var imzaExist : Int? = null,
+    var aracKullanim : String? =null
 )

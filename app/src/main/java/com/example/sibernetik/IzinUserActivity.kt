@@ -35,7 +35,7 @@ class IzinUserActivity : AppCompatActivity(), CustomAdapter.OnItemClickListener 
     val database = Firebase.database("https://sibernetik-3c2ef-default-rtdb.europe-west1.firebasedatabase.app")
     val myRef = database.getReference("Izin").child("Izin Gunluk")
     val myRefUser = database.getReference("Users")
-var serverKey = "serverkey"
+    var serverKey = "serverkey"
 
     val data = ArrayList<ItemsViewModel>()
     val adapter = CustomAdapter(data, this)
