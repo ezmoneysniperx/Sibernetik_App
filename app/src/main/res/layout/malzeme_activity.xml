@@ -74,7 +74,7 @@
                 android:layout_marginTop="7dp"
                 android:background="@drawable/custom2"
                 android:ems="15"
-                android:hint="Malezeme Adı"
+                android:hint="Malzeme Adı"
                 android:inputType="text"
                 android:textColor="?android:attr/textColorTertiaryInverse"
                 android:textColorHint="?android:attr/textColorTertiaryInverse"
