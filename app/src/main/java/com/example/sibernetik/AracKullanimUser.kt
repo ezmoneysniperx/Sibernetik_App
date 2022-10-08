@@ -191,7 +191,23 @@ class AracKullanimUser : AppCompatActivity(), CustomAdapter.OnItemClickListener 
                 cal.set(Calendar.HOUR_OF_DAY, hour)
                 cal.set(Calendar.MINUTE, minute)
                 girSaati = SimpleDateFormat("HH:mm").format(cal.time)
-                girSaatTxtAracUser.setText(girSaati)
+                if(cikSaatTxtAracUser.text.toString().isEmpty()){
+                    showMessage("Çıkış saati doldurmalısınız!","Tamam")
+                }else{
+                    if(cikTarihTxtAracUser.text.toString() == girTarihTxtAracUser.text.toString()){
+                        val minutes = TimeUnit.MINUTES.convert(
+                            formatSaat.parse(girSaati).getTime() -
+                                    formatSaat.parse(cikSaatTxtAracUser.text.toString()).getTime(),
+                            TimeUnit.MILLISECONDS)
+                        if (minutes < 30){
+                            showMessage("Giriş saati, Cıkış saatinden daha ileri olmalıdır!","Tamam")
+                        }else{
+                            girSaatTxtAracUser.setText(girSaati)
+                        }
+                    }else{
+                        girSaatTxtAracUser.setText(girSaati)
+                    }
+                }
             }
             TimePickerDialog(this, timeSetListener, cal.get(Calendar.HOUR_OF_DAY), cal.get(Calendar.MINUTE), true).show()
         }
@@ -225,7 +241,11 @@ class AracKullanimUser : AppCompatActivity(), CustomAdapter.OnItemClickListener 
                 if(edit == 0){
                     saveTalep(plaka,name,sebeb,cikTarih,cikSaat,cikKm)
                 }else if(edit == 1){
-                    editTalep(plaka,name,sebeb,cikTarih,cikSaat,cikKm,girTarih,girSaat,girkKm)
+                    if(girkKm.toInt() <= cikKm.toInt()){
+                        showMessage("Giriş KM, çıkış KM değerinden daha büyük olmalıdır!", "Tamam")
+                    }else{
+                        editTalep(plaka,name,sebeb,cikTarih,cikSaat,cikKm,girTarih,girSaat,girkKm)
+                    }
                 }
             }
         }
