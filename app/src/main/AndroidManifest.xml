@@ -14,6 +14,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.SIbernetik"
         android:usesCleartextTraffic="true">
+        <activity
+            android:name=".AracKullanimAdmin"
+            android:exported="false" />
+
         <meta-data
             android:name="firebase_performance_logcat_enabled"
             android:value="true" />

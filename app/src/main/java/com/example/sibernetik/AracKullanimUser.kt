@@ -305,73 +305,80 @@ class AracKullanimUser : AppCompatActivity(), CustomAdapter.OnItemClickListener 
     }
 
     override fun onItemClick(position: Int) {
-        //INTERFACE CHANGES//
-        girTarihLayoutAracUser.layoutParams = LinearLayout.LayoutParams(
-            330.toPx(),
-            ViewGroup.LayoutParams.MATCH_PARENT
-        )
-
-        girSaatLayoutAracUser.layoutParams = LinearLayout.LayoutParams(
-            330.toPx(),
-            ViewGroup.LayoutParams.MATCH_PARENT
-        )
-
-        girKmTxtAracUser.layoutParams = LinearLayout.LayoutParams(
-            330.toPx(),
-            ViewGroup.LayoutParams.WRAP_CONTENT
-        )
-
-        btnSubmitAracUser.layoutParams = LinearLayout.LayoutParams(
-            100.toPx(),
-            ViewGroup.LayoutParams.WRAP_CONTENT
-        )
-
-        val param1 = girTarihLayoutAracUser.layoutParams as ViewGroup.MarginLayoutParams
-        param1.setMargins(0,7.toPx(),0,0)
-        girTarihLayoutAracUser.layoutParams = param1
-
-        val param2 = girSaatLayoutAracUser.layoutParams as ViewGroup.MarginLayoutParams
-        param2.setMargins(0,7.toPx(),0,0)
-        girSaatLayoutAracUser.layoutParams = param2
-
-        val param3 = girKmTxtAracUser.layoutParams as ViewGroup.MarginLayoutParams
-        param3.setMargins(0,7.toPx(),0,0)
-        girKmTxtAracUser.layoutParams = param3
-
-        btnSubmitAracUser.setText("Güncelle")
         //GETTING DATA//
         val clickedItem:ItemsViewModel = data[position]
 
-        clickedPlaka = clickedItem.date.toString()
-        clickedAdsoyad = clickedItem.text.toString()
-        clickedSebeb = clickedItem.nedeni.toString()
-        clickedCikTarih = clickedItem.time.subSequence(0,10).toString()
-        clickedCikSaat = clickedItem.tip.toString()
-        clickedCikKm = clickedItem.mazeret.toString()
-        clickedGirTarih = clickedItem.time.subSequence(13,23).toString()
-        clickedGirSaat = clickedItem.mesaj.toString()
-        clickedGirKm = clickedItem.day.toString()
         clickedOnay = clickedItem.yonetici1onay.toString()
-        clickedId = clickedItem.id.toString()
 
-        val girTarihVerif = clickedGirTarih.matches(Regex("[0-9]{2}-[0-9]{2}-[0-9]{4}"))
-        if (!girTarihVerif){
-            clickedGirTarih = ""
-            clickedGirSaat = ""
-            clickedGirKm = ""
+        if (clickedOnay == "ONAYLANDI"){
+            Toast.makeText(this, "Onaylandı durumu olan talepleri düzenlenmez!", Toast.LENGTH_LONG).show()
+            clickedOnay = ""
+        }else{
+            clickedPlaka = clickedItem.date.toString()
+            clickedAdsoyad = clickedItem.text.toString()
+            clickedSebeb = clickedItem.nedeni.toString()
+            clickedCikTarih = clickedItem.time.subSequence(0,10).toString()
+            clickedCikSaat = clickedItem.tip.toString()
+            clickedCikKm = clickedItem.mazeret.toString()
+            clickedGirTarih = clickedItem.time.subSequence(13,23).toString()
+            clickedGirSaat = clickedItem.mesaj.toString()
+            clickedGirKm = clickedItem.day.toString()
+            clickedId = clickedItem.id.toString()
+
+            val girTarihVerif = clickedGirTarih.matches(Regex("[0-9]{2}-[0-9]{2}-[0-9]{4}"))
+            if (!girTarihVerif){
+                clickedGirTarih = ""
+                clickedGirSaat = ""
+                clickedGirKm = ""
+            }
+
+            setPlakaSpinnerSelectionByValue(clickedPlaka)
+            adSoyadTxtAracUser.setText(clickedAdsoyad)
+            sebebTxtAracUser.setText(clickedSebeb)
+            cikTarihTxtAracUser.setText(clickedCikTarih)
+            cikSaatTxtAracUser.setText(clickedCikSaat)
+            cikKmTxtAracUser.setText(clickedCikKm)
+            girTarihTxtAracUser.setText(clickedGirTarih)
+            girSaatTxtAracUser.setText(clickedGirSaat)
+            girKmTxtAracUser.setText(clickedGirKm)
+
+            //INTERFACE CHANGES//
+            girTarihLayoutAracUser.layoutParams = LinearLayout.LayoutParams(
+                330.toPx(),
+                ViewGroup.LayoutParams.MATCH_PARENT
+            )
+
+            girSaatLayoutAracUser.layoutParams = LinearLayout.LayoutParams(
+                330.toPx(),
+                ViewGroup.LayoutParams.MATCH_PARENT
+            )
+
+            girKmTxtAracUser.layoutParams = LinearLayout.LayoutParams(
+                330.toPx(),
+                ViewGroup.LayoutParams.WRAP_CONTENT
+            )
+
+            btnSubmitAracUser.layoutParams = LinearLayout.LayoutParams(
+                100.toPx(),
+                ViewGroup.LayoutParams.WRAP_CONTENT
+            )
+
+            val param1 = girTarihLayoutAracUser.layoutParams as ViewGroup.MarginLayoutParams
+            param1.setMargins(0,7.toPx(),0,0)
+            girTarihLayoutAracUser.layoutParams = param1
+
+            val param2 = girSaatLayoutAracUser.layoutParams as ViewGroup.MarginLayoutParams
+            param2.setMargins(0,7.toPx(),0,0)
+            girSaatLayoutAracUser.layoutParams = param2
+
+            val param3 = girKmTxtAracUser.layoutParams as ViewGroup.MarginLayoutParams
+            param3.setMargins(0,7.toPx(),0,0)
+            girKmTxtAracUser.layoutParams = param3
+
+            btnSubmitAracUser.setText("Güncelle")
+
+            edit = 1
         }
-
-        setPlakaSpinnerSelectionByValue(clickedPlaka)
-        adSoyadTxtAracUser.setText(clickedAdsoyad)
-        sebebTxtAracUser.setText(clickedSebeb)
-        cikTarihTxtAracUser.setText(clickedCikTarih)
-        cikSaatTxtAracUser.setText(clickedCikSaat)
-        cikKmTxtAracUser.setText(clickedCikKm)
-        girTarihTxtAracUser.setText(clickedGirTarih)
-        girSaatTxtAracUser.setText(clickedGirSaat)
-        girKmTxtAracUser.setText(clickedGirKm)
-
-        edit = 1
     }
 
     fun showMessage(message : String, button : String){

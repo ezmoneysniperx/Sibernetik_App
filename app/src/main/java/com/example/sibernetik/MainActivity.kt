@@ -86,6 +86,7 @@ class MainActivity : AppCompatActivity()  {
         val izinHakkiButton = findViewById<ImageButton>(R.id.izinHakkiBtn)
         val bilgilerimButton = findViewById<Button>(R.id.editBilgiBtn)
         val geciciGorevButton = findViewById<ImageButton>(R.id.geciciBtn)
+        val aracButton = findViewById<ImageButton>(R.id.aracBtn)
 
         val popupMenuMalzeme = PopupMenu(this@MainActivity, malzemeButton)
         popupMenuMalzeme.menuInflater.inflate(R.menu.popup_menu, popupMenuMalzeme.menu)
@@ -142,6 +143,20 @@ class MainActivity : AppCompatActivity()  {
                 startActivity(admin)
             }else if (id == R.id.userEkran){
                 val user = Intent(this, GeciciGorevlendirmeUserActivity::class.java)
+                startActivity(user)
+            }
+            false
+        }
+
+        val popupMenuArac = PopupMenu(this@MainActivity, aracButton)
+        popupMenuArac.menuInflater.inflate(R.menu.popup_menu, popupMenuArac.menu)
+        popupMenuArac.setOnMenuItemClickListener { menuItem ->
+            val id = menuItem.itemId
+            if (id == R.id.adminEkran){
+                val admin = Intent(this, AracKullanimAdmin::class.java)
+                startActivity(admin)
+            }else if (id == R.id.userEkran){
+                val user = Intent(this, AracKullanimUser::class.java)
                 startActivity(user)
             }
             false
@@ -221,6 +236,25 @@ class MainActivity : AppCompatActivity()  {
             }
         }
 
+        aracButton.setOnClickListener {
+            myRef.child(uid).get().addOnSuccessListener {
+                if (it.exists()) {
+                    val imzaDurum = it.child("imzaExist").value.toString()
+                    Log.w("test","$imzaDurum")
+                    if(imzaDurum == "1"){
+                        if(gorev == "INSAN KAYNAKLARI"){
+                            popupMenuArac.show()
+                        }else{
+                            val intent = Intent(this, AracKullanimUser::class.java)
+                            startActivity(intent)
+                        }
+                    }else{
+                        Toast.makeText(this@MainActivity, "Bu Özelliği Kullanmak İçin İmza Oluşturmanız Gerekiyor! Bilgilerim Sayfasında Ulaşabilirsiniz!", Toast.LENGTH_SHORT).show()
+                    }
+                }
+            }
+        }
+
         malzemeButton.setOnClickListener {
             if(gorev == "INSAN KAYNAKLARI" || gorev == "YONETICI"){
                 popupMenuMalzeme.show()
@@ -251,11 +285,6 @@ class MainActivity : AppCompatActivity()  {
 
         duyuruButton.setOnClickListener {
             val intent = Intent(this, DuyuruActivity::class.java)
-            startActivity(intent)
-        }
-
-        aracBtn.setOnClickListener {
-            val intent = Intent(this,AracKullanimUser::class.java)
             startActivity(intent)
         }
 
