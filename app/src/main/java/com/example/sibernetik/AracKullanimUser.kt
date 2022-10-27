@@ -19,6 +19,8 @@ import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.ktx.database
 import com.google.firebase.database.ktx.getValue
 import com.google.firebase.ktx.Firebase
+import fcm.androidtoandroid.FirebasePush
+import fcm.androidtoandroid.model.Notification
 import kotlinx.android.synthetic.main.activity_arac_kullanim_user.*
 import kotlinx.android.synthetic.main.izin_user_activity.*
 import kotlinx.android.synthetic.main.izin_user_time.*
@@ -241,9 +243,16 @@ class AracKullanimUser : AppCompatActivity(), CustomAdapter.OnItemClickListener 
                 if(edit == 0){
                     saveTalep(plaka,name,sebeb,cikTarih,cikSaat,cikKm)
                 }else if(edit == 1){
-                    if(girkKm.toInt() <= cikKm.toInt()){
-                        showMessage("Giriş KM, çıkış KM değerinden daha büyük olmalıdır!", "Tamam")
-                    }else{
+                    if (!girTarih.isEmpty() || !girSaat.isEmpty() || !girkKm.isEmpty()){
+                        if(girTarih.isEmpty() || girSaat.isEmpty() || girkKm.isEmpty()){
+                            showMessage("Tüm Bilgileri Doldurmalıdır!", "Tamam")
+                        }else if(girkKm.toInt() <= cikKm.toInt()){
+                            showMessage("Giriş KM, çıkış KM değerinden daha büyük olmalıdır!", "Tamam")
+                        }else{
+                            editTalep(plaka,name,sebeb,cikTarih,cikSaat,cikKm,girTarih,girSaat,girkKm)
+                        }
+                    }
+                    else{
                         editTalep(plaka,name,sebeb,cikTarih,cikSaat,cikKm,girTarih,girSaat,girkKm)
                     }
                 }
@@ -278,6 +287,21 @@ class AracKullanimUser : AppCompatActivity(), CustomAdapter.OnItemClickListener 
             btnSubmitAracUser.layoutParams = LinearLayout.LayoutParams(
                 330.toPx(),
                 ViewGroup.LayoutParams.WRAP_CONTENT
+            )
+
+            girTarihLayoutAracUser.layoutParams = LinearLayout.LayoutParams(
+                330.toPx(),
+                0.toPx()
+            )
+
+            girSaatLayoutAracUser.layoutParams = LinearLayout.LayoutParams(
+                330.toPx(),
+                0.toPx()
+            )
+
+            girKmTxtAracUser.layoutParams = LinearLayout.LayoutParams(
+                330.toPx(),
+                0.toPx()
             )
         }
 
@@ -429,6 +453,18 @@ class AracKullanimUser : AppCompatActivity(), CustomAdapter.OnItemClickListener 
                 myRef.child(clickedId).child("girisTarih").setValue(girtarih)
                 myRef.child(clickedId).child("girisSaat").setValue(girsaat)
                 myRef.child(clickedId).child("girisKm").setValue(girkm)
+                //notifikasi//
+                var icon = R.drawable.logo
+                val iconString = icon.toString()
+                val notification = Notification()
+                notification.title = "Yeni Araç Kullanım Talebi Var"
+                notification.body = "$adsoyad adlı kişi $plaka aracı için araç kullanım talebi göndermişti"
+                notification.icon = iconString
+                val firebasePush = FirebasePush.build(serverKey)
+                    .setNotification(notification)
+                    .setOnFinishPush {  }
+                firebasePush.sendToTopic("IK")
+                //notifikasi//
                 Toast.makeText(this, "Izin Talebi Başarıyla Düzenlendi!", Toast.LENGTH_LONG).show()
                 finish()
                 overridePendingTransition(0, 0);

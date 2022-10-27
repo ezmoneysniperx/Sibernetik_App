@@ -16,6 +16,8 @@ import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.ktx.database
 import com.google.firebase.database.ktx.getValue
 import com.google.firebase.ktx.Firebase
+import fcm.androidtoandroid.FirebasePush
+import fcm.androidtoandroid.model.Notification
 import kotlinx.android.synthetic.main.activity_arac_kullanim_admin.*
 import kotlinx.android.synthetic.main.activity_arac_kullanim_admin.recyclerview
 import kotlinx.android.synthetic.main.activity_gecici_gorevlendirme_admin.*
@@ -37,6 +39,7 @@ class AracKullanimAdmin : AppCompatActivity(), CustomAdapter.OnItemClickListener
     var clickedGirKm = ""
     var clickedOnay = ""
     var clickedId = ""
+    var clickedUid = ""
 
     val database =
         Firebase.database("https://sibernetik-3c2ef-default-rtdb.europe-west1.firebasedatabase.app")
@@ -134,6 +137,7 @@ class AracKullanimAdmin : AppCompatActivity(), CustomAdapter.OnItemClickListener
             clickedGirKm = ""
             clickedOnay = ""
             clickedId = ""
+            clickedUid = ""
 
             adsoyadDisplayArac.setText("-")
             plakaDisplayArac.setText("-")
@@ -187,6 +191,20 @@ class AracKullanimAdmin : AppCompatActivity(), CustomAdapter.OnItemClickListener
         clickedGirKm = clickedItem.day.toString()
         clickedOnay = clickedItem.yonetici1onay.toString()
         clickedId = clickedItem.id.toString()
+
+        myRefUser.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                for(postSnapshot in snapshot.children){
+                    var value = postSnapshot.getValue<UsersModel>()
+                    if(value!!.adSoyad == clickedAdsoyad){
+                        clickedUid = postSnapshot.key.toString()
+                    }
+                }
+            }
+            override fun onCancelled(error: DatabaseError) {
+                TODO("Not yet implemented")
+            }
+        })
 
         adsoyadDisplayArac.setText(clickedAdsoyad)
         plakaDisplayArac.setText(clickedPlaka)
@@ -378,6 +396,18 @@ class AracKullanimAdmin : AppCompatActivity(), CustomAdapter.OnItemClickListener
             myRef.child(id).get().addOnSuccessListener {
                 if (it.exists()) {
                     myRef.child(id).child("ikOnay").setValue(durum)
+                    //notifikasi//
+                    var icon = R.drawable.logo
+                    val iconString = icon.toString()
+                    val notification = Notification()
+                    notification.title = "Araç Kullanım Talebi Onaylandı"
+                    notification.body = "$clickedPlaka aracı için araç kullanım talebi onaylandı"
+                    notification.icon = iconString
+                    val firebasePush = FirebasePush.build(serverKey)
+                        .setNotification(notification)
+                        .setOnFinishPush {  }
+                    firebasePush.sendToTopic("$clickedUid")
+                    //notifikasi//
                     Toast.makeText(this, "Onaylama islemi basarili!", Toast.LENGTH_SHORT).show()
                     finish();
                     overridePendingTransition(0, 0);
