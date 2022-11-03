@@ -1,13 +1,17 @@
 package com.example.sibernetik
 
 import android.content.Intent
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.gms.tasks.Tasks
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.DataSnapshot
@@ -16,12 +20,12 @@ import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.ktx.database
 import com.google.firebase.database.ktx.getValue
 import com.google.firebase.ktx.Firebase
+import com.google.firebase.storage.ktx.storage
 import fcm.androidtoandroid.FirebasePush
 import fcm.androidtoandroid.model.Notification
 import kotlinx.android.synthetic.main.activity_arac_kullanim_admin.*
 import kotlinx.android.synthetic.main.activity_arac_kullanim_admin.recyclerview
-import kotlinx.android.synthetic.main.activity_gecici_gorevlendirme_admin.*
-import kotlinx.android.synthetic.main.mesai_admin_activity.*
+import java.io.File
 
 class AracKullanimAdmin : AppCompatActivity(), CustomAdapter.OnItemClickListener {
 
@@ -46,16 +50,21 @@ class AracKullanimAdmin : AppCompatActivity(), CustomAdapter.OnItemClickListener
     val myRef = database.getReference("Arac Kullanim")
     val myRefUser = database.getReference("Users")
     private lateinit var auth: FirebaseAuth
-    var serverKey = "serverkey"
+    var serverKey = "serverKey"
+    val storage = Firebase.storage
 
     var plakaSpinnerItem = ""
     var durumSpinnerItem = ""
+
+    var userUid = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_arac_kullanim_admin)
 
         auth = Firebase.auth
+        val user = Firebase.auth.currentUser
+        userUid = user!!.uid
 
         val plakaArray = resources.getStringArray(R.array.arac_plaka)
         val durumArray = resources.getStringArray(R.array.izin_durum)
@@ -393,9 +402,11 @@ class AracKullanimAdmin : AppCompatActivity(), CustomAdapter.OnItemClickListener
         } else if (clickedOnay == "ONAYLANDI") {
             Toast.makeText(this, "Daha önce onaylandi!", Toast.LENGTH_SHORT).show()
         } else {
-            myRef.child(id).get().addOnSuccessListener {
-                if (it.exists()) {
-                    myRef.child(id).child("ikOnay").setValue(durum)
+            myRef.child(id).child("ikOnay").setValue(durum)
+            myRefUser.child(clickedUid).get().addOnSuccessListener {
+                if (it.exists()){
+                    var tckn = it.child("tckn").value.toString()
+                    Log.w("tes","$clickedUid")
                     //notifikasi//
                     var icon = R.drawable.logo
                     val iconString = icon.toString()
@@ -408,6 +419,7 @@ class AracKullanimAdmin : AppCompatActivity(), CustomAdapter.OnItemClickListener
                         .setOnFinishPush {  }
                     firebasePush.sendToTopic("$clickedUid")
                     //notifikasi//
+                    printPdfArac(clickedId, tckn, clickedUid, userUid)
                     Toast.makeText(this, "Onaylama islemi basarili!", Toast.LENGTH_SHORT).show()
                     finish();
                     overridePendingTransition(0, 0);
@@ -419,4 +431,50 @@ class AracKullanimAdmin : AppCompatActivity(), CustomAdapter.OnItemClickListener
 
 
     }
+
+    fun printPdfArac(id : String, tckn : String, talepEdenUid : String, ikUid : String){
+        val storageRef = storage.reference
+        val getTalepEdenFileRef = storageRef.child("imza_gorseller/$talepEdenUid.jpg")
+        val localfileTalepEden = File.createTempFile("tempImg","jpg")
+
+        val getIkFileRef = storageRef.child("imza_gorseller/$ikUid.jpg")
+        val localfileIk = File.createTempFile("tempImg","jpg")
+
+        val task1 = getTalepEdenFileRef.getFile(localfileTalepEden)
+        val task2 = getIkFileRef.getFile(localfileIk)
+
+        var talepEdenBitmap : Bitmap
+        var ikBitmap : Bitmap
+
+        Tasks.whenAll(task1,task2).addOnSuccessListener {
+            talepEdenBitmap = BitmapFactory.decodeFile(localfileTalepEden.absolutePath)
+            ikBitmap = BitmapFactory.decodeFile(localfileIk.absolutePath)
+
+            myRef.child(id).get().addOnSuccessListener {
+                if(it.exists()){
+                    val izinDetailsList = listOf(
+                        IzinDetails("Talep ID", clickedId),
+                        IzinDetails(" ", " "),
+                        IzinDetails("TCKN", tckn),
+                        IzinDetails("Plaka", it.child("plaka").value.toString()),
+                        IzinDetails("Nedeni", it.child("sebeb").value.toString()),
+                        IzinDetails("Çıkış Tarihi", it.child("cikisTarih").value.toString()),
+                        IzinDetails("Çıkış Saati", it.child("cikisSaat").value.toString()),
+                        IzinDetails("Çıkış KM", it.child("cikisKm").value.toString()),
+                        IzinDetails("Giriş Tarihi", it.child("girisTarih").value.toString()),
+                        IzinDetails("Giriş Saati", it.child("girisSaat").value.toString()),
+                        IzinDetails("Giriş KM", it.child("girisKm").value.toString()),
+                        IzinDetails(" ", " "),
+                        IzinDetails("İnsan Kaynakları Onayı", it.child("ikOnay").value.toString())
+                    )
+                    val pdfDetails = PdfDetails(it.child("adsoyad").value.toString(), izinDetailsList, talepEdenBitmap, ikBitmap, ikBitmap)
+                    val pdfConverter = PDFConverterAracKullanim()
+                    pdfConverter.createPdf(this, pdfDetails, this, id)
+                }
+            }.addOnFailureListener {
+                Log.w("HATA TASK bitmap", "error bro")
+            }
+        }
+    }
+
 }

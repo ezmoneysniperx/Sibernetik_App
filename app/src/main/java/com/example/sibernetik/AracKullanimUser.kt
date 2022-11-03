@@ -22,8 +22,6 @@ import com.google.firebase.ktx.Firebase
 import fcm.androidtoandroid.FirebasePush
 import fcm.androidtoandroid.model.Notification
 import kotlinx.android.synthetic.main.activity_arac_kullanim_user.*
-import kotlinx.android.synthetic.main.izin_user_activity.*
-import kotlinx.android.synthetic.main.izin_user_time.*
 import java.text.SimpleDateFormat
 import java.util.*
 import java.util.concurrent.TimeUnit
@@ -420,7 +418,7 @@ class AracKullanimUser : AppCompatActivity(), CustomAdapter.OnItemClickListener 
         val talepId = myRef.push().getKey()
         val newTalep = AracKullanimModel(plaka,adsoyad, sebeb, ciktarih,ciksaat,cikkm,"","","","ONAY BEKLIYOR")
         myRef.child(talepId.toString()).setValue(newTalep)
-        Toast.makeText(this, "Izin talebi başarıyla gönderildi!", Toast.LENGTH_LONG).show()
+        Toast.makeText(this, "Talebi başarıyla gönderildi!", Toast.LENGTH_LONG).show()
         finish()
         overridePendingTransition(0, 0);
         startActivity(getIntent());
@@ -435,7 +433,7 @@ class AracKullanimUser : AppCompatActivity(), CustomAdapter.OnItemClickListener 
             myRef.child(clickedId).child("cikisTarih").setValue(ciktarih)
             myRef.child(clickedId).child("cikisSaat").setValue(ciksaat)
             myRef.child(clickedId).child("cikisKm").setValue(cikkm)
-            Toast.makeText(this, "Izin Talebi Başarıyla Düzenlendi!", Toast.LENGTH_LONG).show()
+            Toast.makeText(this, "Talebi Başarıyla Düzenlendi!", Toast.LENGTH_LONG).show()
             finish()
             overridePendingTransition(0, 0);
             startActivity(getIntent());
@@ -465,7 +463,7 @@ class AracKullanimUser : AppCompatActivity(), CustomAdapter.OnItemClickListener 
                     .setOnFinishPush {  }
                 firebasePush.sendToTopic("IK")
                 //notifikasi//
-                Toast.makeText(this, "Izin Talebi Başarıyla Düzenlendi!", Toast.LENGTH_LONG).show()
+                Toast.makeText(this, "Talebi Başarıyla Düzenlendi!", Toast.LENGTH_LONG).show()
                 finish()
                 overridePendingTransition(0, 0);
                 startActivity(getIntent());
