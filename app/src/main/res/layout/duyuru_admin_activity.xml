@@ -7,6 +7,7 @@
     android:background="@drawable/wallpaper1">
 
     <ScrollView
+        android:id="@+id/scrollViewUtama"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -23,16 +24,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
 
-                <ImageButton
-                    android:id="@+id/anasayfaDuyuruAdminBtn"
-                    android:layout_width="37dp"
-                    android:layout_height="39dp"
-                    android:layout_marginLeft="15dp"
-                    android:layout_marginTop="15dp"
-                    android:background="@android:color/transparent"
-                    android:contentDescription="@string/app_name"
-                    android:scaleType="centerInside"
-                    app:srcCompat="@drawable/back" />
+
 
                 <TextView
                     android:id="@+id/textView11"
@@ -40,6 +32,7 @@
                     android:layout_height="58dp"
                     android:gravity="center"
                     android:text="Yeni Duyuru"
+                    android:layout_marginTop="35dp"
                     android:textColor="?android:attr/textColorTertiaryInverse"
                     android:textColorHint="?android:attr/textColorTertiaryInverse"
                     android:textSize="34sp" />
@@ -111,5 +104,20 @@
             </LinearLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
+    <ImageButton
+        android:id="@+id/anasayfaDuyuruAdminBtn"
+        android:layout_width="37dp"
+        android:layout_height="39dp"
+        android:layout_marginTop="10dp"
+        android:layout_gravity="right"
+        android:background="@android:color/transparent"
+        android:contentDescription="@string/app_name"
+        android:foregroundGravity="left"
+        android:scaleType="centerInside"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/scrollViewUtama"
+        android:layout_marginEnd="340dp"
+        app:srcCompat="@drawable/back" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

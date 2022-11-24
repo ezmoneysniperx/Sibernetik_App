@@ -39,7 +39,6 @@ class MesaiUserActivity : AppCompatActivity(), MesaiAdapter.OnItemClickListener 
     val myRef = database.getReference("Mesai")
     val myRefUser = database.getReference("Users")
 var serverKey = "serverkey"
-
     val data = ArrayList<MesaiViewModel>()
     val adapter = MesaiAdapter(data, this)
 
@@ -135,7 +134,7 @@ var serverKey = "serverkey"
                     formattedDate  = "0" + dayOfMonth ;
                 }
                 formatted = "$formattedDate-$formattedMonth-$year"
-                val days = TimeUnit.DAYS.convert(
+                /*val days = TimeUnit.DAYS.convert(
                     simpleDateFormat.parse(formatted).getTime() -
                             simpleDateFormat.parse(bugunTarihi).getTime(),
                     TimeUnit.MILLISECONDS)
@@ -143,7 +142,7 @@ var serverKey = "serverkey"
                     showMessageMesai("İzin tarihi, bugün tarihi olmalıdır ya da daha ileri olmalıdır!","Tamam")
                 }else{
                     mesaiTarihTxt.setText(formatted).toString()
-                }
+                }*/
                 mesaiTarihTxt.setText(formatted).toString()
             }, year, month, day)
             dpd.show()

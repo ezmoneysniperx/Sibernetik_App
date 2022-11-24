@@ -8,6 +8,7 @@
     android:background="@drawable/wallpaper">
 
     <ScrollView
+        android:id="@+id/scrollViewUtama"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -20,18 +21,6 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:orientation="vertical">
-
-            <ImageButton
-                android:id="@+id/anasayfaMalzemeAdminBtn"
-                android:layout_width="37dp"
-                android:layout_height="39dp"
-                android:layout_marginLeft="22dp"
-                android:layout_marginTop="10dp"
-                android:background="@android:color/transparent"
-                android:contentDescription="@string/app_name"
-                android:foregroundGravity="left"
-                android:scaleType="centerInside"
-                app:srcCompat="@drawable/back" />
 
             <TextView
                 android:id="@+id/textView10"
@@ -96,5 +85,20 @@
             </LinearLayout>
         </LinearLayout>
     </ScrollView>
+    <ImageButton
+        android:id="@+id/anasayfaMalzemeAdminBtn"
+        android:layout_width="37dp"
+        android:layout_height="39dp"
+        android:layout_marginTop="10dp"
+        android:layout_gravity="right"
+        android:background="@android:color/transparent"
+        android:contentDescription="@string/app_name"
+        android:foregroundGravity="left"
+        android:scaleType="centerInside"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/scrollViewUtama"
+        android:layout_marginEnd="340dp"
+        app:srcCompat="@drawable/back"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

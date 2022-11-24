@@ -8,6 +8,7 @@
     android:background="@drawable/wallpaper">
 
     <ScrollView
+        android:id="@+id/scrollViewUtama"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -22,24 +23,13 @@
             android:gravity="center|top"
             android:orientation="vertical">
 
-            <ImageButton
-                android:id="@+id/anasayfaGGAdminBtn"
-                android:layout_width="37dp"
-                android:layout_height="39dp"
-                android:layout_marginTop="15dp"
-                android:layout_marginRight="165dp"
-                android:background="@android:color/transparent"
-                android:contentDescription="@string/app_name"
-                android:foregroundGravity="left"
-                android:scaleType="centerInside"
-                app:srcCompat="@drawable/back" />
-
             <TextView
                 android:id="@+id/textView9"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="sans-serif-smallcaps"
                 android:gravity="center"
+                android:layout_marginTop="45dp"
                 android:text="Geçici Görevlendirme Onaylama"
                 android:textColor="?android:attr/textColorTertiaryInverse"
                 android:textColorHint="?android:attr/textColorTertiaryInverse"
@@ -299,5 +289,21 @@
 
         </LinearLayout>
     </ScrollView>
+
+    <ImageButton
+        android:id="@+id/anasayfaGGAdminBtn"
+        android:layout_width="37dp"
+        android:layout_height="39dp"
+        android:layout_marginTop="15dp"
+        android:layout_gravity="right"
+        android:background="@android:color/transparent"
+        android:contentDescription="@string/app_name"
+        android:foregroundGravity="left"
+        android:scaleType="centerInside"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/scrollViewUtama"
+        android:layout_marginEnd="340dp"
+        app:srcCompat="@drawable/back" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

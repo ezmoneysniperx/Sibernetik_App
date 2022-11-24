@@ -12,36 +12,29 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        android:id="@+id/scrollViewUtama">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
             <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_width="416dp"
+                android:layout_height="787dp"
                 android:orientation="vertical"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.6"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
-
-                <ImageButton
-                    android:id="@+id/anasayfaDuyuru"
-                    android:layout_width="37dp"
-                    android:layout_height="39dp"
-                    android:layout_marginLeft="15dp"
-                    android:layout_marginTop="15dp"
-                    android:background="@android:color/transparent"
-                    android:contentDescription="@string/app_name"
-                    android:scaleType="centerInside"
-                    app:srcCompat="@drawable/back" />
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.0">
 
                 <TextView
                     android:id="@+id/baslik"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="35dp"
                     android:layout_marginBottom="5dp"
                     android:text="DUYURULAR"
                     android:textAlignment="center"
@@ -82,5 +75,22 @@
             </LinearLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
+
+    <ImageButton
+        android:id="@+id/anasayfaDuyuru"
+        android:layout_marginLeft="15dp"
+        android:layout_width="37dp"
+        android:layout_height="39dp"
+        android:layout_marginTop="15dp"
+        android:layout_gravity="right"
+        android:background="@android:color/transparent"
+        android:contentDescription="@string/app_name"
+        android:foregroundGravity="left"
+        android:scaleType="centerInside"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/scrollViewUtama"
+        android:layout_marginEnd="340dp"
+        app:srcCompat="@drawable/back"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
