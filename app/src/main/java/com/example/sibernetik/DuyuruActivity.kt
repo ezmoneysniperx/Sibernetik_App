@@ -42,7 +42,7 @@ class DuyuruActivity : AppCompatActivity(), DuyuruAdapter.OnItemClickListener {
     val myRef = database.getReference("Duyuru")
     val myRefUser = database.getReference("Users")
     private lateinit var auth: FirebaseAuth
-    var serverKey = "serverkey"
+    var serverKey = "servekey"
 
     val data = ArrayList<DuyuruViewModel>()
     var adapter = DuyuruAdapter(data,this)
@@ -72,9 +72,14 @@ class DuyuruActivity : AppCompatActivity(), DuyuruAdapter.OnItemClickListener {
         }
 
         yeniDuyuruBtn.setOnClickListener {
-            val intent = Intent(this,DuyuruAdminActivity::class.java)
-            startActivity(intent)
-            finish()
+            if(gorev == "INSAN KAYNAKLAR" || gorev == "YONETICI"){
+                val intent = Intent(this,DuyuruAdminActivity::class.java)
+                startActivity(intent)
+                finish()
+            }else{
+                Toast.makeText(this, "Duyuru Sadece Yönetici ve İ.K Oluşturabilir!", Toast.LENGTH_SHORT).show()
+            }
+
         }
 
 
